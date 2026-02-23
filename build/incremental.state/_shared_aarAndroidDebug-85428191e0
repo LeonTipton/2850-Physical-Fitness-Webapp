@@ -1,0 +1,21 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "outputPath": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_aarAndroidDebug\\shared-jvm.aar",
+        "requiredPackagingDirs": "[[],[]]"
+    },
+    "inputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarAndroidDebug\\shared-jvm.jar"
+    ],
+    "inputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarAndroidDebug\\shared-jvm.jar": "size 2019 mtime 2026-02-23T12:09:39.4583254Z"
+    },
+    "outputValues": {},
+    "outputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_aarAndroidDebug\\shared-jvm.aar"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_aarAndroidDebug\\shared-jvm.aar": "size 2143 mtime 2026-02-23T12:09:39.5879339Z"
+    },
+    "excludedOutputFiles": []
+}

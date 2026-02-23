@@ -1,0 +1,28 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "compileDependencies": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21",
+        "repositories": "https://repo1.maven.org/maven2|https://maven.google.com|https://maven.pkg.jetbrains.space/public/p/compose/dev",
+        "resolveNativeTarget": "",
+        "resolvePlatform": "jvm",
+        "resolveWasmTarget": "",
+        "runtimeDependencies": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21",
+        "userCacheRoot": "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper"
+    },
+    "inputFiles": [],
+    "inputFilesState": {},
+    "outputValues": {
+        "compile": "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.2.21\\kotlin-stdlib-2.2.21.jar;C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar",
+        "publicationCoordsOverrides": "{}",
+        "runtime": "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.2.21\\kotlin-stdlib-2.2.21.jar;C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar"
+    },
+    "outputFiles": [
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar",
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.2.21\\kotlin-stdlib-2.2.21.jar"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar": "size 17536 mtime 2026-02-20T16:24:14.6742184Z",
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.2.21\\kotlin-stdlib-2.2.21.jar": "size 1761445 mtime 2026-02-20T16:24:14.15425Z"
+    },
+    "excludedOutputFiles": []
+}

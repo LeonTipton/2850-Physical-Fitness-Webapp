@@ -1,0 +1,15 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "%outputs%": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\android-app\\main\\src\\compose\\resources\\accessors",
+        "makeAccessorsPublic": "false",
+        "packageName": "\"android_app.generated.resources\"",
+        "packagingDir": "\"composeResources/android_app.generated.resources/\""
+    },
+    "inputFiles": [],
+    "inputFilesState": {},
+    "outputValues": {},
+    "outputFiles": [],
+    "outputFilesState": {},
+    "excludedOutputFiles": []
+}

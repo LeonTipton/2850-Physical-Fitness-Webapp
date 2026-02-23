@@ -1,0 +1,31 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "inputDirsDestPaths": "[., ., .]",
+        "jarConfig": "{\"mainClassFqn\":\"MainKt\"}",
+        "outputJarPath": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_jvm-app_jarJvm\\jvm-app-jvm.jar"
+    },
+    "inputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\java-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\resources-output"
+    ],
+    "inputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\java-output": "EMPTY DIR",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$2100668852$1.class": "size 2592 mtime 2026-02-23T10:50:12.4209784Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$45682630$1$1$1.class": "size 1314 mtime 2026-02-23T10:50:12.4223932Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$45682630$1.class": "size 4816 mtime 2026-02-23T10:50:12.4223932Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt.class": "size 2066 mtime 2026-02-23T10:50:12.4179686Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 36 mtime 2026-02-23T10:50:12.4234078Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\MainKt.class": "size 785 mtime 2026-02-23T10:50:12.4234078Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\resources-output": "EMPTY DIR"
+    },
+    "outputValues": {},
+    "outputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_jvm-app_jarJvm\\jvm-app-jvm.jar"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_jvm-app_jarJvm\\jvm-app-jvm.jar": "size 6766 mtime 2026-02-23T10:50:12.6569399Z"
+    },
+    "excludedOutputFiles": []
+}

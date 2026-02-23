@@ -1,0 +1,16 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "%outputs%": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\shared\\android\\src\\compose\\resources\\collectors",
+        "makeAccessorsPublic": "false",
+        "packageName": "\"shared.generated.resources\"",
+        "shouldGenerateCode": "false",
+        "useActualModifier": "true"
+    },
+    "inputFiles": [],
+    "inputFilesState": {},
+    "outputValues": {},
+    "outputFiles": [],
+    "outputFilesState": {},
+    "excludedOutputFiles": []
+}

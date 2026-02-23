@@ -1,0 +1,27 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "inputDirsDestPaths": "[., ., .]",
+        "jarConfig": "{}",
+        "outputJarPath": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarJvm\\shared-jvm.jar"
+    },
+    "inputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\java-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\resources-output"
+    ],
+    "inputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\java-output": "EMPTY DIR",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output\\HelloKt.class": "size 2951 mtime 2026-02-23T10:46:24.6690772Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 37 mtime 2026-02-23T10:46:24.6711979Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\resources-output": "EMPTY DIR"
+    },
+    "outputValues": {},
+    "outputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarJvm\\shared-jvm.jar"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarJvm\\shared-jvm.jar": "size 2019 mtime 2026-02-23T10:46:24.7896451Z"
+    },
+    "excludedOutputFiles": []
+}

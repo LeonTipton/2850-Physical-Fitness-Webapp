@@ -1,0 +1,27 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "inputDirsDestPaths": "[., ., .]",
+        "jarConfig": "{}",
+        "outputJarPath": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarAndroidDebug\\shared-jvm.jar"
+    },
+    "inputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\java-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\kotlin-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\resources-output"
+    ],
+    "inputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\java-output": "EMPTY DIR",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\kotlin-output\\HelloKt.class": "size 2951 mtime 2026-02-23T12:09:39.3280464Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\kotlin-output\\META-INF\\main.kotlin_module": "size 37 mtime 2026-02-23T12:09:39.3310466Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedandroiddebug\\resources-output": "EMPTY DIR"
+    },
+    "outputValues": {},
+    "outputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarAndroidDebug\\shared-jvm.jar"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\tasks\\_shared_jarAndroidDebug\\shared-jvm.jar": "size 2019 mtime 2026-02-23T12:09:39.4583254Z"
+    },
+    "excludedOutputFiles": []
+}

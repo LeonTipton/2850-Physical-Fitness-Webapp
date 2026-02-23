@@ -1,0 +1,14 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {},
+    "inputFiles": [],
+    "inputFilesState": {},
+    "outputValues": {},
+    "outputFiles": [
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-compose-compiler-plugin-embeddable\\2.2.21\\kotlin-compose-compiler-plugin-embeddable-2.2.21.jar"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-compose-compiler-plugin-embeddable\\2.2.21\\kotlin-compose-compiler-plugin-embeddable-2.2.21.jar": "size 935264 mtime 2026-02-23T10:46:17.6768089Z"
+    },
+    "excludedOutputFiles": []
+}

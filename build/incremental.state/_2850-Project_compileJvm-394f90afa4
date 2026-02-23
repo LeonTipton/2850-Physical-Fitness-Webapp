@@ -1,0 +1,39 @@
+{
+    "codeVersion": "0.9.2",
+    "inputValues": {
+        "java.annotation.processor.generated.dir": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\2850-Project\\main\\src\\apt\\java",
+        "jdk.home": "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\extract.cache\\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.5e6efb.d",
+        "jdk.version": "21.0.1.12.1",
+        "target.platforms": "JVM",
+        "task.output.root": "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\2850-Projectjvm",
+        "user.settings": "{\"kotlin\":{\"compilerVersion\":\"2.2.21\",\"languageVersion\":null,\"apiVersion\":null,\"allWarningsAsErrors\":false,\"suppressWarnings\":false,\"debug\":null,\"optimization\":null,\"verbose\":false,\"progressiveMode\":false,\"linkerOptions\":[],\"languageFeatures\":[],\"optIns\":[],\"storeJavaParameterNames\":false,\"freeCompilerArgs\":[],\"compilerPlugins\":[]},\"jvmRelease\":21,\"java\":{\"freeCompilerArgs\":[],\"annotationProcessorOptions\":{},\"compileIncrementally\":false}}"
+    },
+    "inputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\src",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\resources",
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.2.21\\kotlin-stdlib-2.2.21.jar",
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar"
+    ],
+    "inputFilesState": {
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar": "size 17536 mtime 2026-02-20T16:24:14.6742184Z",
+        "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.2.21\\kotlin-stdlib-2.2.21.jar": "size 1761445 mtime 2026-02-20T16:24:14.15425Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\resources": "MISSING",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\src\\main\\Main.kt": "size 43 mtime 2026-02-20T16:22:44.0055184Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\src\\main\\kotlin": "EMPTY DIR",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\src\\main\\static": "EMPTY DIR",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\src\\test": "EMPTY DIR"
+    },
+    "outputValues": {},
+    "outputFiles": [
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\2850-Projectjvm\\java-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\2850-Projectjvm\\kotlin-output",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\2850-Project\\main\\src\\apt\\java"
+    ],
+    "outputFilesState": {
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\2850-Projectjvm\\java-output": "EMPTY DIR",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\2850-Projectjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 36 mtime 2026-02-20T16:24:35.3931531Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\2850-Projectjvm\\kotlin-output\\MainKt.class": "size 627 mtime 2026-02-20T16:24:35.3912144Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\2850-Project\\main\\src\\apt\\java": "EMPTY DIR"
+    },
+    "excludedOutputFiles": []
+}

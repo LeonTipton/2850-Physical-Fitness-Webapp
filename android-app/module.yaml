@@ -1,0 +1,5 @@
+product: android/app
+
+apply:
+  - ../compose.module-template.yaml
+  - ../app.module-template.yaml
