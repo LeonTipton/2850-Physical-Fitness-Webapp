@@ -67,17 +67,15 @@
         "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\kotlinx\\kotlinx-coroutines-core-jvm\\1.8.0\\kotlinx-coroutines-core-jvm-1.8.0.jar": "size 1548360 mtime 2026-02-20T16:24:25.7996012Z",
         "C:\\Users\\leonf\\AppData\\Local\\JetBrains\\Amper\\.m2.cache\\org\\jetbrains\\skiko\\skiko-awt\\0.9.4.2\\skiko-awt-0.9.4.2.jar": "size 1249143 mtime 2026-02-20T16:38:47.8271686Z",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\java-output": "EMPTY DIR",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output\\HelloKt.class": "size 2951 mtime 2026-02-23T10:46:24.6690772Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 37 mtime 2026-02-23T10:46:24.6711979Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output\\HelloKt.class": "size 2951 mtime 2026-03-03T11:44:39.3226684Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 37 mtime 2026-03-03T11:44:39.3235776Z",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\sharedjvm\\resources-output": "EMPTY DIR",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\JvmResourcesDirArtifact\\jvm-appmain": "MISSING",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\jvm-app\\main\\src\\compose\\resources\\accessors": "MISSING",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\jvm-app\\main\\src\\compose\\resources\\collectors": "MISSING",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\jvm-app\\main\\src\\compose\\resources\\commonResClass": "MISSING",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\jvm-app\\resources": "MISSING",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\jvm-app\\src\\main\\Main.kt": "size 197 mtime 2026-02-20T16:48:34.0760259Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\jvm-app\\src\\main\\static": "EMPTY DIR",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\jvm-app\\src\\test": "EMPTY DIR"
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\jvm-app\\src\\main\\Main.kt": "size 197 mtime 2026-03-03T11:42:38.8396693Z"
     },
     "outputValues": {},
     "outputFiles": [
@@ -87,12 +85,12 @@
     ],
     "outputFilesState": {
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\java-output": "EMPTY DIR",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$2100668852$1.class": "size 2592 mtime 2026-02-23T10:50:12.4209784Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$45682630$1$1$1.class": "size 1314 mtime 2026-02-23T10:50:12.4223932Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$45682630$1.class": "size 4816 mtime 2026-02-23T10:50:12.4223932Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt.class": "size 2066 mtime 2026-02-23T10:50:12.4179686Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 36 mtime 2026-02-23T10:50:12.4234078Z",
-        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\MainKt.class": "size 785 mtime 2026-02-23T10:50:12.4234078Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$2100668852$1.class": "size 2592 mtime 2026-03-03T11:44:40.2630294Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$45682630$1$1$1.class": "size 1314 mtime 2026-03-03T11:44:40.2640284Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt$lambda$45682630$1.class": "size 4816 mtime 2026-03-03T11:44:40.2640284Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\ComposableSingletons$MainKt.class": "size 2066 mtime 2026-03-03T11:44:40.2630294Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\META-INF\\main.kotlin_module": "size 36 mtime 2026-03-03T11:44:40.2650305Z",
+        "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\artifacts\\CompiledJvmClassesArtifact\\jvm-appjvm\\kotlin-output\\MainKt.class": "size 785 mtime 2026-03-03T11:44:40.2650305Z",
         "C:\\Users\\leonf\\IdeaProjects\\2850-Project\\build\\generated\\jvm-app\\main\\src\\apt\\java": "EMPTY DIR"
     },
     "excludedOutputFiles": []
