@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity - Fitness App</title>
+  <link rel="stylesheet" href="activity_page.css">
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="start_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+    <a href="home_page.html" class="nav-logo">LOGO</a>
+    <div class="nav-right">
+      <a href="#" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Profile">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+      </svg>
+    </a>
+    </div>
+  </nav>
+
+  <main class="activity-view" id="activity-view">
+    <div class="activity-overlay"></div>
+    <div class="activity-content">
+      <span class="activity-emoji" id="activity-emoji">🏃</span>
+      <h1 class="activity-title" id="activity-title">Run</h1>
+      <p class="activity-desc" id="activity-desc">Ready to run?</p>
+      <a href="hike_page.html" class="activity-cta" id="activity-cta" style="display: none;">Start Tracking</a>
+    </div>
+  </main>
+
+  <script>
+    const activities = {
+      run: {
+        emoji: '🏃',
+        title: 'Run',
+        desc: 'Ready to hit the track?',
+        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1920'
+      },
+      cycle: {
+        emoji: '🚴',
+        title: 'Cycle',
+        desc: 'Let\'s ride!',
+        image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=1920'
+      },
+      hike: {
+        emoji: '🥾',
+        title: 'Hike',
+        desc: 'Explore the trails.',
+        image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920'
+      },
+      swim: {
+        emoji: '🏊',
+        title: 'Swim',
+        desc: 'Dive in!',
+        image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1920'
+      },
+      gym: {
+        emoji: '🏋️',
+        title: 'Gym',
+        desc: 'Time to lift!',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920'
+      },
+      weight: {
+        emoji: '💪',
+        title: 'Strength',
+        desc: 'Build strength!',
+        image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1920'
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const type = (params.get('activity') || 'run').toLowerCase();
+    const activity = activities[type] || activities.run;
+
+    document.getElementById('activity-view').style.backgroundImage = `url(${activity.image})`;
+    document.getElementById('activity-emoji').textContent = activity.emoji;
+    document.getElementById('activity-title').textContent = activity.title;
+    document.getElementById('activity-desc').textContent = activity.desc;
+    document.title = activity.title + ' - Fitness App';
+
+    const cta = document.getElementById('activity-cta');
+    if (type === 'hike') {
+      cta.style.display = 'inline-block';
+      cta.href = 'hike_page.html';
+      cta.textContent = 'Start Hike';
+    } else if (type === 'run') {
+      cta.style.display = 'inline-block';
+      cta.href = 'run_page.html';
+      cta.textContent = 'Start Run';
+    } else {
+      cta.style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>
