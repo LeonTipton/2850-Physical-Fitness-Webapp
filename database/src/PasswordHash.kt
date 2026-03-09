@@ -1,4 +1,4 @@
-package com.example
+package com.physicalfitness
 
 import de.mkammerer.argon2.Argon2Factory
 
