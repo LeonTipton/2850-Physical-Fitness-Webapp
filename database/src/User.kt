@@ -7,7 +7,7 @@ import org.jetbrains.exposed.v1.core.dao.id.EntityID
 class User(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<User>(UserTable)
 
-    var uid by UserTable.uid
+    var uid by UserTable.id
     var name by UserTable.name
     var notificationOption by UserTable.notificationOptIn
 

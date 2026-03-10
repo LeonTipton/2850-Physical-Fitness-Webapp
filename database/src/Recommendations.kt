@@ -1,11 +1,12 @@
 package com.physicalfitness
 
-import org.jetbrains.exposed.v1.dao.IntEntity
-import org.jetbrains.exposed.v1.dao.IntEntityClass
+import org.jetbrains.exposed.v1.core.dao.id.CompositeID
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
+import org.jetbrains.exposed.v1.dao.CompositeEntity
+import org.jetbrains.exposed.v1.dao.CompositeEntityClass
 
-class Recommendations(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<Recommendations>(RecommendationsTable)
+class Recommendations(id: EntityID<CompositeID>) : CompositeEntity(id) {
+    companion object : CompositeEntityClass<Recommendations>(RecommendationsTable)
 
     var exId by RecommendationsTable.exId
     var sportId by RecommendationsTable.sportId
