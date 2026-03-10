@@ -39,7 +39,11 @@
       <span class="activity-emoji" id="activity-emoji">🏃</span>
       <h1 class="activity-title" id="activity-title">Run</h1>
       <p class="activity-desc" id="activity-desc">Ready to run?</p>
-      <a href="hike_page.html" class="activity-cta" id="activity-cta" style="display: none;">Start Tracking</a>
+      <a href="hike_page.html" class="activity-cta" id="cta-hike" style="display:none">Start Hike</a>
+      <a href="run_page.html" class="activity-cta" id="cta-run" style="display:none">Start Run</a>
+      <a href="cycle_page.html" class="activity-cta" id="cta-cycle" style="display:none">Start Cycle</a>
+      <a href="gym_page.html" class="activity-cta" id="cta-gym" style="display:none">Start Gym</a>
+      <a href="swim_page.html" class="activity-cta" id="cta-swim" style="display:none">Start Swim</a>
     </div>
   </main>
 
@@ -93,18 +97,11 @@
     document.getElementById('activity-desc').textContent = activity.desc;
     document.title = activity.title + ' - Fitness App';
 
-    const cta = document.getElementById('activity-cta');
-    if (type === 'hike') {
-      cta.style.display = 'inline-block';
-      cta.href = 'hike_page.html';
-      cta.textContent = 'Start Hike';
-    } else if (type === 'run') {
-      cta.style.display = 'inline-block';
-      cta.href = 'run_page.html';
-      cta.textContent = 'Start Run';
-    } else {
-      cta.style.display = 'none';
-    }
+    document.getElementById('cta-hike').style.display = type === 'hike' ? 'inline-block' : 'none';
+    document.getElementById('cta-run').style.display = type === 'run' ? 'inline-block' : 'none';
+    document.getElementById('cta-cycle').style.display = type === 'cycle' ? 'inline-block' : 'none';
+    document.getElementById('cta-gym').style.display = type === 'gym' ? 'inline-block' : 'none';
+    document.getElementById('cta-swim').style.display = type === 'swim' ? 'inline-block' : 'none';
   </script>
 </body>
 
