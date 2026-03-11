@@ -6,9 +6,9 @@ import com.physicalfitness.PhysicalFitDatabase
 
 fun Application.module() {
     TransactionManager.defaultDatabase = PhysicalFitDatabase.db
-    // configureErrorHandling()
-    // configureTemplates
-    // configureRouting()
+     configureErrorHandling()
+     configureTemplates
+     configureRouting()
 }
 
 fun main(args: Array<String>) {
