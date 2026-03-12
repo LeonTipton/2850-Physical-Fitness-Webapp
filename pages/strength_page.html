@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Strength Exercise - Fitness App</title>
+  <link rel="stylesheet" href="strength_page.css">
+</head>
+
+<body>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <nav class="top-nav">
+    <a href="activity_page.html?activity=weight" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+    <a href="home_page.html" class="nav-logo">LOGO</a>
+    <div class="nav-right">
+      <a href="#" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="strength-main">
+    <header class="strength-header card-animate">
+      <h1 class="strength-title">Choose Strength Exercise</h1>
+      <p class="strength-subtitle" id="strength-subtitle">Select a muscle group to view exercises</p>
+    </header>
+
+    <div class="strength-content card-animate card-animate-delay-1">
+      <!-- View 1: Category Cards -->
+      <div class="view-categories" id="view-categories">
+        <div class="category-grid" id="category-grid">
+          <button type="button" class="category-card" data-category="chest">Chest</button>
+          <button type="button" class="category-card" data-category="back">Back</button>
+          <button type="button" class="category-card" data-category="legs">Legs</button>
+          <button type="button" class="category-card" data-category="shoulders">Shoulders</button>
+          <button type="button" class="category-card" data-category="arms">Arms</button>
+          <button type="button" class="category-card" data-category="core">Core</button>
+        </div>
+      </div>
+
+      <!-- View 2: Exercise List -->
+      <div class="view-exercises hidden" id="view-exercises">
+        <button type="button" class="back-btn" id="back-to-categories">← Back to categories</button>
+        <h2 class="exercise-list-title" id="exercise-list-title">Chest</h2>
+        <div class="exercise-grid" id="exercise-grid"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const exercises = {
+        chest: ['Bench Press', 'Incline Bench Press', 'Chest Press Machine', 'Push Up'],
+        back: ['Lat Pulldown', 'Seated Row', 'Pull Up', 'Deadlift'],
+        legs: ['Squat', 'Leg Press', 'Leg Extension', 'Leg Curl'],
+        shoulders: ['Shoulder Press', 'Lateral Raise', 'Front Raise'],
+        arms: ['Bicep Curl', 'Hammer Curl', 'Tricep Pushdown', 'Tricep Dip'],
+        core: ['Plank', 'Crunch', 'Russian Twist', 'Leg Raise']
+      };
+
+      const categoryLabels = {
+        chest: 'Chest',
+        back: 'Back',
+        legs: 'Legs',
+        shoulders: 'Shoulders',
+        arms: 'Arms',
+        core: 'Core'
+      };
+
+      const viewCategories = document.getElementById('view-categories');
+      const viewExercises = document.getElementById('view-exercises');
+      const categoryGrid = document.getElementById('category-grid');
+      const exerciseGrid = document.getElementById('exercise-grid');
+      const exerciseListTitle = document.getElementById('exercise-list-title');
+      const strengthSubtitle = document.getElementById('strength-subtitle');
+      const backToCategories = document.getElementById('back-to-categories');
+
+      function show(el) { el.classList.remove('hidden'); }
+      function hide(el) { el.classList.add('hidden'); }
+
+      categoryGrid.querySelectorAll('.category-card').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const category = btn.dataset.category;
+          const list = exercises[category];
+          exerciseListTitle.textContent = categoryLabels[category];
+          strengthSubtitle.textContent = 'Select an exercise';
+          exerciseGrid.innerHTML = '';
+          list.forEach(function (name) {
+            const a = document.createElement('a');
+            a.href = 'strength_workout_page.html?exercise=' + encodeURIComponent(name) + '&category=' + encodeURIComponent(categoryLabels[category]);
+            a.className = 'exercise-card';
+            a.textContent = name;
+            exerciseGrid.appendChild(a);
+          });
+          hide(viewCategories);
+          show(viewExercises);
+        });
+      });
+
+      backToCategories.addEventListener('click', function () {
+        strengthSubtitle.textContent = 'Select a muscle group to view exercises';
+        hide(viewExercises);
+        show(viewCategories);
+      });
+    })();
+  </script>
+</body>
+
+</html>
