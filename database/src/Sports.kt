@@ -8,7 +8,6 @@ class Sports(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<Sports>(SportsTable)
 
     var sportId by SportsTable.id
-    var uid by SportsTable.uid
     var sportName by SportsTable.sportName
     var mainMuscles by SportsTable.mainMuscles
     var secondaryMuscles by SportsTable.secondaryMuscles

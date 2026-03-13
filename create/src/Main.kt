@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
             WaterworkTable,
         )
 
-        SchemaUtils.drop(
+        SchemaUtils.create(
             BiometricsTable,
             DistancesTable,
             GymworkTable,
@@ -48,7 +48,7 @@ fun main(args: Array<String>) {
         addWaterwork(WATERWORK_DATA)
         val exercises = addGymwork(GYMWORK_DATA)
         val sports = addSports(SPORTS_DATA)
-        createRecommendations(exercises, sports)
+        // createRecommendations(exercises, sports)
     }
 }
 
@@ -111,6 +111,7 @@ fun addSports(filename : String) : NameToIdMap {
 }
 
 fun createRecommendations(exercises : NameToIdMap, sports : NameToIdMap) {
+    
     RecommendationsTable.insert {
         it[exId]
         it[sportId]
