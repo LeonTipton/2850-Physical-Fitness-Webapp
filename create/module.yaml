@@ -2,6 +2,7 @@ product: jvm/app
 
 dependencies:
   - ../database
+  - $libs.commons.csv
   - $libs.exposed.core
   - $libs.exposed.jdbc
   - $libs.h2: runtime-only

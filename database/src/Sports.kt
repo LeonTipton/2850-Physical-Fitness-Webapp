@@ -10,7 +10,8 @@ class Sports(id: EntityID<Int>) : IntEntity(id) {
     var sportId by SportsTable.id
     var uid by SportsTable.uid
     var sportName by SportsTable.sportName
-    var sportDescription by SportsTable.sportDescription
+    var mainMuscles by SportsTable.mainMuscles
+    var secondaryMuscles by SportsTable.secondaryMuscles
 
     override fun toString() = sportName
 }
