@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Activity - Fitness App</title>
+  <link rel="stylesheet" href="css/gym_page.css">
+</head>
+
+<body>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <nav class="top-nav">
+    <a href="start_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+    <a href="home_page.html" class="nav-logo">LOGO</a>
+    <div class="nav-right">
+      <a href="#" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="#" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="gym-main">
+    <header class="gym-header card-animate">
+      <h1 class="gym-title">Gym Activity</h1>
+      <p class="gym-subtitle">Track your workouts</p>
+    </header>
+
+    <div class="gym-layout">
+      <section class="gym-form-card card-animate">
+        <div class="form-header">
+          <h2 class="form-title">New Workout</h2>
+          <div class="gym-goal">
+            <span class="goal-label">This week</span>
+            <span class="goal-value">5 / 5 sessions</span>
+            <div class="goal-bar"><div class="goal-fill" style="width: 100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Step 1: Body Part -->
+        <div class="step-section" id="step-body-part">
+          <h3 class="step-title">Step 1: Select Body Part</h3>
+          <div class="option-grid" id="body-part-options">
+            <button type="button" class="option-btn" data-body-part="upper">Upper Body</button>
+            <button type="button" class="option-btn" data-body-part="lower">Lower Body</button>
+            <button type="button" class="option-btn" data-body-part="core">Core</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Equipment -->
+        <div class="step-section hidden" id="step-equipment">
+          <h3 class="step-title">Step 2: Select Equipment</h3>
+          <div class="option-grid" id="equipment-options"></div>
+          <button type="button" class="back-btn" id="back-to-body">← Back</button>
+        </div>
+
+        <!-- Step 3: Exercise Details -->
+        <form class="gym-form hidden" id="step-form">
+          <p class="selected-summary" id="selected-summary" aria-live="polite"></p>
+          <div class="form-row form-row-full">
+            <div class="form-group">
+              <label>Exercise Name (optional)</label>
+              <input id="exercise-name" type="text" placeholder="e.g. Bench Press, Plank, Squat">
+            </div>
+          </div>
+          <div class="form-row form-row-4">
+            <div class="form-group">
+              <label>Sets</label>
+              <input id="exercise-sets" type="number" min="0" placeholder="3">
+            </div>
+            <div class="form-group">
+              <label>Reps</label>
+              <input id="exercise-reps" type="number" min="0" placeholder="10">
+            </div>
+            <div class="form-group">
+              <label>Weight (kg)</label>
+              <input id="exercise-weight" type="number" step="0.5" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label>Duration (min)</label>
+              <input id="exercise-duration" type="number" min="0" placeholder="0">
+            </div>
+          </div>
+          <div class="form-group form-group-full">
+            <label>Notes</label>
+            <textarea id="exercise-notes" rows="3" placeholder="Add notes about your workout..."></textarea>
+          </div>
+          <div class="gym-actions">
+            <button type="button" class="btn-back" id="back-to-equipment">Back</button>
+            <button type="submit" class="btn-primary">Save Workout</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="gym-sidebar">
+        <div class="summary-card card-animate card-animate-delay-1">
+          <h3 class="summary-title">Your Stats</h3>
+          <div class="summary-grid">
+            <div class="summary-item summary-item-1">
+              <span class="summary-value">28</span>
+              <span class="summary-label">This Month</span>
+            </div>
+            <div class="summary-item summary-item-2">
+              <span class="summary-value">156</span>
+              <span class="summary-label">Total Exercises</span>
+            </div>
+            <div class="summary-item summary-item-3">
+              <span class="summary-value">85 kg</span>
+              <span class="summary-label">Max Bench</span>
+            </div>
+            <div class="summary-item summary-item-4">
+              <span class="summary-value">140 kg</span>
+              <span class="summary-label">Max Squat</span>
+            </div>
+          </div>
+        </div>
+        <div class="recent-card card-animate card-animate-delay-2">
+          <h3 class="recent-title">Recent Workouts</h3>
+          <ul class="recent-list">
+            <li class="recent-item">
+              <div class="recent-info">
+                <span class="recent-location">Upper Body - Bench Press</span>
+                <span class="recent-date">Mar 8, 2026</span>
+              </div>
+              <span class="recent-distance">4×8 @ 80kg</span>
+            </li>
+            <li class="recent-item">
+              <div class="recent-info">
+                <span class="recent-location">Lower Body - Squats</span>
+                <span class="recent-date">Mar 6, 2026</span>
+              </div>
+              <span class="recent-distance">5×5 @ 120kg</span>
+            </li>
+            <li class="recent-item">
+              <div class="recent-info">
+                <span class="recent-location">Core - Planks</span>
+                <span class="recent-date">Mar 5, 2026</span>
+              </div>
+              <span class="recent-distance">3×60s</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const equipmentByBodyPart = {
+        upper: ['Dumbbells', 'Barbell', 'Bench Press', 'Pull-up Bar', 'Cable Machine'],
+        lower: ['Barbell', 'Leg Press Machine', 'Dumbbells', 'Smith Machine'],
+        core: ['Bodyweight', 'Ab Machine', 'Medicine Ball']
+      };
+
+      const bodyPartLabels = { upper: 'Upper Body', lower: 'Lower Body', core: 'Core' };
+
+      const stepBodyPart = document.getElementById('step-body-part');
+      const stepEquipment = document.getElementById('step-equipment');
+      const stepForm = document.getElementById('step-form');
+      const bodyPartOptions = document.getElementById('body-part-options');
+      const equipmentOptions = document.getElementById('equipment-options');
+      const selectedSummary = document.getElementById('selected-summary');
+      const backToBody = document.getElementById('back-to-body');
+      const backToEquipment = document.getElementById('back-to-equipment');
+
+      let selectedBodyPart = null;
+      let selectedEquipment = null;
+
+      function show(el) { el.classList.remove('hidden'); }
+      function hide(el) { el.classList.add('hidden'); }
+
+      function onBodyPartClick() {
+        selectedBodyPart = this.dataset.bodyPart;
+        const equipment = equipmentByBodyPart[selectedBodyPart];
+        equipmentOptions.innerHTML = '';
+        equipment.forEach(function (item) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.textContent = item;
+          btn.dataset.equipment = item;
+          btn.addEventListener('click', onEquipmentClick);
+          equipmentOptions.appendChild(btn);
+        });
+        selectedEquipment = null;
+        hide(stepBodyPart);
+        show(stepEquipment);
+      }
+
+      function onEquipmentClick() {
+        selectedEquipment = this.dataset.equipment;
+        selectedSummary.textContent = bodyPartLabels[selectedBodyPart] + ' → ' + selectedEquipment;
+        hide(stepEquipment);
+        show(stepForm);
+      }
+
+      bodyPartOptions.querySelectorAll('.option-btn').forEach(function (btn) {
+        btn.addEventListener('click', onBodyPartClick);
+      });
+
+      backToBody.addEventListener('click', function () {
+        selectedBodyPart = null;
+        hide(stepEquipment);
+        show(stepBodyPart);
+      });
+
+      backToEquipment.addEventListener('click', function () {
+        hide(stepForm);
+        show(stepEquipment);
+      });
+
+      stepForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // Form submit logic - could send to backend
+        alert('Workout saved!');
+      });
+    })();
+  </script>
+</body>
+
+</html>

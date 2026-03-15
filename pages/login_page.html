@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="css/login_page.css">
+</head>
+
+<body>
+    <a href="../index.html" class="back-home">← Back to Home</a>
+    <div class="card">
+        <div class="card-header">
+            <a href="../index.html" class="logo-link">
+                <div class="logo-mini">LOGO</div>
+            </a>
+            <div class="text-header">Login</div>
+        </div>
+
+        <div class="card-body">
+            <form id="login-form" action="#">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input required class="form-control" name="email" id="email" type="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input required class="form-control" name="password" id="password" type="password">
+                </div>
+
+                <div class="button-wrapper">
+                    <input type="submit" class="btn" value="Login">
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = 'home_page.html';
+        });
+    </script>
+</body>
+
+</html>
