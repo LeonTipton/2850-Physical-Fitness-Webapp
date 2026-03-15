@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Plan - Fitness App</title>
+  <link rel="stylesheet" href="css/plan_page.css">
+</head>
+
+<body>
+  <!-- Nav -->
+  <nav class="top-nav">
+    <a href="home_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+    <a href="home_page.html" class="nav-logo">LOGO</a>
+    <div class="nav-right">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="plan-main">
+
+    <!-- ── TOP SECTION (unchanged) ── -->
+    <header class="plan-header card-animate">
+      <div class="plan-header-top">
+        <div>
+          <h1 class="plan-title">My Plan</h1>
+          <p class="plan-subtitle">Your personalised weekly training schedule</p>
+        </div>
+        <div class="level-selector" id="level-selector">
+          <button class="level-btn active" data-level="beginner">
+            <span class="level-icon">🌱</span>
+            <span class="level-text">Beginner</span>
+          </button>
+          <button class="level-btn" data-level="advanced">
+            <span class="level-icon">⚡</span>
+            <span class="level-text">Advanced</span>
+          </button>
+          <span class="level-slider" id="level-slider"></span>
+        </div>
+      </div>
+      <div class="level-banner level-banner--beginner" id="level-banner">
+        <span class="banner-icon" id="banner-icon">🌱</span>
+        <div class="banner-body">
+          <span class="banner-title" id="banner-title">Beginner</span>
+          <span class="banner-desc"  id="banner-desc">3 sessions per week · Focus on building a consistent habit · 30–45 min each</span>
+        </div>
+        <span class="banner-badge" id="banner-badge">3 / week</span>
+      </div>
+    </header>
+
+    <!-- Weekly Goals -->
+    <section class="goals-section card-animate card-animate-delay-1">
+      <h2 class="section-title">Weekly Goals</h2>
+      <div class="goals-grid" id="goals-grid"></div>
+    </section>
+
+    <!-- ── BOTTOM SECTION: Editable Monthly Calendar ── -->
+    <section class="cal-section card-animate card-animate-delay-2">
+      <div class="cal-card">
+
+        <!-- Card header -->
+        <div class="cal-card-header">
+          <h2 class="cal-card-title">Training Calendar</h2>
+          <p class="cal-card-hint">Click any day to add or manage activities</p>
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="btn-prev" aria-label="Previous month">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="cal-nav-center">
+              <span class="cal-month-label" id="cal-month-label">March 2026</span>
+              <span class="cal-month-stats" id="cal-month-stats">—</span>
+            </div>
+            <button class="cal-nav-btn" id="btn-next" aria-label="Next month">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Weekday headers -->
+        <div class="cal-weekdays">
+          <span>Mon</span><span>Tue</span><span>Wed</span>
+          <span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+
+        <!-- Day cells -->
+        <div class="cal-grid" id="cal-grid"></div>
+
+        <!-- Legend -->
+        <div class="cal-legend">
+          <span class="legend-item" style="--c:#22c55e">🥾 Hike</span>
+          <span class="legend-item" style="--c:#3b82f6">🏃 Run</span>
+          <span class="legend-item" style="--c:#f59e0b">🚴 Cycle</span>
+          <span class="legend-item" style="--c:#06b6d4">🏊 Swim</span>
+          <span class="legend-item" style="--c:#8b5cf6">🏋️ Gym</span>
+          <span class="legend-item" style="--c:#f43f5e">💪 Strength</span>
+          <span class="legend-item" style="--c:#d1d5db">😴 Rest</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Edit Modal ── -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-date-label">
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <div>
+          <div class="modal-date" id="modal-date-label">Monday, March 9, 2026</div>
+          <div class="modal-subtitle" id="modal-count">No activities planned</div>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Existing activities list -->
+      <ul class="modal-activity-list" id="modal-activity-list"></ul>
+
+      <!-- Divider -->
+      <div class="modal-divider" id="modal-divider"></div>
+
+      <!-- Add form -->
+      <div class="modal-add-form">
+        <div class="form-add-title">Add Activity</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Type</label>
+            <select class="form-select" id="add-type">
+              <option value="run">🏃 Run</option>
+              <option value="hike">🥾 Hike</option>
+              <option value="cycle">🚴 Cycle</option>
+              <option value="swim">🏊 Swim</option>
+              <option value="gym">🏋️ Gym</option>
+              <option value="strength">💪 Strength</option>
+              <option value="rest">😴 Rest</option>
+            </select>
+          </div>
+          <div class="form-group form-group--detail">
+            <label class="form-label">Detail</label>
+            <input class="form-input" id="add-detail" type="text" placeholder="e.g. Easy 5k, Leg day, 30 laps…" maxlength="60">
+          </div>
+          <div class="form-group form-group--dur">
+            <label class="form-label">Duration <span class="form-optional">(optional)</span></label>
+            <input class="form-input" id="add-duration" type="text" placeholder="e.g. 30 min, 1 h">
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add-activity">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  TOP SECTION DATA (banner + goals — unchanged)
+  // ═══════════════════════════════════════════════════════════════════════════
+  const PLANS = {
+    beginner: {
+      banner: { icon:'🌱', title:'Beginner', desc:'3 sessions per week · Focus on building a consistent habit · 30–45 min each', badge:'3 / week', cls:'level-banner--beginner' },
+      goals:  [
+        { icon:'⚡', label:'Workouts',  value:'3',      sub:'sessions this week', color:'blue'   },
+        { icon:'⏱', label:'Duration',  value:'2 h',    sub:'total active time',  color:'orange' },
+        { icon:'🔥', label:'Calories', value:'~900',   sub:'kcal target',        color:'red'    },
+        { icon:'👟', label:'Distance', value:'8 km',   sub:'running / hiking',   color:'green'  }
+      ]
+    },
+    advanced: {
+      banner: { icon:'⚡', title:'Advanced', desc:'6 sessions per week · Structured training with performance targets · 45–90 min each', badge:'6 / week', cls:'level-banner--advanced' },
+      goals:  [
+        { icon:'⚡', label:'Workouts',  value:'6',        sub:'sessions this week', color:'blue'   },
+        { icon:'⏱', label:'Duration',  value:'6 h 15 m', sub:'total active time',  color:'orange' },
+        { icon:'🔥', label:'Calories', value:'~3 200',   sub:'kcal target',        color:'red'    },
+        { icon:'📏', label:'Distance', value:'65 km',    sub:'run + cycle + hike', color:'green'  }
+      ]
+    }
+  };
+  const GOAL_COLORS = {
+    blue:   { bg:'rgba(59,130,246,0.1)',  text:'#2563eb' },
+    orange: { bg:'rgba(249,115,22,0.1)',  text:'#ea580c' },
+    red:    { bg:'rgba(239,68,68,0.1)',   text:'#dc2626' },
+    green:  { bg:'rgba(34,197,94,0.1)',   text:'#16a34a' }
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  CALENDAR CONFIG
+  // ═══════════════════════════════════════════════════════════════════════════
+  const TODAY       = new Date(2026, 2, 15);
+  const MIN_YEAR    = 2025;
+  const MAX_YEAR    = 2027;
+  const MONTH_NAMES = ['January','February','March','April','May','June',
+                       'July','August','September','October','November','December'];
+
+  const ACTIVITY_META = {
+    hike:     { emoji:'🥾', label:'Hike',     color:'#22c55e', bg:'rgba(34,197,94,0.10)',   border:'rgba(34,197,94,0.25)'  },
+    run:      { emoji:'🏃', label:'Run',      color:'#3b82f6', bg:'rgba(59,130,246,0.10)',  border:'rgba(59,130,246,0.25)' },
+    cycle:    { emoji:'🚴', label:'Cycle',    color:'#f59e0b', bg:'rgba(245,158,11,0.10)',  border:'rgba(245,158,11,0.25)' },
+    swim:     { emoji:'🏊', label:'Swim',     color:'#06b6d4', bg:'rgba(6,182,212,0.10)',   border:'rgba(6,182,212,0.25)'  },
+    gym:      { emoji:'🏋️', label:'Gym',      color:'#8b5cf6', bg:'rgba(139,92,246,0.10)',  border:'rgba(139,92,246,0.25)' },
+    strength: { emoji:'💪', label:'Strength', color:'#f43f5e', bg:'rgba(244,63,94,0.10)',   border:'rgba(244,63,94,0.25)'  },
+    rest:     { emoji:'😴', label:'Rest',     color:'#9ca3af', bg:'#f9f9fb',                border:'#e5e7eb'               }
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  EDITABLE PLAN STATE  { 'YYYY-MM-DD': [ { id, type, detail, duration }, … ] }
+  //  Seeded with mock data — replace with API fetch later
+  // ═══════════════════════════════════════════════════════════════════════════
+  let nextId = 1000;
+  function mkId() { return nextId++; }
+
+  function seedEntries(rows) {
+    var out = {};
+    rows.forEach(function(r) {
+      var key = r[0];
+      if (!out[key]) out[key] = [];
+      out[key].push({ id: mkId(), type: r[1], detail: r[2], duration: r[3] || '' });
+    });
+    return out;
+  }
+
+  // Two separate user plans (one per level) — lives in memory
+  var USER_PLAN = {
+    beginner: seedEntries([
+      // demo: Mar 2026 — some days with multiple activities
+      ['2026-03-09','run',      'Easy 5k',              '30 min'],
+      ['2026-03-09','gym',      'Full body warmup',     '15 min'],
+      ['2026-03-11','gym',      'Full body · focus form','40 min'],
+      ['2026-03-13','hike',     'Park trail',           '50 min'],
+      ['2026-03-13','swim',     'Cool-down swim',       '20 min'],
+      ['2026-03-16','run',      'Easy 5k outdoors',     '32 min'],
+      ['2026-03-18','gym',      'Full body · 3 sets',   '40 min'],
+      ['2026-03-20','swim',     'Pool · beginner laps', '25 min'],
+      ['2026-03-23','run',      'Run 5.5k steady',      '34 min'],
+      ['2026-03-25','gym',      'Full body strength',   '45 min'],
+      ['2026-03-27','hike',     'Longer trail 7km',     '55 min'],
+      ['2026-04-01','gym',      'Full body',            '40 min'],
+      ['2026-04-06','run',      '5k morning run',       '31 min'],
+      ['2026-04-08','gym',      'Compound lifts',       '45 min'],
+      ['2026-04-10','swim',     'Pool 20 laps',         '25 min'],
+    ]),
+    advanced: seedEntries([
+      ['2026-03-09','run',      'Interval 6×800m',      '50 min'],
+      ['2026-03-09','strength', 'Upper push/pull',      '60 min'],
+      ['2026-03-10','cycle',    'Hill climb 35km',      '80 min'],
+      ['2026-03-11','strength', 'Leg hypertrophy',      '55 min'],
+      ['2026-03-12','swim',     '30 laps · mixed sets', '40 min'],
+      ['2026-03-13','hike',     'Technical trail 12km', '2 h 15 min'],
+      ['2026-03-14','run',      'Recovery 7k easy',     '48 min'],
+      ['2026-03-14','strength', 'Core & mobility',      '20 min'],
+      ['2026-03-16','run',      'Recovery 7k easy',     '48 min'],
+      ['2026-03-17','strength', 'Upper body volume',    '60 min'],
+      ['2026-03-18','cycle',    'Zone 2 ride 45km',     '85 min'],
+      ['2026-03-19','strength', 'Squat / deadlift',     '60 min'],
+      ['2026-03-20','swim',     '1750m · 35 laps',      '45 min'],
+      ['2026-03-21','hike',     'Long run/hike combo',  '2 h'],
+      ['2026-04-01','cycle',    '40km zone 2',          '75 min'],
+      ['2026-04-02','strength', 'Lower body',           '55 min'],
+    ])
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  STATE
+  // ═══════════════════════════════════════════════════════════════════════════
+  var currentYear  = TODAY.getFullYear();
+  var currentMonth = TODAY.getMonth();
+  var currentLevel = 'beginner';
+  var openKey      = null;  // currently open modal date key
+
+  function dateKey(y, m, d) {
+    return y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+  }
+  function entriesFor(key) {
+    return USER_PLAN[currentLevel][key] || [];
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  TOP SECTION RENDERERS (banner + goals — unchanged logic)
+  // ═══════════════════════════════════════════════════════════════════════════
+  function renderBanner(level) {
+    var b = PLANS[level].banner;
+    document.getElementById('banner-icon').textContent  = b.icon;
+    document.getElementById('banner-title').textContent = b.title;
+    document.getElementById('banner-desc').textContent  = b.desc;
+    document.getElementById('banner-badge').textContent = b.badge;
+    document.getElementById('level-banner').className   = 'level-banner ' + b.cls;
+  }
+  function renderGoals(level) {
+    document.getElementById('goals-grid').innerHTML = PLANS[level].goals.map(function(g) {
+      var c = GOAL_COLORS[g.color];
+      return '<div class="goal-card" style="background:' + c.bg + '">' +
+        '<span class="goal-icon">' + g.icon + '</span>' +
+        '<div class="goal-body">' +
+          '<span class="goal-value" style="color:' + c.text + '">' + g.value + '</span>' +
+          '<span class="goal-label">' + g.label + '</span>' +
+          '<span class="goal-sub">'   + g.sub   + '</span>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  CALENDAR RENDERER
+  // ═══════════════════════════════════════════════════════════════════════════
+  function renderCalendar() {
+    var y = currentYear, m = currentMonth;
+    var plan = USER_PLAN[currentLevel];
+
+    document.getElementById('cal-month-label').textContent = MONTH_NAMES[m] + ' ' + y;
+
+    document.getElementById('btn-prev').disabled = (y === MIN_YEAR && m === 0);
+    document.getElementById('btn-next').disabled = (y === MAX_YEAR && m === 11);
+
+    // Month stats
+    var daysInMonth = new Date(y, m + 1, 0).getDate();
+    var totalSessions = 0;
+    for (var dd = 1; dd <= daysInMonth; dd++) {
+      var entries = plan[dateKey(y, m, dd)] || [];
+      entries.forEach(function(e) { if (e.type !== 'rest') totalSessions++; });
+    }
+    document.getElementById('cal-month-stats').textContent =
+      totalSessions + ' session' + (totalSessions !== 1 ? 's' : '') + ' planned';
+
+    // Grid
+    var firstDOW = new Date(y, m, 1).getDay();
+    var offset   = (firstDOW + 6) % 7;
+    var grid     = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+
+    for (var i = 0; i < offset; i++) {
+      var empty = document.createElement('div');
+      empty.className = 'cal-day cal-day--empty';
+      grid.appendChild(empty);
+    }
+
+    for (var d = 1; d <= daysInMonth; d++) {
+      var key      = dateKey(y, m, d);
+      var entries  = plan[key] || [];
+      var isToday  = (y === TODAY.getFullYear() && m === TODAY.getMonth() && d === TODAY.getDate());
+      var isPast   = new Date(y, m, d) < new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+
+      var cell = document.createElement('div');
+      var cls  = 'cal-day cal-day--clickable';
+      if (entries.length) cls += ' cal-day--has-activity';
+      if (isToday)        cls += ' cal-day--today';
+      if (isPast && !isToday) cls += ' cal-day--past';
+      cell.className   = cls;
+      cell.dataset.key = key;
+
+      // Day number row
+      var header = document.createElement('div');
+      header.className = 'day-header-row';
+
+      var num = document.createElement('span');
+      num.className   = 'day-num';
+      num.textContent = d;
+      header.appendChild(num);
+
+      if (isToday) {
+        var dot = document.createElement('span');
+        dot.className = 'today-marker';
+        header.appendChild(dot);
+      }
+
+      // "+" add hint on hover (always present, shown via CSS)
+      var addHint = document.createElement('span');
+      addHint.className   = 'day-add-hint';
+      addHint.textContent = '+';
+      header.appendChild(addHint);
+
+      cell.appendChild(header);
+
+      // Activity pills — show up to 2, then overflow badge
+      var MAX_VISIBLE = 2;
+      entries.slice(0, MAX_VISIBLE).forEach(function(e) {
+        var act  = ACTIVITY_META[e.type] || ACTIVITY_META.rest;
+        var pill = document.createElement('div');
+        pill.className    = 'activity-pill';
+        pill.style.cssText = 'background:' + act.bg + ';border:1px solid ' + act.border + ';color:' + act.color;
+        pill.innerHTML    = '<span class="pill-emoji">' + act.emoji + '</span>' +
+                            '<span class="pill-label">' + (e.detail || act.label) + '</span>';
+        cell.appendChild(pill);
+      });
+
+      if (entries.length > MAX_VISIBLE) {
+        var more = document.createElement('div');
+        more.className   = 'pill-overflow';
+        more.textContent = '+' + (entries.length - MAX_VISIBLE) + ' more';
+        cell.appendChild(more);
+      }
+
+      cell.addEventListener('click', function(k) {
+        return function() { openModal(k); };
+      }(key));
+
+      grid.appendChild(cell);
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  MODAL
+  // ═══════════════════════════════════════════════════════════════════════════
+  function openModal(key) {
+    openKey = key;
+    var parts   = key.split('-');
+    var dateObj = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+    var dateLabel = dateObj.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+    document.getElementById('modal-date-label').textContent = dateLabel;
+    document.getElementById('add-detail').value   = '';
+    document.getElementById('add-duration').value = '';
+    document.getElementById('add-type').value     = 'run';
+
+    refreshModalList();
+
+    document.getElementById('modal-overlay').classList.add('modal-overlay--open');
+    document.getElementById('add-detail').focus();
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('modal-overlay--open');
+    openKey = null;
+  }
+
+  function refreshModalList() {
+    var entries  = entriesFor(openKey);
+    var listEl   = document.getElementById('modal-activity-list');
+    var divider  = document.getElementById('modal-divider');
+    var countEl  = document.getElementById('modal-count');
+
+    countEl.textContent = entries.length === 0
+      ? 'No activities planned'
+      : entries.length + ' activit' + (entries.length === 1 ? 'y' : 'ies') + ' planned';
+
+    divider.style.display = entries.length ? 'block' : 'none';
+
+    if (entries.length === 0) {
+      listEl.innerHTML = '<li class="modal-empty">No activities yet — add one below.</li>';
+      return;
+    }
+
+    listEl.innerHTML = entries.map(function(e) {
+      var act = ACTIVITY_META[e.type] || ACTIVITY_META.rest;
+      return '<li class="modal-item" data-id="' + e.id + '">' +
+        '<div class="modal-item-badge" style="background:' + act.bg + ';border:1px solid ' + act.border + '">' +
+          '<span>' + act.emoji + '</span>' +
+        '</div>' +
+        '<div class="modal-item-body">' +
+          '<span class="modal-item-type" style="color:' + act.color + '">' + act.label + '</span>' +
+          '<span class="modal-item-detail">' + escHtml(e.detail) + '</span>' +
+          (e.duration ? '<span class="modal-item-dur">' + escHtml(e.duration) + '</span>' : '') +
+        '</div>' +
+        '<button class="modal-item-delete" data-id="' + e.id + '" aria-label="Delete activity">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>' +
+        '</button>' +
+      '</li>';
+    }).join('');
+  }
+
+  function addActivity() {
+    var type     = document.getElementById('add-type').value;
+    var detail   = document.getElementById('add-detail').value.trim();
+    var duration = document.getElementById('add-duration').value.trim();
+
+    if (!detail) {
+      document.getElementById('add-detail').focus();
+      document.getElementById('add-detail').classList.add('input-error');
+      setTimeout(function() { document.getElementById('add-detail').classList.remove('input-error'); }, 600);
+      return;
+    }
+
+    if (!USER_PLAN[currentLevel][openKey]) USER_PLAN[currentLevel][openKey] = [];
+    USER_PLAN[currentLevel][openKey].push({ id: mkId(), type: type, detail: detail, duration: duration });
+
+    document.getElementById('add-detail').value   = '';
+    document.getElementById('add-duration').value = '';
+    document.getElementById('add-type').value     = 'run';
+
+    refreshModalList();
+    renderCalendar();
+  }
+
+  function deleteActivity(id) {
+    var arr = USER_PLAN[currentLevel][openKey];
+    if (!arr) return;
+    USER_PLAN[currentLevel][openKey] = arr.filter(function(e) { return e.id !== id; });
+    if (USER_PLAN[currentLevel][openKey].length === 0) delete USER_PLAN[currentLevel][openKey];
+    refreshModalList();
+    renderCalendar();
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ─── Modal event listeners ────────────────────────────────────────────────
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.getElementById('modal-activity-list').addEventListener('click', function(e) {
+    var btn = e.target.closest('.modal-item-delete');
+    if (!btn) return;
+    deleteActivity(parseInt(btn.dataset.id));
+  });
+
+  document.getElementById('btn-add-activity').addEventListener('click', addActivity);
+
+  document.getElementById('add-detail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') addActivity();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  NAVIGATION
+  // ═══════════════════════════════════════════════════════════════════════════
+  document.getElementById('btn-prev').addEventListener('click', function() {
+    if (currentMonth === 0) { currentMonth = 11; currentYear--; } else currentMonth--;
+    renderCalendar();
+  });
+  document.getElementById('btn-next').addEventListener('click', function() {
+    if (currentMonth === 11) { currentMonth = 0; currentYear++; } else currentMonth++;
+    renderCalendar();
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  LEVEL SELECTOR
+  // ═══════════════════════════════════════════════════════════════════════════
+  var selector = document.getElementById('level-selector');
+  var slider   = document.getElementById('level-slider');
+
+  function positionSlider(btn) {
+    slider.style.width = btn.offsetWidth + 'px';
+    slider.style.left  = btn.offsetLeft  + 'px';
+  }
+
+  selector.addEventListener('click', function(e) {
+    var btn = e.target.closest('.level-btn');
+    if (!btn) return;
+    document.querySelectorAll('.level-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    positionSlider(btn);
+    currentLevel = btn.dataset.level;
+    renderBanner(currentLevel);
+    renderGoals(currentLevel);
+    renderCalendar();
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  INIT
+  // ═══════════════════════════════════════════════════════════════════════════
+  renderBanner('beginner');
+  renderGoals('beginner');
+  renderCalendar();
+  requestAnimationFrame(function() {
+    positionSlider(document.querySelector('.level-btn.active'));
+  });
+  </script>
+</body>
+</html>
