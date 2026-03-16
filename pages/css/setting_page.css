@@ -1,3 +1,4 @@
+/* Settings page and top navigation styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
@@ -6,6 +7,7 @@
   box-sizing: border-box;
 }
 
+/* Top Navigation Bar */
 .top-nav {
   position: relative;
   z-index: 10;
@@ -75,6 +77,8 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+
+/* Main Content */
 .settings-page {
   max-width: 700px;
   margin: 60px auto;
