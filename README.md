@@ -8,3 +8,6 @@ Repository containing all code and documentation for the 2850 project 7 week pro
 
 Pull requests are welcome. 
 Ensure all code in a pull request is thoroughly tested with tests attached.
+
+## UoL staff
+Physical Fitness 10  /  Group number: 60
