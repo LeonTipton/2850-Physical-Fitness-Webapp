@@ -5,15 +5,66 @@
 */
 
 const translations = {
+
+  // English
   en: {
     // nav
     back: "Back",
+
+    // register page
+		regp_back_btn: "← Back to Home",
+		regp_title: "Register",
+		regp_username: "Username:",
+		regp_email: "Email:",
+		regp_password: "Password:",
+		regp_confirm_password: "Confirm Password:",
+    regp_submit: "Submit",
+
+    // run page
+		runp_title: "Run Activity",
+		runp_subtitle: "Track your runs and progress",
+		runp_car_title: "New Run",
+		runp_t_w: "This week",
+		runp_distance: "Distance (km)",
+		runp_duration: "Duration (min)",
+		runp_c_b: "Calories burned",
+		runp_steps: "Steps",
+		runp_avg_pace: "Avg. pace (min/km)",
+		runp_location: "Location",
+    runp_loca_placeholder: "Park or route name",
+		runp_weather: "Weather",
+		runp_s_w: "Select weather",
+		runp_sunny: "Sunny",
+		runp_cloudy: "Cloudy",
+		runp_rainy: "Rainy",
+		runp_sonwy: "Snowy",
+		runp_notes: "Notes",
+		runp_notes_placeholder: "Add notes about your run...",
+		runp_start_r: "Start Run",
+		runp_pause: "Pause",
+		runp_finish: "Finish",
+		runp_save_r: "Save Run",
+		runp_y_s: "Your Stats",
+		runp_total_r: "Total Runs",
+		runp_total_dis: "Total Distance",
+		runp_aveg_pace: "Avg Pace (min/km)",
+		runp_longest_r: "Longest Run",
+		runp_recent_rs: "Recent Runs",
 
     // setting page
     settings_title: "Settings",
     language: "Language",
     choose_language: "Choose your language",
     strp_subtitle: "Select a muscle group to view exercises",
+
+    // start page
+    stap_title: "What are we doing today?",
+    stap_hike: "Hike",
+    stap_run: "Run",
+    stap_swim: "Swim",
+    stap_cycle: "Cycle",
+    stap_gym: "Gym",
+    stap_strength: "Strength",
 
     // strength page
     strp_title: "Choose Strength Exercise",
@@ -108,9 +159,50 @@ const translations = {
     recent_swim: "Recent Swims"
   },
 
+  // Chinese
   zh: {
     // nav
     back: "返回",
+
+    // register page
+		regp_back_btn: "← 返回首页",
+		regp_title: "注册",
+		regp_username: "用户名：",
+		regp_email: "邮箱：",
+		regp_password: "密码：",
+		regp_confirm_password: "确认密码：",
+		regp_submit: "提交",
+
+    // run page
+		runp_title: "跑步活动",
+		runp_subtitle: "记录你的跑步和进度",
+		runp_car_title: "新建跑步记录",
+		runp_t_w: "本周",
+		runp_distance: "距离（公里）",
+		runp_duration: "时长（分钟）",
+		runp_c_b: "消耗卡路里",
+		runp_steps: "步数",
+		runp_avg_pace: "平均配速（分钟/公里）",
+		runp_location: "地点",
+    runp_loca_placeholder: "公园或路线名称",
+		runp_weather: "天气",
+		runp_s_w: "选择天气",
+		runp_sunny: "晴天",
+		runp_cloudy: "多云",
+		runp_rainy: "雨天",
+		runp_sonwy: "雪天",
+		runp_notes: "备注",
+		runp_notes_placeholder: "添加关于本次跑步的备注……",
+		runp_start_r: "开始跑步",
+		runp_pause: "暂停",
+		runp_finish: "结束",
+		runp_save_r: "保存跑步记录",
+		runp_y_s: "你的统计",
+		runp_total_r: "总跑步次数",
+		runp_total_dis: "总距离",
+		runp_aveg_pace: "平均配速（分钟/公里）",
+		runp_longest_r: "最长跑步距离",
+		runp_recent_rs: "最近跑步记录",
 
     // setting page
     settings_title: "设置",
@@ -118,6 +210,15 @@ const translations = {
     choose_language: "请选择你的语言",
     dark_mode: "深色模式",
     save: "保存",
+
+    // start page
+		stap_title: "我们今天做什么？",
+		stap_hike: "徒步",
+		stap_run: "跑步",
+		stap_swim: "游泳",
+		stap_cycle: "骑行",
+		stap_gym: "健身房",
+		stap_strength: "力量训练",
 
     // strength page 
 		strp_title: "选择力量训练动作",
@@ -212,9 +313,50 @@ const translations = {
     recent_swim: "最近游泳记录",
   },
 
+  // Spanish
   es: {
     // nav
     back: "Atrás",
+
+		// register page
+		regp_back_btn: "← Volver al inicio",
+		regp_title: "Registrarse",
+		regp_username: "Nombre de usuario:",
+		regp_email: "Correo electrónico:",
+		regp_password: "Contraseña:",
+		regp_confirm_password: "Confirmar contraseña:",
+		regp_submit: "Enviar",
+
+    // run page
+		runp_title: "Actividad de carrera",
+		runp_subtitle: "Registra tus carreras y tu progreso",
+		runp_car_title: "Nueva carrera",
+		runp_t_w: "Esta semana",
+		runp_distance: "Distancia (km)",
+		runp_duration: "Duración (min)",
+		runp_c_b: "Calorías quemadas",
+		runp_steps: "Pasos",
+		runp_avg_pace: "Ritmo medio (min/km)",
+		runp_location: "Ubicación",
+    runp_loca_placeholder: "Nombre del parque o la ruta",
+		runp_weather: "Clima",
+		runp_s_w: "Seleccionar clima",
+		runp_sunny: "Soleado",
+		runp_cloudy: "Nublado",
+		runp_rainy: "Lluvioso",
+		runp_sonwy: "Nevado",
+		runp_notes: "Notas",
+		runp_notes_placeholder: "Añade notas sobre tu carrera...",
+		runp_start_r: "Comenzar carrera",
+		runp_pause: "Pausa",
+		runp_finish: "Finalizar",
+		runp_save_r: "Guardar carrera",
+		runp_y_s: "Tus estadísticas",
+		runp_total_r: "Total de carreras",
+		runp_total_dis: "Distancia total",
+		runp_aveg_pace: "Ritmo medio (min/km)",
+		runp_longest_r: "Carrera más larga",
+		runp_recent_rs: "Carreras recientes",
 
     // setting page
     settings_title: "Configuración",
@@ -222,6 +364,15 @@ const translations = {
     choose_language: "Elige tu idioma",
     dark_mode: "Modo oscuro",
     save: "Guardar",
+
+    // start page
+		stap_title: "¿Qué vamos a hacer hoy?",
+		stap_hike: "Senderismo",
+		stap_run: "Correr",
+		stap_swim: "Natación",
+		stap_cycle: "Ciclismo",
+		stap_gym: "Gimnasio",
+		stap_strength: "Fuerza",
 
 		// strength page 
 		strp_title: "Elegir ejercicio de fuerza",
@@ -316,9 +467,50 @@ const translations = {
     recent_swim: "Sesiones recientes"
   },
 
+  // French
   fr: {
     // nav
     back: "Retour",
+
+		// register page
+		regp_back_btn: "← Retour à l’accueil",
+		regp_title: "S'inscrire",
+		regp_username: "Nom d'utilisateur :",
+		regp_email: "E-mail :",
+		regp_password: "Mot de passe :",
+		regp_confirm_password: "Confirmer le mot de passe :",
+		regp_submit: "Valider",
+
+    // run page
+		runp_title: "Activité de course",
+		runp_subtitle: "Suivez vos courses et votre progression",
+		runp_car_title: "Nouvelle course",
+		runp_t_w: "Cette semaine",
+		runp_distance: "Distance (km)",
+		runp_duration: "Durée (min)",
+		runp_c_b: "Calories brûlées",
+		runp_steps: "Pas",
+		runp_avg_pace: "Allure moyenne (min/km)",
+		runp_location: "Lieu",
+    runp_loca_placeholder: "Nom du parc ou de l’itinéraire",
+		runp_weather: "Météo",
+		runp_s_w: "Sélectionner la météo",
+		runp_sunny: "Ensoleillé",
+		runp_cloudy: "Nuageux",
+		runp_rainy: "Pluvieux",
+		runp_sonwy: "Neigeux",
+		runp_notes: "Notes",
+		runp_notes_placeholder: "Ajoutez des notes sur votre course...",
+		runp_start_r: "Commencer la course",
+		runp_pause: "Pause",
+		runp_finish: "Terminer",
+		runp_save_r: "Enregistrer la course",
+		runp_y_s: "Vos statistiques",
+		runp_total_r: "Nombre total de courses",
+		runp_total_dis: "Distance totale",
+		runp_aveg_pace: "Allure moyenne (min/km)",
+		runp_longest_r: "Course la plus longue",
+		runp_recent_rs: "Courses récentes",
 
     // setting page
     settings_title: "Paramètres",
@@ -326,6 +518,15 @@ const translations = {
     choose_language: "Choisissez votre langue",
     dark_mode: "Mode sombre",
     save: "Enregistrer",
+
+		// start page
+		stap_title: "Que faisons-nous aujourd’hui ?",
+		stap_hike: "Randonnée",
+		stap_run: "Course",
+		stap_swim: "Natation",
+		stap_cycle: "Cyclisme",
+		stap_gym: "Salle de sport",
+		stap_strength: "Musculation",
 
 		// strength page 
 		strp_title: "Choisir un exercice de musculation",
@@ -420,9 +621,50 @@ const translations = {
     recent_swim: "Séances récentes"
   },
 
+  // Japanese
   ja: {
     // nav
     back: "戻る",
+
+		// register page
+		regp_back_btn: "← ホームに戻る",
+		regp_title: "登録",
+		regp_username: "ユーザー名：",
+		regp_email: "メールアドレス：",
+		regp_password: "パスワード：",
+		regp_confirm_password: "パスワード確認：",
+		regp_submit: "送信",
+
+    // run page
+		runp_title: "ランニングアクティビティ",
+		runp_subtitle: "ランニングの記録と進捗を管理しましょう",
+		runp_car_title: "新しいランニング記録",
+		runp_t_w: "今週",
+		runp_distance: "距離 (km)",
+		runp_duration: "時間 (分)",
+		runp_c_b: "消費カロリー",
+		runp_steps: "歩数",
+		runp_avg_pace: "平均ペース (分/km)",
+		runp_location: "場所",
+    runp_loca_placeholder: "公園またはルート名",
+		runp_weather: "天気",
+		runp_s_w: "天気を選択",
+		runp_sunny: "晴れ",
+		runp_cloudy: "曇り",
+		runp_rainy: "雨",
+		runp_sonwy: "雪",
+		runp_notes: "メモ",
+		runp_notes_placeholder: "ランニングについてのメモを追加...",
+		runp_start_r: "ランニング開始",
+		runp_pause: "一時停止",
+		runp_finish: "終了",
+		runp_save_r: "ランニング記録を保存",
+		runp_y_s: "あなたの統計",
+		runp_total_r: "総ランニング回数",
+		runp_total_dis: "総距離",
+		runp_aveg_pace: "平均ペース (分/km)",
+		runp_longest_r: "最長ランニング距離",
+		runp_recent_rs: "最近のランニング記録",
 
     // setting page
     settings_title: "設定",
@@ -430,6 +672,15 @@ const translations = {
     choose_language: "言語を選択してください",
     dark_mode: "ダークモード",
     save: "保存",
+
+		// start page
+		stap_title: "今日は何をしますか？",
+		stap_hike: "ハイキング",
+		stap_run: "ランニング",
+		stap_swim: "水泳",
+		stap_cycle: "サイクリング",
+		stap_gym: "ジム",
+		stap_strength: "筋力トレーニング",
 
 		// strength page 
 		strp_title: "筋力トレーニング種目を選択",
@@ -524,9 +775,50 @@ const translations = {
     recent_swim: "最近の水泳記録"
   },
 
+  // Korean
   ko: {
     // nav
     back: "뒤로",
+
+		// register page
+		regp_back_btn: "← 홈으로 돌아가기",
+		regp_title: "회원가입",
+		regp_username: "사용자 이름:",
+		regp_email: "이메일:",
+		regp_password: "비밀번호:",
+		regp_confirm_password: "비밀번호 확인:",
+		regp_submit: "제출",
+
+    // run page
+		runp_title: "달리기 활동",
+		runp_subtitle: "달리기 기록과 진행 상황을 추적하세요",
+		runp_car_title: "새 달리기 기록",
+		runp_t_w: "이번 주",
+		runp_distance: "거리 (km)",
+		runp_duration: "시간 (분)",
+		runp_c_b: "소모 칼로리",
+		runp_steps: "걸음 수",
+		runp_avg_pace: "평균 페이스 (분/km)",
+		runp_location: "위치",
+    runp_loca_placeholder: "공원 또는 경로 이름",
+		runp_weather: "날씨",
+		runp_s_w: "날씨 선택",
+		runp_sunny: "맑음",
+		runp_cloudy: "흐림",
+		runp_rainy: "비",
+		runp_sonwy: "눈",
+		runp_notes: "메모",
+		runp_notes_placeholder: "달리기에 대한 메모를 추가하세요...",
+		runp_start_r: "달리기 시작",
+		runp_pause: "일시정지",
+		runp_finish: "종료",
+		runp_save_r: "달리기 기록 저장",
+		runp_y_s: "내 통계",
+		runp_total_r: "총 달리기 횟수",
+		runp_total_dis: "총 거리",
+		runp_aveg_pace: "평균 페이스 (분/km)",
+		runp_longest_r: "가장 긴 달리기 거리",
+		runp_recent_rs: "최근 달리기 기록",
 
     // setting page
     settings_title: "설정",
@@ -534,6 +826,15 @@ const translations = {
     choose_language: "언어를 선택하세요",
     dark_mode: "다크 모드",
     save: "저장",
+
+		// start page
+		stap_title: "오늘은 무엇을 할까요?",
+		stap_hike: "하이킹",
+		stap_run: "달리기",
+		stap_swim: "수영",
+		stap_cycle: "사이클",
+		stap_gym: "헬스장",
+		stap_strength: "근력 운동",
 
 		// strength page 
 		strp_title: "근력 운동 선택",

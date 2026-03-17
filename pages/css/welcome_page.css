@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 html, body {
   height: 100%;
@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-  font-family: "Fjalla One", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #efefef;
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ body {
   width: 240px;
   height: 120px;
   margin: 0 auto 60px;
-  border: 3px solid #333;
+  border: 3px solid #111;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ body {
 .intro {
   font-size: 28px;
   line-height: 1.7;
-  color: #333;
+  color: #111;
   margin: 0 0 55px;
 }
 
@@ -50,7 +50,7 @@ body {
   width: 280px;
   margin: 22px auto;
   padding: 22px 0;
-  background-color: #333;
+  background-color: #111;
   color: white;
   text-decoration: none;
   text-transform: uppercase;
@@ -61,6 +61,6 @@ body {
 }
 
 .btn:hover {
-  background-color: #555;
+  background-color: #333;
 }
 
