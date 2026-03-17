@@ -18,17 +18,17 @@
       <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
-      Back
+      <span data-i18n="back">Back</span>
     </a>
     <a href="home_page.html" class="nav-logo">LOGO</a>
     <div class="nav-right">
-      <a href="#" class="nav-icon" aria-label="Settings">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="3"></circle>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
         </svg>
       </a>
-      <a href="#" class="nav-icon" aria-label="Profile">
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
@@ -39,17 +39,17 @@
 
   <main class="gym-main strength-workout-main">
     <header class="gym-header card-animate">
-      <h1 class="gym-title">Strength Workout</h1>
-      <p class="gym-subtitle">Record your exercise</p>
+      <h1 class="gym-title" data-i18n="swp_title">Strength Workout</h1>
+      <p class="gym-subtitle" data-i18n="swp_subtitle">Record your exercise</p>
     </header>
 
     <div class="gym-layout">
       <section class="gym-form-card card-animate">
         <div class="form-header">
-          <h2 class="form-title">New Workout</h2>
+          <h2 class="form-title" data-i18n="swp_card_title">New Workout</h2>
           <div class="gym-goal">
-            <span class="goal-label">This week</span>
-            <span class="goal-value">4 / 5 sessions</span>
+            <span class="goal-label" data-i18n="swp_t_w">This week</span>
+            <span class="goal-value"><span>4 / 5</span> <span data-i18n="swp_sessions">sessions</span></span>
             <div class="goal-bar"><div class="goal-fill" style="width: 80%"></div></div>
           </div>
         </div>
@@ -58,63 +58,63 @@
           <p class="selected-summary" id="selected-summary" aria-live="polite"></p>
           <div class="form-row form-row-full">
             <div class="form-group">
-              <label>Exercise Name (optional)</label>
-              <input id="exercise-name" type="text" placeholder="e.g. Bench Press, Plank, Squat">
+              <label data-i18n="swp_exer_name">Exercise Name (optional)</label>
+              <input id="exercise-name" type="text" data-i18n-placeholder="swp_placeholder_e_g" placeholder="e.g. Bench Press, Plank, Squat">
             </div>
           </div>
           <div class="form-row form-row-4">
             <div class="form-group">
-              <label>Sets</label>
+              <label data-i18n="swp_sets">Sets</label>
               <input id="exercise-sets" type="number" min="0" placeholder="3">
             </div>
             <div class="form-group">
-              <label>Reps</label>
+              <label data-i18n="swp_reps">Reps</label>
               <input id="exercise-reps" type="number" min="0" placeholder="10">
             </div>
             <div class="form-group">
-              <label>Weight (kg)</label>
+              <label data-i18n="swp_weight">Weight (kg)</label>
               <input id="exercise-weight" type="number" step="0.5" min="0" placeholder="0">
             </div>
             <div class="form-group">
-              <label>Duration (min)</label>
+              <label data-i18n="swp_duration">Duration (min)</label>
               <input id="exercise-duration" type="number" min="0" placeholder="0">
             </div>
           </div>
           <div class="form-group form-group-full">
-            <label>Notes</label>
-            <textarea id="exercise-notes" rows="3" placeholder="Add notes about your workout..."></textarea>
+            <label data-i18n="swp_notes">Notes</label>
+            <textarea id="exercise-notes" rows="3" data-i18n="swp_placeholder_note" placeholder="Add notes about your workout..."></textarea>
           </div>
           <div class="gym-actions">
-            <button type="button" class="btn-back" onclick="window.location.href='strength_page.html'">Back</button>
-            <button type="submit" class="btn-primary">Save Workout</button>
+            <button type="button" class="btn-back" onclick="window.location.href='strength_page.html'" data-i18n="swp_back_btn">Back</button>
+            <button type="submit" class="btn-primary" data-i18n="swp_save_workout_btn">Save Workout</button>
           </div>
         </form>
       </section>
 
       <aside class="gym-sidebar">
         <div class="summary-card card-animate card-animate-delay-1">
-          <h3 class="summary-title">Your Stats</h3>
+          <h3 class="summary-title" data-i18n="swp_your_stats">Your Stats</h3>
           <div class="summary-grid">
             <div class="summary-item summary-item-1">
               <span class="summary-value">28</span>
-              <span class="summary-label">This Month</span>
+              <span class="summary-label" data-i18n="swp_t_m">This Month</span>
             </div>
             <div class="summary-item summary-item-2">
               <span class="summary-value">142</span>
-              <span class="summary-label">Total Exercises</span>
+              <span class="summary-label" data-i18n="swp_total_exer">Total Exercises</span>
             </div>
             <div class="summary-item summary-item-3">
               <span class="summary-value">85 kg</span>
-              <span class="summary-label">Max Bench</span>
+              <span class="summary-label" data-i18n="swp_max_bench">Max Bench</span>
             </div>
             <div class="summary-item summary-item-4">
               <span class="summary-value">140 kg</span>
-              <span class="summary-label">Max Squat</span>
+              <span class="summary-label" data-i18n="swp_max_squat">Max Squat</span>
             </div>
           </div>
         </div>
         <div class="recent-card card-animate card-animate-delay-2">
-          <h3 class="recent-title">Recent Workouts</h3>
+          <h3 class="recent-title" data-i18n="swp_recent_workout">Recent Workouts</h3>
           <ul class="recent-list">
             <li class="recent-item">
               <div class="recent-info">
