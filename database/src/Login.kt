@@ -7,7 +7,6 @@ import org.jetbrains.exposed.v1.core.dao.id.EntityID
 class Login(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<Login>(LoginTable)
 
-    var uid by LoginTable.id
     var username by LoginTable.username
     var email by LoginTable.email
     var password by LoginTable.password
