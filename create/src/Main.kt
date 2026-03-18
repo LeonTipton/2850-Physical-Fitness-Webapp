@@ -13,6 +13,7 @@ import org.jetbrains.exposed.v1.core.innerJoin
 import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.insertAndGetId
 import org.jetbrains.exposed.v1.jdbc.select
+import org.jetbrains.exposed.v1.jdbc.batchInsert
 
 
 const val GYMWORK_DATA = "csv/gymwork.csv"
@@ -143,13 +144,23 @@ fun addSports(filename : String) : NameToIdMap {
 }
 
 fun createRecommendations(exercises : NameToIdMap, sports : NameToIdMap) {
-    val matcher = GymworkMusclesTable
-        .innerJoin(SportsMusclesTable)
-        .select(GymworkMusclesTable.id, SportsMusclesTable.id)
-        .where {
+    val joinTable = GymworkMusclesTable.innerJoin(
+            otherTable = SportsMusclesTable,
+            onColumn = { GymworkMusclesTable.muscleName },
+            otherColumn = { SportsMusclesTable.muscleName }
+        )
+
+    val matcher = joinTable.select(
+            GymworkMusclesTable.id,
+            SportsMusclesTable.id
+        )
+        .where { 
             GymworkMusclesTable.muscleName eq SportsMusclesTable.muscleName
         }
         .withDistinct()
 
-    RecommendationsTable.insert(matcher)
+    RecommendationsTable.batchInsert(matcher) { row ->
+        this[RecommendationsTable.exId] = row[GymworkMusclesTable.id]
+        this[RecommendationsTable.sportId] = row[SportsMusclesTable.id]
+    }
 }
