@@ -1,5 +1,6 @@
 package com.physicalfitness
 
+import com.physicalfitness.DistancesTypeTable.exType
 import java.io.FileReader
 import org.apache.commons.csv.CSVFormat
 import org.jetbrains.exposed.v1.core.StdOutSqlLogger
@@ -16,7 +17,7 @@ import org.jetbrains.exposed.v1.jdbc.batchInsert
 const val GYMWORK_DATA = "csv/gymwork.csv"
 const val DISTANCE_DATA = "csv/distance.csv"
 const val SPORTS_DATA = "csv/sports.csv"
-const val WATERWORK_DATA = "csv/waterwork.csv"
+const val SWIM_DATA = "csv/waterwork.csv"
 
 fun main(args: Array<String>) {
     val sqlLogging = args.isNotEmpty() && args[0] == "--sql"
@@ -26,32 +27,42 @@ fun main(args: Array<String>) {
 
         SchemaUtils.drop(
             BiometricsTable,
+            DistancesEquipTable,
+            DistancesIntensityTable,
             DistancesTable,
+            DistancesTypeTable,
             GymworkTable,
             GymworkMusclesTable,
             LoginTable,
             RecommendationsTable,
             SportsTable,
             SportsMusclesTable,
+            SwimStrokesTable,
+            SwimEquipTable,
+            SwimTable,
             UserTable,
-            WaterworkTable,
         )
 
         SchemaUtils.create(
             BiometricsTable,
+            DistancesEquipTable,
+            DistancesIntensityTable,
             DistancesTable,
+            DistancesTypeTable,
             GymworkTable,
             GymworkMusclesTable,
             LoginTable,
             RecommendationsTable,
             SportsTable,
             SportsMusclesTable,
+            SwimStrokesTable,
+            SwimEquipTable,
+            SwimTable,
             UserTable,
-            WaterworkTable,
         )
 
         addDistance(DISTANCE_DATA)
-        addWaterwork(WATERWORK_DATA)
+        addSwimming(SWIM_DATA)
         addGymwork(GYMWORK_DATA)
         addSports(SPORTS_DATA)
          createRecommendations()
@@ -62,25 +73,50 @@ fun addDistance(filename : String) {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
         for (record in records) {
-            DistancesTable.insert {
+            val distId = DistancesTable.insertAndGetId {
                 it[exName] = record[0]
-                it[intensity] = record[1]
-                it[type] = record[2]
-                it[equipment] = record[3]
+            }
+            record[1].split(";").forEach { intensityVal ->
+                DistancesIntensityTable.insert {
+                    it[id] = distId
+                    it[intensity] = intensityVal
+                }
+            }
+            record[2].split(";").forEach { type ->
+                DistancesTypeTable.insert {
+                    it[id] = distId
+                    it[exType] = type
+                }
+            }
+            record[3].split(";").forEach { equipment ->
+                DistancesEquipTable.insert {
+                    it[id] = distId
+                    it[equip] = equipment
+                }
             }
         }
     }
 }
 
-fun addWaterwork(filename: String) {
+fun addSwimming(filename: String) {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
         for (record in records) {
-            WaterworkTable.insert {
+            val swimId = SwimTable.insertAndGetId {
                 it[exName] = record[0]
                 it[intensity] = record[1]
-                it[strokes] = record[2]
-                it[equipment] = record[3]
+            }
+            record[2].split(";").forEach { strokeAbbr ->
+                SwimStrokesTable.insert {
+                    it[id] = swimId
+                    it[stroke] = strokeAbbr
+                }
+            }
+            record[3].split(";").forEach { equipment ->
+                SwimEquipTable.insert {
+                    it[id] = swimId
+                    it[equip] = equipment
+                }
             }
         }
     }

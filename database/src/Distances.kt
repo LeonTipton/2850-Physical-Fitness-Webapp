@@ -8,8 +8,8 @@ class Distances(id : EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<Distances>(DistancesTable)
 
     var exName by DistancesTable.exName
-    var intensity by DistancesTable.intensity
-    var type by DistancesTable.type
-    var equipment by DistancesTable.equipment
+    var intensity by DistancesIntensityTable.intensity
+    var type by DistancesTypeTable.exType
+    var equipment by DistancesEquipTable.equip
 
 }
