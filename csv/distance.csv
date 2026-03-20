@@ -1,0 +1,42 @@
+distance,intensity,type,equipment/terrain
+100m,Sprint,Run,Spikes
+200m,Sprint,Run,Spikes
+400m,Fast,Run,None
+500m,Easy,Cycle;Run,None
+800m,Hard,Run,None
+1km,Fast;Sprint,Cycle;Run,None
+2km,Easy;Moderate,Cycle;Run,Stationary Bike;Treadmill
+3km,Moderate,Run,None
+5km,Moderate;Race Pace,Cycle;Run,None
+8km,Moderate,Run,None
+10km,Moderate,Cycle;Run,None
+12km,Build,Run,None
+15km,Hard;Aerobic,Cycle;Run,None
+20km,Hard,Cycle,Aero Bars
+21km,Endurance,Run,None
+25km,Moderate,Cycle,Indoor Trainer
+30km,Build,Cycle,None
+32km,Endurance,Run,Hydration Vest
+40km,Moderate,Cycle,Aero Bars
+42km,Race Pace,Run,Hydration Vest;Nutrition
+50km,Endurance,Run,Hydration Vest;Poles
+60km,Moderate,Cycle,None
+80km,Moderate,Cycle,None
+90km,Race Pace,Cycle,Aero Bars
+100km,Aerobic,Cycle,None
+120km,Endurance,Cycle,Aero Bars
+180km,Endurance,Cycle,Aero Bars;Hydration System
+10x500m,Max Effort,Cycle;Run,None
+5x2km,Hard,Cycle,None
+5x1km,Hard;Sprint,Cycle;Run,None
+10x400m,Fast,Run,None
+8x200m,Max Effort,Run,None
+15mins,Easy,Run,Walk/Jog
+20mins,Easy,Cycle,Recumbent Bike
+45mins,Hard,Cycle,Spin Bike
+5km/1km,Fast,Brick (Cycle/Run),Road;Shoes
+10km/2km,Moderate,Brick (Cycle/Run),Road;Shoes
+20km/5km,Race Pace,Brick (Cycle/Run),Aero Bars;Road
+40km/10km,Moderate,Brick (Cycle/Run),Aero Bars;Road
+90km/10km,Hard,Brick (Cycle/Run),Aero Bars;Nutrition
+180km/5km,Endurance,Brick (Cycle/Run),Aero Bars;Hydration
