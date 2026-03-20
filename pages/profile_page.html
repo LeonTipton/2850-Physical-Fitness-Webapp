@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Setting Page</title>
+  <title>Profile Page</title>
   <link rel="stylesheet" href="css/profile_page.css">
 </head>
 
@@ -26,11 +26,29 @@
                 </svg>
             </a>
         </div>
-
     </nav>
+
+    <main class="profile-container">
+        <h1 data-i18n="profile_title">Profile</h1>
+
+        <button type="button" class="logout-btn" onclick="logout()">
+            <span class="logout-title" data-i18n="log_out">Log Out</span>
+            <span class="logout-subtitle" data-i18n="logout_subtitle">Sign out of your account</span>
+        </button>
+    </main>
 
     <!-- Language Change Script --> 
     <script src="js/i18n.js"></script>
+
+    <script>
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("user");
+            sessionStorage.clear();
+
+            window.location.href = "../index.html";
+        }
+    </script>
 </body>
 
 </html>

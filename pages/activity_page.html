@@ -14,33 +14,36 @@
       <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
-      Back
-
-      
+      <span data-i18n="back">Back</span>
     </a>
+
     <a href="home_page.html" class="nav-logo">LOGO</a>
+
     <div class="nav-right">
-      <a href="#" class="nav-icon" aria-label="Settings">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="3"></circle>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
         </svg>
       </a>
-      <a href="#" class="nav-icon" aria-label="Profile">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="8" r="4"></circle>
-        <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
-      </svg>
-    </a>
+
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
     </div>
   </nav>
 
   <main class="activity-view" id="activity-view">
     <div class="activity-overlay"></div>
+
     <div class="activity-content">
       <span class="activity-emoji" id="activity-emoji">🏃</span>
       <h1 class="activity-title" id="activity-title">Run</h1>
       <p class="activity-desc" id="activity-desc">Ready to run?</p>
+
       <a href="hike_page.html" class="activity-cta" id="cta-hike" style="display:none">Start Hike</a>
       <a href="run_page.html" class="activity-cta" id="cta-run" style="display:none">Start Run</a>
       <a href="cycle_page.html" class="activity-cta" id="cta-cycle" style="display:none">Start Cycle</a>
@@ -51,64 +54,105 @@
   </main>
 
   <script>
-    const activities = {
-      run: {
-        emoji: '🏃',
-        title: 'Run',
-        desc: 'Ready to hit the track?',
-        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1920'
-      },
-      cycle: {
-        emoji: '🚴',
-        title: 'Cycle',
-        desc: 'Let\'s ride!',
-        image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=1920'
-      },
-      hike: {
-        emoji: '🥾',
-        title: 'Hike',
-        desc: 'Explore the trails.',
-        image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920'
-      },
-      swim: {
-        emoji: '🏊',
-        title: 'Swim',
-        desc: 'Dive in!',
-        image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1920'
-      },
-      gym: {
-        emoji: '🏋️',
-        title: 'Gym',
-        desc: 'Time to lift!',
-        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920'
-      },
-      weight: {
-        emoji: '💪',
-        title: 'Strength',
-        desc: 'Build strength!',
-        image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1920'
+    (function () {
+      const activities = {
+        run: {
+          emoji: '🏃',
+          titleKey: 'activity_run_title',
+          descKey: 'activity_run_desc',
+          ctaKey: 'activity_cta_run',
+          image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1920'
+        },
+        cycle: {
+          emoji: '🚴',
+          titleKey: 'activity_cycle_title',
+          descKey: 'activity_cycle_desc',
+          ctaKey: 'activity_cta_cycle',
+          image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=1920'
+        },
+        hike: {
+          emoji: '🥾',
+          titleKey: 'activity_hike_title',
+          descKey: 'activity_hike_desc',
+          ctaKey: 'activity_cta_hike',
+          image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920'
+        },
+        swim: {
+          emoji: '🏊',
+          titleKey: 'activity_swim_title',
+          descKey: 'activity_swim_desc',
+          ctaKey: 'activity_cta_swim',
+          image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1920'
+        },
+        gym: {
+          emoji: '🏋️',
+          titleKey: 'activity_gym_title',
+          descKey: 'activity_gym_desc',
+          ctaKey: 'activity_cta_gym',
+          image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920'
+        },
+        weight: {
+          emoji: '💪',
+          titleKey: 'activity_weight_title',
+          descKey: 'activity_weight_desc',
+          ctaKey: 'activity_cta_weight',
+          image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1920'
+        }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const type = (params.get('activity') || 'run').toLowerCase();
+      const activity = activities[type] || activities.run;
+
+      const activityView = document.getElementById('activity-view');
+      const activityEmoji = document.getElementById('activity-emoji');
+      const activityTitle = document.getElementById('activity-title');
+      const activityDesc = document.getElementById('activity-desc');
+
+      const ctaHike = document.getElementById('cta-hike');
+      const ctaRun = document.getElementById('cta-run');
+      const ctaCycle = document.getElementById('cta-cycle');
+      const ctaGym = document.getElementById('cta-gym');
+      const ctaWeight = document.getElementById('cta-weight');
+      const ctaSwim = document.getElementById('cta-swim');
+
+      function renderActivity() {
+        activityView.style.backgroundImage = `url(${activity.image})`;
+        activityEmoji.textContent = activity.emoji;
+        activityTitle.textContent = t(activity.titleKey);
+        activityDesc.textContent = t(activity.descKey);
+        document.title = t(activity.titleKey) + ' - Fitness App';
+
+        ctaHike.textContent = t('activity_cta_hike');
+        ctaRun.textContent = t('activity_cta_run');
+        ctaCycle.textContent = t('activity_cta_cycle');
+        ctaGym.textContent = t('activity_cta_gym');
+        ctaWeight.textContent = t('activity_cta_weight');
+        ctaSwim.textContent = t('activity_cta_swim');
+
+        ctaHike.style.display = type === 'hike' ? 'inline-block' : 'none';
+        ctaRun.style.display = type === 'run' ? 'inline-block' : 'none';
+        ctaCycle.style.display = type === 'cycle' ? 'inline-block' : 'none';
+        ctaGym.style.display = type === 'gym' ? 'inline-block' : 'none';
+        ctaWeight.style.display = type === 'weight' ? 'inline-block' : 'none';
+        ctaSwim.style.display = type === 'swim' ? 'inline-block' : 'none';
       }
-    };
 
-    const params = new URLSearchParams(window.location.search);
-    const type = (params.get('activity') || 'run').toLowerCase();
-    const activity = activities[type] || activities.run;
+      document.addEventListener('DOMContentLoaded', function () {
+        renderActivity();
 
-    document.getElementById('activity-view').style.backgroundImage = `url(${activity.image})`;
-    document.getElementById('activity-emoji').textContent = activity.emoji;
-    document.getElementById('activity-title').textContent = activity.title;
-    document.getElementById('activity-desc').textContent = activity.desc;
-    document.title = activity.title + ' - Fitness App';
-
-    document.getElementById('cta-hike').style.display = type === 'hike' ? 'inline-block' : 'none';
-    document.getElementById('cta-run').style.display = type === 'run' ? 'inline-block' : 'none';
-    document.getElementById('cta-cycle').style.display = type === 'cycle' ? 'inline-block' : 'none';
-    document.getElementById('cta-gym').style.display = type === 'gym' ? 'inline-block' : 'none';
-    document.getElementById('cta-weight').style.display = type === 'weight' ? 'inline-block' : 'none';
-    document.getElementById('cta-swim').style.display = type === 'swim' ? 'inline-block' : 'none';
+        const originalApplyLanguage = window.applyLanguage;
+        if (typeof originalApplyLanguage === 'function') {
+          window.applyLanguage = function (lang) {
+            originalApplyLanguage(lang);
+            renderActivity();
+          };
+        }
+      });
+    })();
   </script>
 
-  <!-- Language Change Script --> 
+  <!-- Language Change Script -->
   <script src="js/i18n.js"></script>
 </body>
 
