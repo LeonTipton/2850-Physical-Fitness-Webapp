@@ -10,17 +10,14 @@ import java.io.File
 fun Application.configureRouting() {
     routing {
 
-        // Home page
         get("/") {
             call.respondFile(File("index.html"))
         }
 
-        // Login page
         get("/login") {
             call.respondFile(File("pages/login_page.html"))
         }
 
-        // Register page
         get("/register") {
             call.respondFile(File("pages/register_page.html"))
         }
