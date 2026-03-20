@@ -1,25 +1,29 @@
 package com.physicalfitness
 
 import io.ktor.server.application.Application
-import io.ktor.server.routing.routing
 import io.ktor.server.application.call
+import io.ktor.server.routing.routing
 import io.ktor.server.routing.get
-import io.ktor.server.response.respondText
+import io.ktor.server.response.respondFile
+import java.io.File
 
 fun Application.configureRouting() {
     routing {
 
-         get("/") {
-            call.respondText("Home page")
+        // Home page
+        get("/") {
+            call.respondFile(File("index.html"))
         }
 
+        // Login page
         get("/login") {
-            call.respondText("Login page")
+            call.respondFile(File("pages/login_page.html"))
         }
 
-        get("/dashboard") {
-            call.respondText("Dashboard page")
+        // Register page
+        get("/register") {
+            call.respondFile(File("pages/register_page.html"))
         }
-       
+
     }
 }
