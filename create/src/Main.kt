@@ -1,6 +1,5 @@
 package com.physicalfitness
 
-import com.physicalfitness.DistancesTypeTable.exType
 import java.io.FileReader
 import org.apache.commons.csv.CSVFormat
 import org.jetbrains.exposed.v1.core.StdOutSqlLogger
@@ -20,11 +19,12 @@ const val SPORTS_DATA = "csv/sports.csv"
 const val SWIM_DATA = "csv/waterwork.csv"
 
 fun main(args: Array<String>) {
-    val sqlLogging = args.isNotEmpty() && args[0] == "--sql"
+    val sqlLogging = args.isNotEmpty() && args[0] == "--sql" // check cmdline args for sql output
 
     transaction(PhysicalFitDatabase.db) {
-        if (sqlLogging) addLogger(StdOutSqlLogger)
+        if (sqlLogging) addLogger(StdOutSqlLogger) // output to cmdline
 
+        // drop all tables
         SchemaUtils.drop(
             BiometricsTable,
             DistancesEquipTable,
@@ -43,6 +43,7 @@ fun main(args: Array<String>) {
             UserTable,
         )
 
+        // rebuild all tables
         SchemaUtils.create(
             BiometricsTable,
             DistancesEquipTable,
@@ -61,33 +62,40 @@ fun main(args: Array<String>) {
             UserTable,
         )
 
+        // populate all tables
         addDistance(DISTANCE_DATA)
         addSwimming(SWIM_DATA)
         addGymwork(GYMWORK_DATA)
         addSports(SPORTS_DATA)
-         createRecommendations()
+        createRecommendations()
     }
 }
 
 fun addDistance(filename : String) {
+    // read the csv file using correct reader
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
+        // loop over each line
         for (record in records) {
-            val distId = DistancesTable.insertAndGetId {
+            // add exercise names to the general table
+            val distId = DistancesTable.insertAndGetId { // store id for connected tables
                 it[exName] = record[0]
             }
+            // add intensities to Intensity table
             record[1].split(";").forEach { intensityVal ->
                 DistancesIntensityTable.insert {
                     it[id] = distId
                     it[intensity] = intensityVal
                 }
             }
+            // add exercise types to Type table
             record[2].split(";").forEach { type ->
                 DistancesTypeTable.insert {
                     it[id] = distId
                     it[exType] = type
                 }
             }
+            // add equipment required/recommended to Equip table
             record[3].split(";").forEach { equipment ->
                 DistancesEquipTable.insert {
                     it[id] = distId
@@ -98,6 +106,7 @@ fun addDistance(filename : String) {
     }
 }
 
+// acts same as above for respective tables
 fun addSwimming(filename: String) {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
@@ -122,6 +131,7 @@ fun addSwimming(filename: String) {
     }
 }
 
+// acts same as above for respective tables
 fun addGymwork(filename : String) {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
@@ -140,6 +150,7 @@ fun addGymwork(filename : String) {
     }
 }
 
+// acts same as above for respective tables
 fun addSports(filename : String) {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
@@ -167,12 +178,18 @@ fun addSports(filename : String) {
 }
 
 fun createRecommendations() {
+    // build a join table connecting muscle groups from gymwork to sports
+    // this has the respective table ids as nonprimary key entities
     val joinTable = GymworkMusclesTable.innerJoin(
             otherTable = SportsMusclesTable,
             onColumn = { GymworkMusclesTable.muscleName },
             otherColumn = { SportsMusclesTable.muscleName }
         )
 
+    // using the join table create a matcher to the respective ids
+    // Filter where the muscle names are the same, ensuring the combination
+    // of ids is unique
+    // (i.e., the composite key 11 will only appear once connecting gymwork id 1 to sport id 1)
     val matcher = joinTable.select(
             GymworkMusclesTable.id,
             SportsMusclesTable.id
@@ -182,6 +199,7 @@ fun createRecommendations() {
         }
         .withDistinct()
 
+    // since no iteration is required to extract data simply batch insert ids into the Recommendations table
     RecommendationsTable.batchInsert(matcher) { row ->
         this[RecommendationsTable.exId] = row[GymworkMusclesTable.id]
         this[RecommendationsTable.sportId] = row[SportsMusclesTable.id]

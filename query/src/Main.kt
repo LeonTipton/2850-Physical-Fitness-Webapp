@@ -10,5 +10,8 @@ fun main(args: Array<String>) {
     transaction(PhysicalFitDatabase.db) {
         if (sqlLogging) addLogger(StdOutSqlLogger)
 
+        // add give recommendations code here
+        // if sport given, search sport table for that id and match that sportId to all gymworkIds
+        // if muscle group given, search gymworkMuscle table for gymwork ids and output names from gymwork table
     }
 }
