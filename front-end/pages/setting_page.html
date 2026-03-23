@@ -39,19 +39,87 @@
   <main class="settings-page">
     <h1 data-i18n="settings_title">Settings</h1>
 
-    <div class="settings-card">
-      <label for="languageSelect" data-i18n="language">Language</label>
-      <select id="languageSelect">
-        <option value="en">English</option>
-        <option value="zh">中文</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
-      </select>
+    <section class="settings-card">
+      <h2>Preferences</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label" data-i18n="language">Language</span>
+          <span class="setting-desc" data-i18n="choose_language">Choose your preferred language</span>
+        </div>
+        <select id="languageSelect" class="setting-select">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+        </select>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label">Units</span>
+          <span class="setting-desc">Choose your preferred distance units</span>
+        </div>
+        <select id="unitsSelect" class="setting-select">
+          <option value="km">Kilometers (km)</option>
+          <option value="miles">Miles (mi)</option>
+        </select>
+      </div>
+    </section>
 
-      <p data-i18n="choose_language">Choose your language</p>
-    </div>
+    <section class="settings-card">
+      <h2>Notifications</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label">Email Notifications</span>
+          <span class="setting-desc">Receive updates and tips via email</span>
+        </div>
+        <label class="toggle"><input type="checkbox" id="toggleEmail"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label">Workout Reminders</span>
+          <span class="setting-desc">Get reminded before scheduled workouts</span>
+        </div>
+        <label class="toggle"><input type="checkbox" id="toggleReminders"><span class="toggle-slider"></span></label>
+      </div>
+    </section>
+
+    <section class="settings-card">
+      <h2>Appearance</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label">Dark Mode</span>
+          <span class="setting-desc">Switch between light and dark theme</span>
+        </div>
+        <label class="toggle"><input type="checkbox" id="toggleDarkMode"><span class="toggle-slider"></span></label>
+      </div>
+    </section>
+
+    <section class="settings-card">
+      <h2>Account</h2>
+      <div class="setting-row setting-row-action" onclick="changePassword()">
+        <div class="setting-info">
+          <span class="setting-label">Change Password</span>
+          <span class="setting-desc">Update your account password</span>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+      <div class="setting-row setting-row-action" onclick="exportData()">
+        <div class="setting-info">
+          <span class="setting-label">Export Data</span>
+          <span class="setting-desc">Download your workout history as a file</span>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+      <div class="setting-row setting-row-danger" onclick="deleteAccount()">
+        <div class="setting-info">
+          <span class="setting-label">Delete Account</span>
+          <span class="setting-desc">Permanently remove your account and all data</span>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+    </section>
   </main>
 
   <!-- Language Change Script --> 

@@ -84,90 +84,63 @@
 
 /* Main Content */
 .profile-container {
-  max-width: 760px;
-  margin: 72px auto 0;
-  padding: 0 16px;
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
 }
 
 .profile-container h1 {
   font-size: 32px;
   font-weight: 700;
-  line-height: 1.1;
   margin-bottom: 28px;
   color: #000;
 }
 
-.logout-btn {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 28px 32px;
-  border: none;
-  border-radius: 24px;
-  background-color: #ffffff;
-  color: #111;
-  text-align: left;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.profile-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
 }
 
-.logout-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+.user-info { display: flex; align-items: center; gap: 20px; }
+.avatar {
+  width: 72px; height: 72px; border-radius: 50%; background: #f0f0f0;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.user-details { display: flex; flex-direction: column; gap: 4px; }
+.user-name { font-size: 20px; font-weight: 600; color: #111; }
+.user-email { font-size: 15px; color: #666; }
+
+.account-card h2 {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: #999; margin-bottom: 16px;
 }
 
-.logout-btn:active {
-  transform: translateY(0);
+.account-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0; border: none; background: none; cursor: pointer;
+  text-align: left; color: #111; border-top: 1px solid #f0f0f0;
+  transition: background-color 0.15s ease; border-radius: 0;
 }
+.account-btn:first-of-type { border-top: none; }
+.account-btn:hover { background-color: #fafafa; }
 
-.logout-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #111;
-}
+.account-btn-left { display: flex; align-items: center; gap: 14px; }
+.account-btn-left svg { flex-shrink: 0; color: #555; }
+.account-btn-text { display: flex; flex-direction: column; gap: 2px; }
+.account-btn-title { font-size: 16px; font-weight: 600; color: #111; }
+.account-btn-sub { font-size: 13px; font-weight: 400; color: #888; }
+.chevron { flex-shrink: 0; color: #ccc; }
 
-.logout-subtitle {
-  margin-top: 12px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #666;
-}
+.account-btn-danger .account-btn-title { color: #dc3545; }
+.account-btn-danger .account-btn-left svg { color: #dc3545; }
+.account-btn-danger:hover { background-color: #fff5f5; }
 
 @media (max-width: 768px) {
-  .top-nav {
-    height: 88px;
-    padding: 0 20px;
-  }
-
-  .nav-back {
-    padding: 12px 16px;
-    font-size: 15px;
-    border-radius: 12px;
-  }
-
-  .nav-logo {
-    font-size: 26px;
-  }
-
-  .profile-container {
-    margin-top: 48px;
-    padding: 0 20px;
-  }
-
-  .profile-container h1 {
-    font-size: 38px;
-    margin-bottom: 22px;
-  }
-
-  .logout-btn {
-    padding: 22px 24px;
-    font-size: 20px;
-    border-radius: 20px;
-  }
-
-  .logout-btn::after {
-    font-size: 14px;
-  }
+  .top-nav { height: 88px; padding: 0 20px; }
+  .nav-back { padding: 12px 16px; font-size: 15px; border-radius: 12px; }
+  .profile-container { margin-top: 48px; }
+  .profile-container h1 { font-size: 28px; margin-bottom: 22px; }
 }
