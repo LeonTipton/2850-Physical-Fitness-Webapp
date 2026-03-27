@@ -245,8 +245,13 @@ const translations = {
 
     // profile page
 	profile_title: "Profile",
-	log_out: "Log Out",
+	profile_account: "Account",
+	profile_change_pw: "Change Password",
+	profile_change_pw_sub: "Update your password",
+	profile_log_out: "Log Out",
 	logout_subtitle: "Sign out of your account",
+	profile_delete: "Delete Account",
+	profile_delete_sub: "Permanently remove your account",
 
     // records page
     recp_title: "Workout Records",
@@ -325,9 +330,28 @@ const translations = {
 
     // setting page
     settings_title: "Settings",
+    setp_preferences: "Preferences",
     language: "Language",
-    choose_language: "Choose your language",
-    strp_subtitle: "Select a muscle group to view exercises",
+    choose_language: "Choose your preferred language",
+    setp_units: "Units",
+    setp_units_desc: "Choose your preferred distance units",
+    setp_units_km: "Kilometers (km)",
+    setp_units_miles: "Miles (mi)",
+    setp_notifications: "Notifications",
+    setp_email_notifications: "Email Notifications",
+    setp_email_notifications_desc: "Receive updates and tips via email",
+    setp_workout_reminders: "Workout Reminders",
+    setp_workout_reminders_desc: "Get reminded before scheduled workouts",
+    setp_appearance: "Appearance",
+    setp_dark_mode: "Dark Mode",
+    setp_dark_mode_desc: "Switch between light and dark theme",
+    setp_account: "Account",
+    setp_change_password: "Change Password",
+    setp_change_password_desc: "Update your account password",
+    setp_export_data: "Export Data",
+    setp_export_data_desc: "Download your workout history as a file",
+    setp_delete_account: "Delete Account",
+    setp_delete_account_desc: "Permanently remove your account and all data",
 
     // start page
     stap_title: "What are we doing today?",
@@ -668,9 +692,14 @@ const translations = {
 	weekday_sun: "周日",
 
 	// profile page
-	profile_title: "个人资料",
-	log_out: "退出登录",
+	profile_title: "个人中心",
+	profile_account: "账户",
+	profile_change_pw: "修改密码",
+	profile_change_pw_sub: "更新你的密码",
+	profile_log_out: "退出登录",
 	logout_subtitle: "退出你的账户",
+	profile_delete: "删除账户",
+	profile_delete_sub: "永久删除你的账户",
 
     // records page
     recp_title: "运动记录",
@@ -747,12 +776,30 @@ const translations = {
 	runp_longest_r: "最长跑步距离",
 	runp_recent_rs: "最近跑步记录",
 
-    // setting page
-    settings_title: "设置",
-    language: "语言",
-    choose_language: "请选择你的语言",
-    dark_mode: "深色模式",
-    save: "保存",
+	// setting page
+	settings_title: "设置",
+	setp_preferences: "偏好设置",
+	language: "语言",
+	choose_language: "选择你偏好的语言",
+	setp_units: "单位",
+	setp_units_desc: "选择你偏好的距离单位",
+	setp_units_km: "公里 (km)",
+	setp_units_miles: "英里 (mi)",
+	setp_notifications: "通知",
+	setp_email_notifications: "邮件通知",
+	setp_email_notifications_desc: "通过电子邮件接收更新和提示",
+	setp_workout_reminders: "训练提醒",
+	setp_workout_reminders_desc: "在计划训练前收到提醒",
+	setp_appearance: "外观",
+	setp_dark_mode: "深色模式",
+	setp_dark_mode_desc: "在浅色和深色主题之间切换",
+	setp_account: "账户",
+	setp_change_password: "修改密码",
+	setp_change_password_desc: "更新你的账户密码",
+	setp_export_data: "导出数据",
+	setp_export_data_desc: "将你的训练历史下载为文件",
+	setp_delete_account: "删除账户",
+	setp_delete_account_desc: "永久删除你的账户和所有数据",
 
     // start page
 	stap_title: "我们今天做什么？",
@@ -1094,8 +1141,13 @@ const translations = {
 
 	// profile page
 	profile_title: "Perfil",
-	log_out: "Cerrar sesión",
+	profile_account: "Cuenta",
+	profile_change_pw: "Cambiar contraseña",
+	profile_change_pw_sub: "Actualiza tu contraseña",
+	profile_log_out: "Cerrar sesión",
 	logout_subtitle: "Cerrar sesión de tu cuenta",
+	profile_delete: "Eliminar cuenta",
+	profile_delete_sub: "Eliminar permanentemente tu cuenta",
 
 	// records page
 	recp_title: "Registros de entrenamiento",
@@ -1172,12 +1224,30 @@ const translations = {
 	runp_longest_r: "Carrera más larga",
 	runp_recent_rs: "Carreras recientes",
 
-    // setting page
-    settings_title: "Configuración",
-    language: "Idioma",
-    choose_language: "Elige tu idioma",
-    dark_mode: "Modo oscuro",
-    save: "Guardar",
+	// setting page
+	settings_title: "Configuración",
+	setp_preferences: "Preferencias",
+	language: "Idioma",
+	choose_language: "Elige tu idioma preferido",
+	setp_units: "Unidades",
+	setp_units_desc: "Elige tus unidades de distancia preferidas",
+	setp_units_km: "Kilómetros (km)",
+	setp_units_miles: "Millas (mi)",
+	setp_notifications: "Notificaciones",
+	setp_email_notifications: "Notificaciones por correo",
+	setp_email_notifications_desc: "Recibe actualizaciones y consejos por correo electrónico",
+	setp_workout_reminders: "Recordatorios de entrenamiento",
+	setp_workout_reminders_desc: "Recibe recordatorios antes de los entrenamientos programados",
+	setp_appearance: "Apariencia",
+	setp_dark_mode: "Modo oscuro",
+	setp_dark_mode_desc: "Cambia entre tema claro y oscuro",
+	setp_account: "Cuenta",
+	setp_change_password: "Cambiar contraseña",
+	setp_change_password_desc: "Actualiza la contraseña de tu cuenta",
+	setp_export_data: "Exportar datos",
+	setp_export_data_desc: "Descarga tu historial de entrenamiento como archivo",
+	setp_delete_account: "Eliminar cuenta",
+	setp_delete_account_desc: "Eliminar permanentemente tu cuenta y todos tus datos",
 
     // start page
 	stap_title: "¿Qué vamos a hacer hoy?",
@@ -1519,8 +1589,13 @@ const translations = {
 
 	// profile page
 	profile_title: "Profil",
-	log_out: "Se déconnecter",
+	profile_account: "Compte",
+	profile_change_pw: "Changer le mot de passe",
+	profile_change_pw_sub: "Mettez à jour votre mot de passe",
+	profile_log_out: "Se déconnecter",
 	logout_subtitle: "Se déconnecter de votre compte",
+	profile_delete: "Supprimer le compte",
+	profile_delete_sub: "Supprimer définitivement votre compte",
 
 	// records page
 	recp_title: "Historique des entraînements",
@@ -1597,12 +1672,30 @@ const translations = {
 	runp_longest_r: "Course la plus longue",
 	runp_recent_rs: "Courses récentes",
 
-    // setting page
-    settings_title: "Paramètres",
-    language: "Langue",
-    choose_language: "Choisissez votre langue",
-    dark_mode: "Mode sombre",
-    save: "Enregistrer",
+	// setting page
+	settings_title: "Paramètres",
+	setp_preferences: "Préférences",
+	language: "Langue",
+	choose_language: "Choisissez votre langue préférée",
+	setp_units: "Unités",
+	setp_units_desc: "Choisissez vos unités de distance préférées",
+	setp_units_km: "Kilomètres (km)",
+	setp_units_miles: "Miles (mi)",
+	setp_notifications: "Notifications",
+	setp_email_notifications: "Notifications par e-mail",
+	setp_email_notifications_desc: "Recevez des mises à jour et des conseils par e-mail",
+	setp_workout_reminders: "Rappels d'entraînement",
+	setp_workout_reminders_desc: "Recevez des rappels avant les entraînements prévus",
+	setp_appearance: "Apparence",
+	setp_dark_mode: "Mode sombre",
+	setp_dark_mode_desc: "Basculer entre le thème clair et sombre",
+	setp_account: "Compte",
+	setp_change_password: "Changer le mot de passe",
+	setp_change_password_desc: "Mettez à jour le mot de passe de votre compte",
+	setp_export_data: "Exporter les données",
+	setp_export_data_desc: "Téléchargez votre historique d'entraînement sous forme de fichier",
+	setp_delete_account: "Supprimer le compte",
+	setp_delete_account_desc: "Supprimer définitivement votre compte et toutes vos données",
 
 	// start page
 	stap_title: "Que faisons-nous aujourd’hui ?",
@@ -1944,8 +2037,13 @@ const translations = {
 
 	// profile page
 	profile_title: "プロフィール",
-	log_out: "ログアウト",
+	profile_account: "アカウント",
+	profile_change_pw: "パスワードを変更",
+	profile_change_pw_sub: "パスワードを更新します",
+	profile_log_out: "ログアウト",
 	logout_subtitle: "アカウントからサインアウトします",
+	profile_delete: "アカウントを削除",
+	profile_delete_sub: "アカウントを完全に削除します",
 
 	// records page
 	recp_title: "ワークアウト記録",
@@ -2022,12 +2120,30 @@ const translations = {
 	runp_longest_r: "最長ランニング距離",
 	runp_recent_rs: "最近のランニング記録",
 
-    // setting page
-    settings_title: "設定",
-    language: "言語",
-    choose_language: "言語を選択してください",
-    dark_mode: "ダークモード",
-    save: "保存",
+	// setting page
+	settings_title: "設定",
+	setp_preferences: "設定項目",
+	language: "言語",
+	choose_language: "希望する言語を選択してください",
+	setp_units: "単位",
+	setp_units_desc: "希望する距離の単位を選択してください",
+	setp_units_km: "キロメートル (km)",
+	setp_units_miles: "マイル (mi)",
+	setp_notifications: "通知",
+	setp_email_notifications: "メール通知",
+	setp_email_notifications_desc: "メールで更新情報やヒントを受け取る",
+	setp_workout_reminders: "トレーニングのリマインダー",
+	setp_workout_reminders_desc: "予定されたトレーニングの前に通知を受け取る",
+	setp_appearance: "外観",
+	setp_dark_mode: "ダークモード",
+	setp_dark_mode_desc: "ライトテーマとダークテーマを切り替える",
+	setp_account: "アカウント",
+	setp_change_password: "パスワードを変更",
+	setp_change_password_desc: "アカウントのパスワードを更新する",
+	setp_export_data: "データをエクスポート",
+	setp_export_data_desc: "トレーニング履歴をファイルとしてダウンロードする",
+	setp_delete_account: "アカウントを削除",
+	setp_delete_account_desc: "アカウントとすべてのデータを完全に削除する",
 
 	// start page
 	stap_title: "今日は何をしますか？",
@@ -2369,8 +2485,13 @@ const translations = {
 
 	// profile page
 	profile_title: "프로필",
-	log_out: "로그아웃",
-	logout_subtitle: "계정에서 로그아웃",
+	profile_account: "계정",
+	profile_change_pw: "비밀번호 변경",
+	profile_change_pw_sub: "비밀번호를 업데이트하세요",
+	profile_log_out: "로그아웃",
+	logout_subtitle: "계정에서 로그아웃합니다",
+	profile_delete: "계정 삭제",
+	profile_delete_sub: "계정을 영구적으로 삭제합니다",
 
 	// records page
 	recp_title: "운동 기록",
@@ -2447,12 +2568,30 @@ const translations = {
 	runp_longest_r: "가장 긴 달리기 거리",
 	runp_recent_rs: "최근 달리기 기록",
 
-    // setting page
-    settings_title: "설정",
-    language: "언어",
-    choose_language: "언어를 선택하세요",
-    dark_mode: "다크 모드",
-    save: "저장",
+	// setting page
+	settings_title: "설정",
+	setp_preferences: "환경설정",
+	language: "언어",
+	choose_language: "선호하는 언어를 선택하세요",
+	setp_units: "단위",
+	setp_units_desc: "선호하는 거리 단위를 선택하세요",
+	setp_units_km: "킬로미터 (km)",
+	setp_units_miles: "마일 (mi)",
+	setp_notifications: "알림",
+	setp_email_notifications: "이메일 알림",
+	setp_email_notifications_desc: "이메일로 업데이트와 팁을 받습니다",
+	setp_workout_reminders: "운동 알림",
+	setp_workout_reminders_desc: "예정된 운동 전에 알림을 받습니다",
+	setp_appearance: "화면 설정",
+	setp_dark_mode: "다크 모드",
+	setp_dark_mode_desc: "라이트 테마와 다크 테마를 전환합니다",
+	setp_account: "계정",
+	setp_change_password: "비밀번호 변경",
+	setp_change_password_desc: "계정 비밀번호를 업데이트하세요",
+	setp_export_data: "데이터 내보내기",
+	setp_export_data_desc: "운동 기록을 파일로 다운로드합니다",
+	setp_delete_account: "계정 삭제",
+	setp_delete_account_desc: "계정과 모든 데이터를 영구적으로 삭제합니다",
 
 	// start page
 	stap_title: "오늘은 무엇을 할까요?",

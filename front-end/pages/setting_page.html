@@ -26,7 +26,7 @@
     </a>
 
     <div class="nav-right">
-      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+      <a href="profile_page.html" class="nav-icon" data-i18n-aria-label="profile" aria-label="Profile">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
@@ -40,7 +40,8 @@
     <h1 data-i18n="settings_title">Settings</h1>
 
     <section class="settings-card">
-      <h2>Preferences</h2>
+      <h2 data-i18n="setp_preferences">Preferences</h2>
+
       <div class="setting-row">
         <div class="setting-info">
           <span class="setting-label" data-i18n="language">Language</span>
@@ -55,67 +56,74 @@
           <option value="ko">한국어</option>
         </select>
       </div>
+
       <div class="setting-row">
         <div class="setting-info">
-          <span class="setting-label">Units</span>
-          <span class="setting-desc">Choose your preferred distance units</span>
+          <span class="setting-label" data-i18n="setp_units">Units</span>
+          <span class="setting-desc" data-i18n="setp_units_desc">Choose your preferred distance units</span>
         </div>
         <select id="unitsSelect" class="setting-select">
-          <option value="km">Kilometers (km)</option>
-          <option value="miles">Miles (mi)</option>
+          <option value="km" data-i18n="setp_units_km">Kilometers (km)</option>
+          <option value="miles" data-i18n="setp_units_miles">Miles (mi)</option>
         </select>
       </div>
     </section>
 
     <section class="settings-card">
-      <h2>Notifications</h2>
+      <h2 data-i18n="setp_notifications">Notifications</h2>
+
       <div class="setting-row">
         <div class="setting-info">
-          <span class="setting-label">Email Notifications</span>
-          <span class="setting-desc">Receive updates and tips via email</span>
+          <span class="setting-label" data-i18n="setp_email_notifications">Email Notifications</span>
+          <span class="setting-desc" data-i18n="setp_email_notifications_desc">Receive updates and tips via email</span>
         </div>
         <label class="toggle"><input type="checkbox" id="toggleEmail"><span class="toggle-slider"></span></label>
       </div>
+
       <div class="setting-row">
         <div class="setting-info">
-          <span class="setting-label">Workout Reminders</span>
-          <span class="setting-desc">Get reminded before scheduled workouts</span>
+          <span class="setting-label" data-i18n="setp_workout_reminders">Workout Reminders</span>
+          <span class="setting-desc" data-i18n="setp_workout_reminders_desc">Get reminded before scheduled workouts</span>
         </div>
         <label class="toggle"><input type="checkbox" id="toggleReminders"><span class="toggle-slider"></span></label>
       </div>
     </section>
 
     <section class="settings-card">
-      <h2>Appearance</h2>
+      <h2 data-i18n="setp_appearance">Appearance</h2>
+
       <div class="setting-row">
         <div class="setting-info">
-          <span class="setting-label">Dark Mode</span>
-          <span class="setting-desc">Switch between light and dark theme</span>
+          <span class="setting-label" data-i18n="setp_dark_mode">Dark Mode</span>
+          <span class="setting-desc" data-i18n="setp_dark_mode_desc">Switch between light and dark theme</span>
         </div>
         <label class="toggle"><input type="checkbox" id="toggleDarkMode"><span class="toggle-slider"></span></label>
       </div>
     </section>
 
     <section class="settings-card">
-      <h2>Account</h2>
+      <h2 data-i18n="setp_account">Account</h2>
+
       <div class="setting-row setting-row-action" onclick="changePassword()">
         <div class="setting-info">
-          <span class="setting-label">Change Password</span>
-          <span class="setting-desc">Update your account password</span>
+          <span class="setting-label" data-i18n="setp_change_password">Change Password</span>
+          <span class="setting-desc" data-i18n="setp_change_password_desc">Update your account password</span>
         </div>
         <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
       </div>
+
       <div class="setting-row setting-row-action" onclick="exportData()">
         <div class="setting-info">
-          <span class="setting-label">Export Data</span>
-          <span class="setting-desc">Download your workout history as a file</span>
+          <span class="setting-label" data-i18n="setp_export_data">Export Data</span>
+          <span class="setting-desc" data-i18n="setp_export_data_desc">Download your workout history as a file</span>
         </div>
         <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
       </div>
+
       <div class="setting-row setting-row-danger" onclick="deleteAccount()">
         <div class="setting-info">
-          <span class="setting-label">Delete Account</span>
-          <span class="setting-desc">Permanently remove your account and all data</span>
+          <span class="setting-label" data-i18n="setp_delete_account">Delete Account</span>
+          <span class="setting-desc" data-i18n="setp_delete_account_desc">Permanently remove your account and all data</span>
         </div>
         <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
       </div>
