@@ -3,8 +3,7 @@ product: jvm/app
 settings:
   ktor: enabled
   jvm:
-    mainClass: ApplicationKt
-
+    mainClass: com.physicalfitness.ApplicationKt
 dependencies:
   - ../database
   - $ktor.server.core
