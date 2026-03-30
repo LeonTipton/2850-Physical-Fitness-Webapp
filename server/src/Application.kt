@@ -1,16 +1,22 @@
 package com.physicalfitness
 
 import io.ktor.server.application.Application
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import com.physicalfitness.PhysicalFitDatabase
 
 fun Application.module() {
     TransactionManager.defaultDatabase = PhysicalFitDatabase.db
-     configureErrorHandling()
-     configureTemplates
-     configureRouting()
+    configureErrorHandling()
+    configureRouting()
 }
 
-fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
+fun main() {
+    embeddedServer(
+        Netty,
+        port = 8080,
+        host = "0.0.0.0",
+        module = Application::module
+    ).start(wait = true)
 }
