@@ -13,7 +13,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import java.io.File
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.v1.core.eq
 
 fun Application.configureRouting() {
     routing {
