@@ -59,7 +59,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function changePassword() {
-  alert("Change Password dialog would open here.");
+  var oldPw = prompt("Enter current password:");
+  if (!oldPw) return;
+  var newPw = prompt("Enter new password:");
+  if (!newPw) return;
+
+  var user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (!user.id) { alert("Not logged in"); return; }
+
+  var body = new URLSearchParams();
+  body.append("uid", user.id);
+  body.append("oldPassword", oldPw);
+  body.append("newPassword", newPw);
+
+  fetch("/api/user/password", { method: "POST", body: body })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      alert(data.message || (data.ok ? "Password updated" : "Failed"));
+    })
+    .catch(function() { alert("Could not connect to server"); });
 }
 
 function exportData() {
@@ -80,9 +98,28 @@ function exportData() {
 }
 
 function deleteAccount() {
-  if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+  if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) return;
+
+  var user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (!user.id) {
     localStorage.clear();
-    sessionStorage.clear();
     window.location.href = "../index.html";
+    return;
   }
+
+  var body = new URLSearchParams();
+  body.append("uid", user.id);
+
+  fetch("/api/user/delete", { method: "POST", body: body })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../index.html";
+      } else {
+        alert(data.message || "Delete failed");
+      }
+    })
+    .catch(function() { alert("Could not connect to server"); });
 }
