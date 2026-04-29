@@ -1,0 +1,5 @@
+JetBrains Amper version 0.9.2 (80094bb, 2025-12-11)
+running on Windows 11 10.0 jvm arch amd64
+
+00:01.915 INFO  :server:compileJvm        JvmCompileTask            Compiling module 'server' for platform 'jvm'...
+00:03.792 ERROR :server:compileJvm        KotlinBuildToolsApiKt     file:///C:/Users/19866/Desktop/2850/2850-Physical-Fitness-Webapp-frontend-backend-link/server/src/Application.kt:14:26 Unresolved reference 'embeddedServer'.

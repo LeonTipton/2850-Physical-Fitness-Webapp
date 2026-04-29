@@ -1,0 +1,82 @@
+JetBrains Amper version 0.9.2 (80094bb, 2025-12-11)
+running on Windows 11 10.0 jvm arch amd64
+
+00:01.735 DEBUG :server:resolveDependenciesJvm ResolveExternalDependenciesTask resolve dependencies server -- main -- io.ktor:ktor-bom:3.2.3 io.ktor:ktor-server-core:3.2.3 io.ktor:ktor-server-netty:3.2.3 io.ktor:ktor-server-pebble:3.2.3 io.ktor:ktor-server-status-pages:3.2.3 org.jetbrains.exposed:exposed-core:1.0.0-rc-4 org.jetbrains.exposed:exposed-dao:1.0.0-rc-4 org.jetbrains.exposed:exposed-jdbc:1.0.0-rc-4 org.jetbrains.kotlin:kotlin-stdlib:2.2.21 -- resolvePlatform=jvm nativeTarget=null wasmTarget=null
+00:01.735 DEBUG :database:resolveDependenciesJvm ResolveExternalDependenciesTask resolve dependencies database -- common jvm -- de.mkammerer:argon2-jvm:2.11 org.jetbrains.exposed:exposed-core:1.0.0-rc-4 org.jetbrains.exposed:exposed-dao:1.0.0-rc-4 org.jetbrains.exposed:exposed-jdbc:1.0.0-rc-4 org.jetbrains.kotlin:kotlin-stdlib:2.2.21 -- resolvePlatform=jvm nativeTarget=null wasmTarget=null
+00:01.750 DEBUG :database:resolveDependenciesJvm IncrementalCache          [inc] up-to-date according to state file at 'C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\incremental.state\_database_resolveDependenciesJvm-ad77429442' in 9.011900ms
+00:01.750 DEBUG :database:resolveDependenciesJvm IncrementalCache          [inc] ':database:resolveDependenciesJvm' is up-to-date
+00:01.754 DEBUG :server:resolveDependenciesJvm IncrementalCache          [inc] up-to-date according to state file at 'C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\incremental.state\_server_resolveDependenciesJvm-a6b66df74c' in 13.570400ms
+00:01.755 DEBUG :database:resolveDependenciesJvm ResolveExternalDependenciesTask resolve dependencies database -- common jvm -- de.mkammerer:argon2-jvm:2.11 org.jetbrains.exposed:exposed-core:1.0.0-rc-4 org.jetbrains.exposed:exposed-dao:1.0.0-rc-4 org.jetbrains.exposed:exposed-jdbc:1.0.0-rc-4 org.jetbrains.kotlin:kotlin-stdlib:2.2.21 -- resolvePlatform=JVM nativeTarget=null
+wasmTarget=null
+https://repo1.maven.org/maven2 https://maven.google.com https://maven.pkg.jetbrains.space/public/p/compose/dev resolved to:
+  .m2.cache\org\jetbrains\exposed\exposed-core\1.0.0-rc-4\exposed-core-1.0.0-rc-4.jar
+  .m2.cache\org\jetbrains\exposed\exposed-dao\1.0.0-rc-4\exposed-dao-1.0.0-rc-4.jar
+  .m2.cache\org\jetbrains\exposed\exposed-jdbc\1.0.0-rc-4\exposed-jdbc-1.0.0-rc-4.jar
+  .m2.cache\de\mkammerer\argon2-jvm\2.11\argon2-jvm-2.11.jar
+  .m2.cache\org\jetbrains\kotlin\kotlin-stdlib\2.2.21\kotlin-stdlib-2.2.21.jar
+  .m2.cache\org\jetbrains\kotlin\kotlin-reflect\2.1.0\kotlin-reflect-2.1.0.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-datetime-jvm\0.7.1-0.6.x-compat\kotlinx-datetime-jvm-0.7.1-0.6.x-compat.jar
+  .m2.cache\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar
+  .m2.cache\de\mkammerer\argon2-jvm-nolibs\2.11\argon2-jvm-nolibs-2.11.jar
+  .m2.cache\org\jetbrains\annotations\23.0.0\annotations-23.0.0.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-coroutines-core-jvm\1.10.2\kotlinx-coroutines-core-jvm-1.10.2.jar
+00:01.755 DEBUG :server:resolveDependenciesJvm IncrementalCache          [inc] ':server:resolveDependenciesJvm' is up-to-date
+00:01.758 DEBUG :server:resolveDependenciesJvm ResolveExternalDependenciesTask resolve dependencies server -- main -- io.ktor:ktor-bom:3.2.3 io.ktor:ktor-server-core:3.2.3 io.ktor:ktor-server-netty:3.2.3 io.ktor:ktor-server-pebble:3.2.3 io.ktor:ktor-server-status-pages:3.2.3 org.jetbrains.exposed:exposed-core:1.0.0-rc-4 org.jetbrains.exposed:exposed-dao:1.0.0-rc-4 org.jetbrains.exposed:exposed-jdbc:1.0.0-rc-4 org.jetbrains.kotlin:kotlin-stdlib:2.2.21 -- resolvePlatform=JVM nativeTarget=null
+wasmTarget=null
+https://repo1.maven.org/maven2 https://maven.google.com https://maven.pkg.jetbrains.space/public/p/compose/dev resolved to:
+  .m2.cache\org\jetbrains\exposed\exposed-core\1.0.0-rc-4\exposed-core-1.0.0-rc-4.jar
+  .m2.cache\org\jetbrains\exposed\exposed-jdbc\1.0.0-rc-4\exposed-jdbc-1.0.0-rc-4.jar
+  .m2.cache\org\jetbrains\exposed\exposed-dao\1.0.0-rc-4\exposed-dao-1.0.0-rc-4.jar
+  .m2.cache\org\jetbrains\kotlin\kotlin-stdlib\2.2.21\kotlin-stdlib-2.2.21.jar
+  .m2.cache\io\ktor\ktor-server-core-jvm\3.2.3\ktor-server-core-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-server-status-pages-jvm\3.2.3\ktor-server-status-pages-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-server-netty-jvm\3.2.3\ktor-server-netty-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-server-pebble-jvm\3.2.3\ktor-server-pebble-jvm-3.2.3.jar
+  .m2.cache\org\jetbrains\kotlin\kotlin-reflect\2.1.21\kotlin-reflect-2.1.21.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-datetime-jvm\0.7.1-0.6.x-compat\kotlinx-datetime-jvm-0.7.1-0.6.x-compat.jar
+  .m2.cache\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar
+  .m2.cache\org\jetbrains\annotations\23.0.0\annotations-23.0.0.jar
+  .m2.cache\com\typesafe\config\1.4.3\config-1.4.3.jar
+  .m2.cache\io\netty\netty-codec-http2\4.2.2.Final\netty-codec-http2-4.2.2.Final.jar
+  .m2.cache\org\eclipse\jetty\alpn\alpn-api\1.1.3.v20160715\alpn-api-1.1.3.v20160715.jar
+  .m2.cache\io\netty\netty-transport-native-kqueue\4.2.2.Final\netty-transport-native-kqueue-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-transport-native-epoll\4.2.2.Final\netty-transport-native-epoll-4.2.2.Final.jar
+  .m2.cache\io\pebbletemplates\pebble\3.2.4\pebble-3.2.4.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-coroutines-core-jvm\1.10.2\kotlinx-coroutines-core-jvm-1.10.2.jar
+  .m2.cache\io\ktor\ktor-utils-jvm\3.2.3\ktor-utils-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-http-jvm\3.2.3\ktor-http-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-serialization-jvm\3.2.3\ktor-serialization-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-events-jvm\3.2.3\ktor-events-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-http-cio-jvm\3.2.3\ktor-http-cio-jvm-3.2.3.jar
+  .m2.cache\io\ktor\ktor-websockets-jvm\3.2.3\ktor-websockets-jvm-3.2.3.jar
+  .m2.cache\io\netty\netty-common\4.2.2.Final\netty-common-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-buffer\4.2.2.Final\netty-buffer-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-transport\4.2.2.Final\netty-transport-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-codec-base\4.2.2.Final\netty-codec-base-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-handler\4.2.2.Final\netty-handler-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-codec-http\4.2.2.Final\netty-codec-http-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-transport-native-unix-common\4.2.2.Final\netty-transport-native-unix-common-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-transport-classes-kqueue\4.2.2.Final\netty-transport-classes-kqueue-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-transport-classes-epoll\4.2.2.Final\netty-transport-classes-epoll-4.2.2.Final.jar
+  .m2.cache\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar
+  .m2.cache\io\netty\netty-resolver\4.2.2.Final\netty-resolver-4.2.2.Final.jar
+  .m2.cache\io\netty\netty-codec-compression\4.2.2.Final\netty-codec-compression-4.2.2.Final.jar
+  .m2.cache\io\ktor\ktor-io-jvm\3.2.3\ktor-io-jvm-3.2.3.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-serialization-core-jvm\1.8.1\kotlinx-serialization-core-jvm-1.8.1.jar
+  .m2.cache\io\ktor\ktor-network-jvm\3.2.3\ktor-network-jvm-3.2.3.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-io-core-jvm\0.7.0\kotlinx-io-core-jvm-0.7.0.jar
+  .m2.cache\org\jetbrains\kotlinx\kotlinx-io-bytestring-jvm\0.7.0\kotlinx-io-bytestring-jvm-0.7.0.jar
+00:01.758 DEBUG :database:compileJvm      JvmCompileTask            compile database -- common jvm
+00:01.827 DEBUG :database:compileJvm      ExtractKt                 Skipping extract to C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d since flag file C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d.flag is correct
+00:01.849 DEBUG :database:compileJvm      IncrementalCache          [inc] up-to-date according to state file at 'C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\incremental.state\_database_compileJvm-222e93d7b1' in 6.752300ms
+00:01.849 DEBUG :database:compileJvm      IncrementalCache          [inc] ':database:compileJvm' is up-to-date
+00:01.850 DEBUG :server:compileJvm        JvmCompileTask            compile server -- main
+00:01.853 DEBUG :server:compileJvm        ExtractKt                 Skipping extract to C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d since flag file C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d.flag is correct
+00:01.857 DEBUG :database:jarJvm          IncrementalCache          [inc] up-to-date according to state file at 'C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\incremental.state\_database_jarJvm-240945cbdb' in 2.981100ms
+00:01.857 DEBUG :database:jarJvm          IncrementalCache          [inc] ':database:jarJvm' is up-to-date
+00:01.870 DEBUG :server:compileJvm        IncrementalCache          [inc] up-to-date according to state file at 'C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\incremental.state\_server_compileJvm-49f71830a8' in 15.304100ms
+00:01.870 DEBUG :server:compileJvm        IncrementalCache          [inc] ':server:compileJvm' is up-to-date
+00:01.876 DEBUG :server:jarJvm            IncrementalCache          [inc] up-to-date according to state file at 'C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\incremental.state\_server_jarJvm-7d67d65cce' in 2.626700ms
+00:01.876 DEBUG :server:jarJvm            IncrementalCache          [inc] ':server:jarJvm' is up-to-date
+00:01.880 DEBUG :server:runJvm            ExtractKt                 Skipping extract to C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d since flag file C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d.flag is correct
+00:01.887 DEBUG :server:runJvm            BuildPrimitives           [cmd] C:\Users\19866\AppData\Local\JetBrains\Amper\extract.cache\5de2c13edf-amazon-corretto-21.0.1.12.1-windows-x64-jdk.zip.151e89.d\bin\java.exe @C:\Users\19866\Desktop\2850\2850-Physical-Fitness-Webapp-frontend-backend-link\build\temp\java-args-11406839108071573845.txt

@@ -1,0 +1,146 @@
+/* Settings page and top navigation styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 96px;
+  background-color: #111;
+  color: #fff;
+}
+
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.nav-back:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateX(-2px);
+}
+
+.nav-back-arrow {
+  flex-shrink: 0;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  height: 68px;
+  width: auto;
+  display: block;
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-icon {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.nav-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content */
+.profile-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.profile-container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #000;
+}
+
+.profile-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.user-info { display: flex; align-items: center; gap: 20px; }
+.avatar {
+  width: 72px; height: 72px; border-radius: 50%; background: #f0f0f0;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.user-details { display: flex; flex-direction: column; gap: 4px; }
+.user-name { font-size: 20px; font-weight: 600; color: #111; }
+.user-email { font-size: 15px; color: #666; }
+
+.account-card h2 {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: #999; margin-bottom: 16px;
+}
+
+.account-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0; border: none; background: none; cursor: pointer;
+  text-align: left; color: #111; border-top: 1px solid #f0f0f0;
+  transition: background-color 0.15s ease; border-radius: 0;
+}
+.account-btn:first-of-type { border-top: none; }
+.account-btn:hover { background-color: #fafafa; }
+
+.account-btn-left { display: flex; align-items: center; gap: 14px; }
+.account-btn-left svg { flex-shrink: 0; color: #555; }
+.account-btn-text { display: flex; flex-direction: column; gap: 2px; }
+.account-btn-title { font-size: 16px; font-weight: 600; color: #111; }
+.account-btn-sub { font-size: 13px; font-weight: 400; color: #888; }
+.chevron { flex-shrink: 0; color: #ccc; }
+
+.account-btn-danger .account-btn-title { color: #dc3545; }
+.account-btn-danger .account-btn-left svg { color: #dc3545; }
+.account-btn-danger:hover { background-color: #fff5f5; }
+
+@media (max-width: 768px) {
+  .top-nav { height: 88px; padding: 0 20px; }
+  .nav-back { padding: 12px 16px; font-size: 15px; border-radius: 12px; }
+  .profile-container { margin-top: 48px; }
+  .profile-container h1 { font-size: 28px; margin-bottom: 22px; }
+}

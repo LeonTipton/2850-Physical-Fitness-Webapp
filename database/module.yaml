@@ -1,0 +1,9 @@
+product:
+  type: lib
+  platforms: [ jvm ]
+
+dependencies:
+  - $libs.exposed.core
+  - $libs.exposed.dao
+  - $libs.exposed.jdbc
+  - de.mkammerer:argon2-jvm:2.11
