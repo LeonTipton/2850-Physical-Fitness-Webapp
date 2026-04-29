@@ -178,34 +178,89 @@
     </div>
   </main>
   <script>
-    (function () {
-      const distanceInput = document.getElementById('run-distance');
-      const durationInput = document.getElementById('run-duration');
-      const paceInput = document.getElementById('run-pace');
-      if (!distanceInput || !durationInput || !paceInput) return;
+  (function () {
+    const distanceInput = document.getElementById('run-distance');
+    const durationInput = document.getElementById('run-duration');
+    const paceInput = document.getElementById('run-pace');
+    const saveButton = document.querySelector('.btn-outline');
+    const notesInput = document.querySelector('textarea');
 
-      function updatePace() {
-        const distance = parseFloat(distanceInput.value);
-        const duration = parseFloat(durationInput.value);
-        if (!distance || !duration || distance <= 0 || duration <= 0) {
-          paceInput.value = '';
-          return;
-        }
-        const paceMinutes = duration / distance; // min per km
-        const totalSeconds = Math.round(paceMinutes * 60);
-        const mm = Math.floor(totalSeconds / 60);
-        const ss = totalSeconds % 60;
-        paceInput.value = mm + ':' + String(ss).padStart(2, '0');
+    if (!distanceInput || !durationInput || !paceInput) return;
+
+    function updatePace() {
+      const distance = parseFloat(distanceInput.value);
+      const duration = parseFloat(durationInput.value);
+
+      if (!distance || !duration || distance <= 0 || duration <= 0) {
+        paceInput.value = '';
+        return;
       }
 
-      distanceInput.addEventListener('input', updatePace);
-      durationInput.addEventListener('input', updatePace);
-    })();
+      const paceMinutes = duration / distance;
+      const totalSeconds = Math.round(paceMinutes * 60);
+      const mm = Math.floor(totalSeconds / 60);
+      const ss = totalSeconds % 60;
+
+      paceInput.value = mm + ':' + String(ss).padStart(2, '0');
+    }
+
+    distanceInput.addEventListener('input', updatePace);
+    durationInput.addEventListener('input', updatePace);
+
+    // Save Run
+    if (saveButton) {
+      saveButton.addEventListener('click', async function () {
+        const uid = localStorage.getItem("uid");
+
+        if (!uid) {
+          alert("Please login first");
+          window.location.href = "login_page.html";
+          return;
+        }
+
+        const distance = distanceInput.value;
+        const duration = durationInput.value;
+        const notes = notesInput ? notesInput.value : "";
+
+        if (!distance || !duration) {
+          alert("Please enter distance and duration");
+          return;
+        }
+
+        const body = new URLSearchParams();
+        body.append("uid", uid);
+        body.append("activityType", "run");
+        body.append("activityName", "Run");
+        body.append("durationMinutes", duration);
+        body.append("distanceKm", distance);
+        body.append("notes", notes);
+
+        try {
+          const res = await fetch("/api/records", {
+            method: "POST",
+            body: body
+          });
+
+          const data = await res.json();
+
+          if (data.ok) {
+            alert("Run saved successfully");
+            window.location.href = "records_page.html";
+          } else {
+            alert(data.message || "Save failed");
+          }
+
+        } catch (err) {
+          alert("Could not connect to server");
+          console.error(err);
+        }
+      });
+    }
+
+  })();
   </script>
 
   <!-- Language Change Script --> 
   <script src="js/i18n.js"></script>
-</body>
-
-</html>
-
+  </body>
+  </html>
