@@ -101,81 +101,153 @@
           <h3 class="summary-title" data-i18n="swp_your_stats">Your Stats</h3>
           <div class="summary-grid">
             <div class="summary-item summary-item-1">
-              <span class="summary-value">28</span>
+              <span class="summary-value" id="stat-this-month">—</span>
               <span class="summary-label" data-i18n="swp_t_m">This Month</span>
             </div>
             <div class="summary-item summary-item-2">
-              <span class="summary-value">142</span>
+              <span class="summary-value" id="stat-total-exercises">—</span>
               <span class="summary-label" data-i18n="swp_total_exer">Total Exercises</span>
             </div>
             <div class="summary-item summary-item-3">
-              <span class="summary-value">85 kg</span>
+              <span class="summary-value" id="stat-max-weight">—</span>
               <span class="summary-label" data-i18n="swp_max_bench">Max Bench</span>
             </div>
             <div class="summary-item summary-item-4">
-              <span class="summary-value">140 kg</span>
+              <span class="summary-value" id="stat-total-sessions">—</span>
               <span class="summary-label" data-i18n="swp_max_squat">Max Squat</span>
             </div>
           </div>
         </div>
         <div class="recent-card card-animate card-animate-delay-2">
           <h3 class="recent-title" data-i18n="swp_recent_workout">Recent Workouts</h3>
-          <ul class="recent-list">
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Chest - Bench Press</span>
-                <span class="recent-date">Mar 10, 2026</span>
-              </div>
-              <span class="recent-distance">4×8 @ 80kg</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Legs - Squat</span>
-                <span class="recent-date">Mar 8, 2026</span>
-              </div>
-              <span class="recent-distance">5×5 @ 120kg</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Arms - Bicep Curl</span>
-                <span class="recent-date">Mar 6, 2026</span>
-              </div>
-              <span class="recent-distance">3×12 @ 15kg</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Core - Plank</span>
-                <span class="recent-date">Mar 5, 2026</span>
-              </div>
-              <span class="recent-distance">3×60s</span>
-            </li>
+          <ul class="recent-list" id="recent-list">
+            <li class="recent-empty">No workouts saved yet.</li>
           </ul>
         </div>
       </aside>
     </div>
   </main>
 
+  <script src="js/activity-store.js"></script>
   <script>
     (function () {
-      const params = new URLSearchParams(window.location.search);
-      const exercise = params.get('exercise') || '';
-      const category = params.get('category') || '';
+      var params = new URLSearchParams(window.location.search);
+      var exercise = params.get('exercise') || '';
+      var category = params.get('category') || '';
 
-      const selectedSummary = document.getElementById('selected-summary');
-      const exerciseNameInput = document.getElementById('exercise-name');
+      var selectedSummary = document.getElementById('selected-summary');
+      var exerciseNameInput = document.getElementById('exercise-name');
 
       if (category && exercise) {
         selectedSummary.textContent = category + ' → ' + exercise;
         exerciseNameInput.value = exercise;
       }
 
+      function refreshSidebar() {
+        var all = ActivityStore.getAll().filter(function (r) { return r.type === 'strength'; });
+        var now = new Date();
+        var thisMonth = all.filter(function (r) {
+          var d = new Date(r.dateISO);
+          return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        });
+
+        var maxWeight = 0;
+        all.forEach(function (r) {
+          var w = parseFloat(r.weight) || 0;
+          if (w > maxWeight) maxWeight = w;
+        });
+
+        document.getElementById('stat-this-month').textContent = thisMonth.length;
+        document.getElementById('stat-total-exercises').textContent = all.length;
+        document.getElementById('stat-max-weight').textContent = maxWeight ? maxWeight + ' kg' : '—';
+        document.getElementById('stat-total-sessions').textContent = all.length;
+
+        var list = document.getElementById('recent-list');
+        if (all.length === 0) {
+          list.innerHTML = '<li class="recent-empty">No workouts saved yet.</li>';
+          return;
+        }
+        var recent = all.slice(-4).reverse();
+        var html = '';
+        recent.forEach(function (r) {
+          var detail = (r.details && r.details[0]) ? r.details[0].text : '';
+          html += '<li class="recent-item">'
+            + '<div class="recent-info">'
+            + '<span class="recent-location">' + (r.badge || '') + '</span>'
+            + '<span class="recent-date">' + (r.date || '') + '</span>'
+            + '</div>'
+            + '<span class="recent-distance">' + detail + '</span>'
+            + '</li>';
+        });
+        list.innerHTML = html;
+      }
+
+      function showNotification() {
+        var notif = document.getElementById('save-notification');
+        notif.classList.add('show');
+        setTimeout(function () {
+          notif.classList.remove('show');
+        }, 2200);
+        document.getElementById('strength-form').reset();
+        if (category && exercise) {
+          selectedSummary.textContent = category + ' → ' + exercise;
+          exerciseNameInput.value = exercise;
+        }
+      }
+
       document.getElementById('strength-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        alert('Workout saved!');
+        var exerciseName = document.getElementById('exercise-name').value || exercise;
+        var sets = document.getElementById('exercise-sets').value || '0';
+        var reps = document.getElementById('exercise-reps').value || '0';
+        var weight = document.getElementById('exercise-weight').value || '0';
+        var duration = document.getElementById('exercise-duration').value || '0';
+        var notes = document.getElementById('exercise-notes').value || '';
+
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        var dateISO = now.toISOString().slice(0, 10);
+
+        var record = {
+          id: String(Date.now()),
+          type: 'strength',
+          emoji: '💪',
+          label: 'Strength',
+          badge: (category || 'General') + ' - ' + exerciseName,
+          date: dateStr,
+          dateISO: dateISO,
+          duration: duration + ' min',
+          durationSeconds: parseInt(duration, 10) * 60,
+          details: [{ icon: 'weight', text: sets + '×' + reps + ' @ ' + weight + 'kg' }],
+          distanceKm: 0,
+          category: category || 'General',
+          exerciseName: exerciseName,
+          sets: sets,
+          reps: reps,
+          weight: weight,
+          notes: notes
+        };
+
+        ActivityStore.add(record);
+        refreshSidebar();
+        showNotification();
       });
+
+      refreshSidebar();
     })();
   </script>
   
+  <div id="save-notification" class="save-notif" role="status" aria-live="polite">
+    <span class="save-notif-icon">✓</span>
+    <div>
+      <div class="save-notif-title">Workout Saved!</div>
+      <div class="save-notif-sub">
+        <span>Record stored.</span>
+        <a href="records_page.html">View Records →</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Language Change Script --> 
   <script src="js/i18n.js"></script>
 </body>

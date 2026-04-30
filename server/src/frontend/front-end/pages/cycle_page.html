@@ -60,6 +60,11 @@
           </div>
         </div>
 
+        <div id="timer-display" class="timer-display hidden">
+          <div id="timer-status" class="timer-status">Running</div>
+          <div id="timer-clock" class="timer-clock">00:00</div>
+        </div>
+
         <form class="cycle-form" id="cycle-form">
           <div class="form-row">
             <div class="form-group">
@@ -85,7 +90,7 @@
                 </span>
                 <span data-i18n="cycle_duration">Duration (min)</span>
               </label>
-              <input id="cycle-duration" type="number" min="0" placeholder="0">
+              <input id="cycle-duration" type="number" min="0" placeholder="0" readonly>
             </div>
 
             <div class="form-group">
@@ -123,10 +128,10 @@
 
         <!-- Action Buttons -->
         <div class="cycle-actions">
-          <button class="btn-primary" type="button" data-i18n="cycle_start_ride">Start Ride</button>
-          <button class="btn-secondary" type="button" data-i18n="cycle_pause">Pause</button>
-          <button class="btn-secondary" type="button" data-i18n="cycle_finish">Finish</button>
-          <button class="btn-outline" type="submit" form="cycle-form" data-i18n="cycle_save_ride">Save Ride</button>
+          <button id="btn-start" class="btn-primary" type="button" data-i18n="cycle_start_ride">Start Ride</button>
+          <button id="btn-pause" class="btn-secondary" type="button" disabled data-i18n="cycle_pause">Pause</button>
+          <button id="btn-finish" class="btn-secondary" type="button" disabled data-i18n="cycle_finish">Finish</button>
+          <button id="btn-save" class="btn-outline" type="button" disabled data-i18n="cycle_save_ride">Save Ride</button>
         </div>
       </section>
 
@@ -137,19 +142,19 @@
           <h3 class="summary-title" data-i18n="cycle_your_stats">Your Stats</h3>
           <div class="summary-grid">
             <div class="summary-item summary-item-1">
-              <span class="summary-value">31</span>
+              <span class="summary-value" id="stat-total-rides">—</span>
               <span class="summary-label" data-i18n="cycle_total_rides">Total Rides</span>
             </div>
             <div class="summary-item summary-item-2">
-              <span class="summary-value">480 km</span>
+              <span class="summary-value" id="stat-total-distance">—</span>
               <span class="summary-label" data-i18n="cycle_total_distance">Total Distance</span>
             </div>
             <div class="summary-item summary-item-3">
-              <span class="summary-value">3:45</span>
+              <span class="summary-value" id="stat-avg-pace">—</span>
               <span class="summary-label" data-i18n="cycle_avg_pace">Avg Pace (min/km)</span>
             </div>
             <div class="summary-item summary-item-4">
-              <span class="summary-value">65 km</span>
+              <span class="summary-value" id="stat-longest">—</span>
               <span class="summary-label" data-i18n="cycle_longest_ride">Longest Ride</span>
             </div>
           </div>
@@ -158,83 +163,304 @@
         <!-- Recent Rides -->
         <div class="recent-card card-animate card-animate-delay-2">
           <h3 class="recent-title" data-i18n="cycle_recent_rides">Recent Rides</h3>
-          <ul class="recent-list">
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location" data-i18n="cycle_recent_1_title">Country Road Loop</span>
-                <span class="recent-date">Mar 8, 2026</span>
-              </div>
-              <span class="recent-distance">32 km</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location" data-i18n="cycle_recent_2_title">City Commute</span>
-                <span class="recent-date">Mar 6, 2026</span>
-              </div>
-              <span class="recent-distance">18 km</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location" data-i18n="cycle_recent_3_title">Hill Climb</span>
-                <span class="recent-date">Mar 4, 2026</span>
-              </div>
-              <span class="recent-distance">25 km</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location" data-i18n="cycle_recent_4_title">Lakeside Path</span>
-                <span class="recent-date">Mar 2, 2026</span>
-              </div>
-              <span class="recent-distance">45 km</span>
-            </li>
+          <ul class="recent-list" id="recent-list">
+            <li class="recent-empty">No rides saved yet.</li>
           </ul>
         </div>
       </aside>
     </div>
   </main>
 
+  <div id="save-notification" class="save-notif" role="status" aria-live="polite">
+    <span class="save-notif-icon">✓</span>
+    <div>
+      <div class="save-notif-title">Ride Saved!</div>
+      <div class="save-notif-sub">
+        <span>Record stored.</span>
+        <a href="records_page.html">View Records →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/activity-store.js"></script>
   <script>
-    (function () {
-      const distanceInput = document.getElementById('cycle-distance');
-      const durationInput = document.getElementById('cycle-duration');
-      const paceInput = document.getElementById('cycle-pace');
-      const dateInput = document.getElementById('cycle-date');
-      const cycleForm = document.getElementById('cycle-form');
+  (function () {
+    var btnStart    = document.getElementById('btn-start');
+    var btnPause    = document.getElementById('btn-pause');
+    var btnFinish   = document.getElementById('btn-finish');
+    var btnSave     = document.getElementById('btn-save');
+    var timerDisplay = document.getElementById('timer-display');
+    var timerClock  = document.getElementById('timer-clock');
+    var timerStatus = document.getElementById('timer-status');
+    var saveNotif   = document.getElementById('save-notification');
 
-      if (!distanceInput || !durationInput || !paceInput) return;
+    var distanceInput = document.getElementById('cycle-distance');
+    var durationInput = document.getElementById('cycle-duration');
+    var paceInput     = document.getElementById('cycle-pace');
+    var dateInput     = document.getElementById('cycle-date');
+    var notesArea     = document.getElementById('cycle-notes');
 
-      // Set default date to today
-      if (dateInput) {
-        const today = new Date().toISOString().slice(0, 10);
-        dateInput.value = today;
+    var state          = 'idle';
+    var timerInterval  = null;
+    var elapsedSeconds = 0;
+    var startTimestamp = null;
+    var startDate      = null;
+
+    if (dateInput) {
+      dateInput.value = new Date().toISOString().slice(0, 10);
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function formatClock(s) {
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      return h > 0
+        ? pad(h) + ':' + pad(m) + ':' + pad(sec)
+        : pad(m) + ':' + pad(sec);
+    }
+
+    function formatDuration(s) {
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      if (h > 0) return h + ' h ' + m + ' min';
+      return (m || 1) + ' min';
+    }
+
+    function updateTimerDisplay() {
+      timerClock.textContent = formatClock(elapsedSeconds);
+      var mins = Math.round(elapsedSeconds / 60);
+      if (mins >= 1) durationInput.value = mins;
+      updatePace();
+    }
+
+    function tickTimer() {
+      elapsedSeconds = Math.floor((Date.now() - startTimestamp) / 1000);
+      updateTimerDisplay();
+    }
+
+    function startTicking() {
+      startTimestamp = Date.now() - elapsedSeconds * 1000;
+      timerInterval  = setInterval(tickTimer, 1000);
+    }
+
+    function stopTicking() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function updatePace() {
+      var dist = parseFloat(distanceInput.value);
+      var mins = elapsedSeconds > 0
+        ? elapsedSeconds / 60
+        : parseFloat(durationInput.value);
+      if (!dist || !mins || dist <= 0 || mins <= 0) {
+        paceInput.value = '';
+        return;
+      }
+      var paceMin = mins / dist;
+      var totalSec = Math.round(paceMin * 60);
+      paceInput.value = Math.floor(totalSec / 60) + ':' + pad(totalSec % 60);
+    }
+
+    distanceInput.addEventListener('input', updatePace);
+
+    function setState(newState) {
+      state = newState;
+
+      timerDisplay.classList.toggle('hidden', state === 'idle');
+      timerDisplay.classList.toggle('timer-running',  state === 'running');
+      timerDisplay.classList.toggle('timer-paused',   state === 'paused');
+      timerDisplay.classList.toggle('timer-finished', state === 'finished');
+
+      switch (state) {
+        case 'idle':
+          btnStart.textContent  = 'Start Ride';
+          btnStart.disabled  = false;
+          btnPause.disabled  = true;
+          btnFinish.disabled = true;
+          btnSave.disabled   = true;
+          timerStatus.textContent = '';
+          elapsedSeconds = 0;
+          durationInput.value = '';
+          timerClock.textContent = '00:00';
+          break;
+
+        case 'running':
+          btnStart.textContent  = 'Riding…';
+          btnStart.disabled  = true;
+          btnPause.textContent = 'Pause';
+          btnPause.disabled  = false;
+          btnFinish.disabled = false;
+          btnSave.disabled   = true;
+          timerStatus.textContent = 'Running';
+          break;
+
+        case 'paused':
+          btnStart.textContent  = 'Resume';
+          btnStart.disabled  = false;
+          btnPause.disabled  = true;
+          btnFinish.disabled = false;
+          btnSave.disabled   = true;
+          timerStatus.textContent = 'Paused';
+          break;
+
+        case 'finished':
+          btnStart.textContent  = 'Start Ride';
+          btnStart.disabled  = true;
+          btnPause.disabled  = true;
+          btnFinish.disabled = true;
+          btnSave.disabled   = false;
+          btnSave.textContent = 'Save Ride';
+          timerStatus.textContent = 'Finished';
+          break;
+      }
+    }
+
+    btnStart.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state === 'idle') {
+        startDate = new Date();
+        startTicking();
+        setState('running');
+      } else if (state === 'paused') {
+        startTicking();
+        setState('running');
+      }
+    });
+
+    btnPause.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state === 'running') {
+        stopTicking();
+        setState('paused');
+      }
+    });
+
+    btnFinish.addEventListener('click', function (e) {
+      e.preventDefault();
+      stopTicking();
+      setState('finished');
+      updateTimerDisplay();
+    });
+
+    btnSave.addEventListener('click', function (e) {
+      e.preventDefault();
+      saveCycle();
+    });
+
+    function saveCycle() {
+      var distance = parseFloat(distanceInput.value) || 0;
+      var notes    = (notesArea.value || '').trim();
+
+      var dateObj       = startDate || new Date();
+      var dateFormatted = dateObj.toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      var dateISO = dateObj.toISOString().slice(0, 10);
+
+      var badge = dateInput.value
+        ? new Date(dateInput.value + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+        : 'Ride';
+
+      var details = [];
+      if (distance > 0) details.push({ icon: 'distance', text: distance.toFixed(1) + ' km' });
+      if (notes)        details.push({ icon: 'notes',    text: notes });
+      if (details.length === 0) details.push({ icon: 'distance', text: '—' });
+
+      var record = {
+        id:              String(Date.now()),
+        type:            'cycle',
+        label:           'Cycle',
+        emoji:           '🚴',
+        date:            dateFormatted,
+        dateISO:         dateISO,
+        duration:        formatDuration(elapsedSeconds),
+        durationSeconds: elapsedSeconds,
+        badge:           badge,
+        details:         details,
+        distanceKm:      distance,
+        notes:           notes
+      };
+
+      ActivityStore.add(record);
+      refreshSidebar();
+      showNotification();
+    }
+
+    function showNotification() {
+      saveNotif.classList.add('save-notif--visible');
+      setTimeout(function () {
+        saveNotif.classList.remove('save-notif--visible');
+        resetForm();
+      }, 3000);
+    }
+
+    function resetForm() {
+      stopTicking();
+      setState('idle');
+      distanceInput.value = '';
+      paceInput.value     = '';
+      notesArea.value     = '';
+      dateInput.value     = new Date().toISOString().slice(0, 10);
+      startDate = null;
+    }
+
+    function refreshSidebar() {
+      var rides = ActivityStore.getAll().filter(function (r) {
+        return r.type === 'cycle';
+      });
+
+      var totalCount   = rides.length;
+      var totalDistKm  = rides.reduce(function (s, r) { return s + (r.distanceKm || 0); }, 0);
+      var longestDist  = rides.reduce(function (s, r) { return Math.max(s, r.distanceKm || 0); }, 0);
+
+      var totalSeconds = rides.reduce(function (s, r) { return s + (r.durationSeconds || 0); }, 0);
+      var avgPace = '';
+      if (totalDistKm > 0 && totalSeconds > 0) {
+        var paceMin  = (totalSeconds / 60) / totalDistKm;
+        var paceSec  = Math.round(paceMin * 60);
+        avgPace = Math.floor(paceSec / 60) + ':' + pad(paceSec % 60);
       }
 
-      function updatePace() {
-        const distance = parseFloat(distanceInput.value);
-        const duration = parseFloat(durationInput.value);
+      document.getElementById('stat-total-rides').textContent =
+        totalCount > 0 ? totalCount : '—';
+      document.getElementById('stat-total-distance').textContent =
+        totalDistKm > 0 ? totalDistKm.toFixed(1) + ' km' : '—';
+      document.getElementById('stat-avg-pace').textContent =
+        avgPace || '—';
+      document.getElementById('stat-longest').textContent =
+        longestDist > 0 ? longestDist.toFixed(1) + ' km' : '—';
 
-        if (!distance || !duration || distance <= 0 || duration <= 0) {
-          paceInput.value = '';
-          return;
-        }
-
-        const paceMinutes = duration / distance; // min per km
-        const totalSeconds = Math.round(paceMinutes * 60);
-        const mm = Math.floor(totalSeconds / 60);
-        const ss = totalSeconds % 60;
-        paceInput.value = mm + ':' + String(ss).padStart(2, '0');
+      var list = document.getElementById('recent-list');
+      if (rides.length === 0) {
+        list.innerHTML = '<li class="recent-empty">No rides saved yet.</li>';
+        return;
       }
 
-      distanceInput.addEventListener('input', updatePace);
-      durationInput.addEventListener('input', updatePace);
+      list.innerHTML = rides.slice(0, 5).map(function (r) {
+        return '<li class="recent-item">'
+          + '<div class="recent-info">'
+          +   '<span class="recent-location">' + escHtml(r.badge) + '</span>'
+          +   '<span class="recent-date">'     + escHtml(r.date)  + '</span>'
+          + '</div>'
+          + '<span class="recent-distance">'
+          +   (r.distanceKm > 0 ? r.distanceKm.toFixed(1) + ' km' : r.duration)
+          + '</span>'
+          + '</li>';
+      }).join('');
+    }
 
-      if (cycleForm) {
-        cycleForm.addEventListener('submit', function (e) {
-          e.preventDefault();
-          alert(t('cycle_ride_saved'));
-        });
-      }
-    })();
+    function escHtml(s) {
+      return String(s || '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    refreshSidebar();
+    setState('idle');
+  })();
   </script>
 
   <!-- Language Change Script -->
