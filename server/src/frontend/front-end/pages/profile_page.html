@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="css/profile_page.css">
+  <link rel="icon" type="image/png" size="32x32" href="../logo/favicon-32.png">
+</head>
+
+<body>
+    <nav class="top-nav">
+        <!-- Use ChatGPT to teach me how to implement return to the previous page funciton (line 14) -->
+        <a href="#" class="nav-back" onclick="history.back(); return false;">
+            <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> 
+                <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+            <span data-i18n="back">Back</span>
+        </a>
+        
+        <a href="home_page.html" class="nav-logo">
+            <img src="../logo/white.png" alt="Fitness App Logo">
+        </a>
+
+        <div class="nav-right">
+            <a href="setting_page.html" class="nav-icon" aria-label="Setting">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <main class="profile-container">
+        <h1 data-i18n="profile_title">Profile</h1>
+
+        <section class="profile-card user-info-card">
+            <div class="user-info">
+                <div class="avatar">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+                    </svg>
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Alex Johnson</span>
+                    <span class="user-email" id="userEmail">alex.johnson@example.com</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-card account-card">
+            <h2 data-i18n="profile_account">Account</h2>
+
+            <button type="button" class="account-btn" onclick="changePassword()">
+                <div class="account-btn-left">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <div class="account-btn-text">
+                        <span class="account-btn-title" data-i18n="profile_change_pw">Change Password</span>
+                        <span class="account-btn-sub" data-i18n="profile_change_pw_sub">Update your password</span>
+                    </div>
+                </div>
+                <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"></path>
+                </svg>
+            </button>
+
+            <button type="button" class="account-btn" onclick="logout()">
+                <div class="account-btn-left">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <div class="account-btn-text">
+                        <span class="account-btn-title" data-i18n="profile_log_out">Log Out</span>
+                        <span class="account-btn-sub" data-i18n="logout_subtitle">Sign out of your account</span>
+                    </div>
+                </div>
+                <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"></path>
+                </svg>
+            </button>
+
+            <button type="button" class="account-btn account-btn-danger" onclick="deleteAccount()">
+                <div class="account-btn-left">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                    </svg>
+                    <div class="account-btn-text">
+                        <span class="account-btn-title" data-i18n="profile_delete">Delete Account</span>
+                        <span class="account-btn-sub" data-i18n="profile_delete_sub">Permanently remove your account</span>
+                    </div>
+                </div>
+                <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"></path>
+                </svg>
+            </button>
+        </section>
+    </main>
+
+    <!-- Language Change Script -->
+    <script src="js/i18n.js"></script>
+
+    <script>
+        (function() {
+            var stored = localStorage.getItem('user');
+            if (stored) {
+                try {
+                    var u = JSON.parse(stored);
+                    if (u.username) document.getElementById('userName').textContent = u.username;
+                    if (u.email) document.getElementById('userEmail').textContent = u.email;
+                } catch(e) {}
+            }
+
+            var user = stored ? JSON.parse(stored) : null;
+            if (user && user.id) {
+                fetch('/api/user?uid=' + user.id)
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) {
+                        if (data.ok && data.user) {
+                            document.getElementById('userName').textContent = data.user.username || data.user.name;
+                            document.getElementById('userEmail').textContent = data.user.email;
+                            localStorage.setItem('user', JSON.stringify(data.user));
+                        }
+                    })
+                    .catch(function(e) { console.error('Failed to load profile:', e); });
+            }
+        })();
+
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("user");
+            sessionStorage.clear();
+            window.location.href = "../index.html";
+        }
+
+        function changePassword() {
+            var oldPw = prompt("Enter current password:");
+            if (!oldPw) return;
+            var newPw = prompt("Enter new password:");
+            if (!newPw) return;
+
+            var user = JSON.parse(localStorage.getItem('user') || '{}');
+            if (!user.id) { alert("Not logged in"); return; }
+
+            var body = new URLSearchParams();
+            body.append('uid', user.id);
+            body.append('oldPassword', oldPw);
+            body.append('newPassword', newPw);
+
+            fetch('/api/user/password', { method: 'POST', body: body })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    alert(data.message || (data.ok ? 'Password updated' : 'Failed'));
+                })
+                .catch(function() { alert('Could not connect to server'); });
+        }
+
+        function deleteAccount() {
+            if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) return;
+
+            var user = JSON.parse(localStorage.getItem('user') || '{}');
+            if (!user.id) {
+                localStorage.clear();
+                window.location.href = "../index.html";
+                return;
+            }
+
+            var body = new URLSearchParams();
+            body.append('uid', user.id);
+
+            fetch('/api/user/delete', { method: 'POST', body: body })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.ok) {
+                        localStorage.clear();
+                        sessionStorage.clear();
+                        window.location.href = "../index.html";
+                    } else {
+                        alert(data.message || 'Delete failed');
+                    }
+                })
+                .catch(function() {
+                    alert('Could not connect to server');
+                });
+        }
+    </script>
+</body>
+
+</html>

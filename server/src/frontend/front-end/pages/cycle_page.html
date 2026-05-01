@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cycle Activity - Fitness App</title>
+  <link rel="stylesheet" href="css/cycle_page.css">
+  <link rel="icon" type="image/png" size="32x32" href="../logo/favicon-32.png">
+</head>
+
+<body>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <nav class="top-nav">
+    <a href="start_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span data-i18n="back">Back</span>
+    </a>
+
+    <a href="home_page.html" class="nav-logo">
+      <img src="../logo/white.png" alt="Fitness App Logo">
+    </a>
+
+    <div class="nav-right">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="cycle-main">
+    <!-- Page Header -->
+    <header class="cycle-header card-animate">
+      <h1 class="cycle-title" data-i18n="cycle_title">Cycle Activity</h1>
+      <p class="cycle-subtitle" data-i18n="cycle_subtitle">Track your rides and progress</p>
+    </header>
+
+    <div class="cycle-layout">
+      <!-- Main Form -->
+      <section class="cycle-form-card card-animate">
+        <div class="form-header">
+          <h2 class="form-title" data-i18n="cycle_new_ride">New Ride</h2>
+          <div class="cycle-goal">
+            <span class="goal-label" data-i18n="cycle_this_week">This week</span>
+            <span class="goal-value">85 km / 100 km</span>
+            <div class="goal-bar"><div class="goal-fill" style="width: 85%"></div></div>
+          </div>
+        </div>
+
+        <div id="timer-display" class="timer-display hidden">
+          <div id="timer-status" class="timer-status">Running</div>
+          <div id="timer-clock" class="timer-clock">00:00</div>
+        </div>
+
+        <form class="cycle-form" id="cycle-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>
+                <span class="field-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </span>
+                <span data-i18n="cycle_distance">Distance (km)</span>
+              </label>
+              <input id="cycle-distance" type="number" step="0.1" min="0" placeholder="0.0">
+            </div>
+
+            <div class="form-group">
+              <label>
+                <span class="field-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </span>
+                <span data-i18n="cycle_duration">Duration (min)</span>
+              </label>
+              <input id="cycle-duration" type="number" min="0" placeholder="0" readonly>
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="cycle_avg_pace">Avg. pace (min/km)</label>
+              <input id="cycle-pace" type="text" readonly placeholder="--:--">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>
+                <span class="field-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </span>
+                <span data-i18n="cycle_date">Date</span>
+              </label>
+              <input id="cycle-date" type="date">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="cycle_notes">Notes</label>
+            <textarea
+              id="cycle-notes"
+              rows="3"
+              data-i18n-placeholder="cycle_notes_placeholder"
+              placeholder="Add notes about your ride..."></textarea>
+          </div>
+        </form>
+
+        <!-- Action Buttons -->
+        <div class="cycle-actions">
+          <button id="btn-start" class="btn-primary" type="button" data-i18n="cycle_start_ride">Start Ride</button>
+          <button id="btn-pause" class="btn-secondary" type="button" disabled data-i18n="cycle_pause">Pause</button>
+          <button id="btn-finish" class="btn-secondary" type="button" disabled data-i18n="cycle_finish">Finish</button>
+          <button id="btn-save" class="btn-outline" type="button" disabled data-i18n="cycle_save_ride">Save Ride</button>
+        </div>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="cycle-sidebar">
+        <!-- Summary Card -->
+        <div class="summary-card card-animate card-animate-delay-1">
+          <h3 class="summary-title" data-i18n="cycle_your_stats">Your Stats</h3>
+          <div class="summary-grid">
+            <div class="summary-item summary-item-1">
+              <span class="summary-value" id="stat-total-rides">—</span>
+              <span class="summary-label" data-i18n="cycle_total_rides">Total Rides</span>
+            </div>
+            <div class="summary-item summary-item-2">
+              <span class="summary-value" id="stat-total-distance">—</span>
+              <span class="summary-label" data-i18n="cycle_total_distance">Total Distance</span>
+            </div>
+            <div class="summary-item summary-item-3">
+              <span class="summary-value" id="stat-avg-pace">—</span>
+              <span class="summary-label" data-i18n="cycle_avg_pace">Avg Pace (min/km)</span>
+            </div>
+            <div class="summary-item summary-item-4">
+              <span class="summary-value" id="stat-longest">—</span>
+              <span class="summary-label" data-i18n="cycle_longest_ride">Longest Ride</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Rides -->
+        <div class="recent-card card-animate card-animate-delay-2">
+          <h3 class="recent-title" data-i18n="cycle_recent_rides">Recent Rides</h3>
+          <ul class="recent-list" id="recent-list">
+            <li class="recent-empty">No rides saved yet.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="save-notification" class="save-notif" role="status" aria-live="polite">
+    <span class="save-notif-icon">✓</span>
+    <div>
+      <div class="save-notif-title">Ride Saved!</div>
+      <div class="save-notif-sub">
+        <span>Record stored.</span>
+        <a href="records_page.html">View Records →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/activity-store.js"></script>
+  <script>
+  (function () {
+    var btnStart    = document.getElementById('btn-start');
+    var btnPause    = document.getElementById('btn-pause');
+    var btnFinish   = document.getElementById('btn-finish');
+    var btnSave     = document.getElementById('btn-save');
+    var timerDisplay = document.getElementById('timer-display');
+    var timerClock  = document.getElementById('timer-clock');
+    var timerStatus = document.getElementById('timer-status');
+    var saveNotif   = document.getElementById('save-notification');
+
+    var distanceInput = document.getElementById('cycle-distance');
+    var durationInput = document.getElementById('cycle-duration');
+    var paceInput     = document.getElementById('cycle-pace');
+    var dateInput     = document.getElementById('cycle-date');
+    var notesArea     = document.getElementById('cycle-notes');
+
+    var state          = 'idle';
+    var timerInterval  = null;
+    var elapsedSeconds = 0;
+    var startTimestamp = null;
+    var startDate      = null;
+
+    if (dateInput) {
+      dateInput.value = new Date().toISOString().slice(0, 10);
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function formatClock(s) {
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      return h > 0
+        ? pad(h) + ':' + pad(m) + ':' + pad(sec)
+        : pad(m) + ':' + pad(sec);
+    }
+
+    function formatDuration(s) {
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      if (h > 0) return h + ' h ' + m + ' min';
+      return (m || 1) + ' min';
+    }
+
+    function updateTimerDisplay() {
+      timerClock.textContent = formatClock(elapsedSeconds);
+      var mins = Math.round(elapsedSeconds / 60);
+      if (mins >= 1) durationInput.value = mins;
+      updatePace();
+    }
+
+    function tickTimer() {
+      elapsedSeconds = Math.floor((Date.now() - startTimestamp) / 1000);
+      updateTimerDisplay();
+    }
+
+    function startTicking() {
+      startTimestamp = Date.now() - elapsedSeconds * 1000;
+      timerInterval  = setInterval(tickTimer, 1000);
+    }
+
+    function stopTicking() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function updatePace() {
+      var dist = parseFloat(distanceInput.value);
+      var mins = elapsedSeconds > 0
+        ? elapsedSeconds / 60
+        : parseFloat(durationInput.value);
+      if (!dist || !mins || dist <= 0 || mins <= 0) {
+        paceInput.value = '';
+        return;
+      }
+      var paceMin = mins / dist;
+      var totalSec = Math.round(paceMin * 60);
+      paceInput.value = Math.floor(totalSec / 60) + ':' + pad(totalSec % 60);
+    }
+
+    distanceInput.addEventListener('input', updatePace);
+
+    function setState(newState) {
+      state = newState;
+
+      timerDisplay.classList.toggle('hidden', state === 'idle');
+      timerDisplay.classList.toggle('timer-running',  state === 'running');
+      timerDisplay.classList.toggle('timer-paused',   state === 'paused');
+      timerDisplay.classList.toggle('timer-finished', state === 'finished');
+
+      switch (state) {
+        case 'idle':
+          btnStart.textContent  = 'Start Ride';
+          btnStart.disabled  = false;
+          btnPause.disabled  = true;
+          btnFinish.disabled = true;
+          btnSave.disabled   = true;
+          timerStatus.textContent = '';
+          elapsedSeconds = 0;
+          durationInput.value = '';
+          timerClock.textContent = '00:00';
+          break;
+
+        case 'running':
+          btnStart.textContent  = 'Riding…';
+          btnStart.disabled  = true;
+          btnPause.textContent = 'Pause';
+          btnPause.disabled  = false;
+          btnFinish.disabled = false;
+          btnSave.disabled   = true;
+          timerStatus.textContent = 'Running';
+          break;
+
+        case 'paused':
+          btnStart.textContent  = 'Resume';
+          btnStart.disabled  = false;
+          btnPause.disabled  = true;
+          btnFinish.disabled = false;
+          btnSave.disabled   = true;
+          timerStatus.textContent = 'Paused';
+          break;
+
+        case 'finished':
+          btnStart.textContent  = 'Start Ride';
+          btnStart.disabled  = true;
+          btnPause.disabled  = true;
+          btnFinish.disabled = true;
+          btnSave.disabled   = false;
+          btnSave.textContent = 'Save Ride';
+          timerStatus.textContent = 'Finished';
+          break;
+      }
+    }
+
+    btnStart.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state === 'idle') {
+        startDate = new Date();
+        startTicking();
+        setState('running');
+      } else if (state === 'paused') {
+        startTicking();
+        setState('running');
+      }
+    });
+
+    btnPause.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state === 'running') {
+        stopTicking();
+        setState('paused');
+      }
+    });
+
+    btnFinish.addEventListener('click', function (e) {
+      e.preventDefault();
+      stopTicking();
+      setState('finished');
+      updateTimerDisplay();
+    });
+
+    btnSave.addEventListener('click', function (e) {
+      e.preventDefault();
+      saveCycle();
+    });
+
+    function saveCycle() {
+      var distance = parseFloat(distanceInput.value) || 0;
+      var notes    = (notesArea.value || '').trim();
+
+      var dateObj       = startDate || new Date();
+      var dateFormatted = dateObj.toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      var dateISO = dateObj.toISOString().slice(0, 10);
+
+      var badge = dateInput.value
+        ? new Date(dateInput.value + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+        : 'Ride';
+
+      var details = [];
+      if (distance > 0) details.push({ icon: 'distance', text: distance.toFixed(1) + ' km' });
+      if (notes)        details.push({ icon: 'notes',    text: notes });
+      if (details.length === 0) details.push({ icon: 'distance', text: '—' });
+
+      var record = {
+        id:              String(Date.now()),
+        type:            'cycle',
+        label:           'Cycle',
+        emoji:           '🚴',
+        date:            dateFormatted,
+        dateISO:         dateISO,
+        duration:        formatDuration(elapsedSeconds),
+        durationSeconds: elapsedSeconds,
+        badge:           badge,
+        details:         details,
+        distanceKm:      distance,
+        notes:           notes
+      };
+
+      ActivityStore.add(record);
+      refreshSidebar();
+      showNotification();
+    }
+
+    function showNotification() {
+      saveNotif.classList.add('save-notif--visible');
+      setTimeout(function () {
+        saveNotif.classList.remove('save-notif--visible');
+        resetForm();
+      }, 3000);
+    }
+
+    function resetForm() {
+      stopTicking();
+      setState('idle');
+      distanceInput.value = '';
+      paceInput.value     = '';
+      notesArea.value     = '';
+      dateInput.value     = new Date().toISOString().slice(0, 10);
+      startDate = null;
+    }
+
+    function refreshSidebar() {
+      var rides = ActivityStore.getAll().filter(function (r) {
+        return r.type === 'cycle';
+      });
+
+      var totalCount   = rides.length;
+      var totalDistKm  = rides.reduce(function (s, r) { return s + (r.distanceKm || 0); }, 0);
+      var longestDist  = rides.reduce(function (s, r) { return Math.max(s, r.distanceKm || 0); }, 0);
+
+      var totalSeconds = rides.reduce(function (s, r) { return s + (r.durationSeconds || 0); }, 0);
+      var avgPace = '';
+      if (totalDistKm > 0 && totalSeconds > 0) {
+        var paceMin  = (totalSeconds / 60) / totalDistKm;
+        var paceSec  = Math.round(paceMin * 60);
+        avgPace = Math.floor(paceSec / 60) + ':' + pad(paceSec % 60);
+      }
+
+      document.getElementById('stat-total-rides').textContent =
+        totalCount > 0 ? totalCount : '—';
+      document.getElementById('stat-total-distance').textContent =
+        totalDistKm > 0 ? totalDistKm.toFixed(1) + ' km' : '—';
+      document.getElementById('stat-avg-pace').textContent =
+        avgPace || '—';
+      document.getElementById('stat-longest').textContent =
+        longestDist > 0 ? longestDist.toFixed(1) + ' km' : '—';
+
+      var list = document.getElementById('recent-list');
+      if (rides.length === 0) {
+        list.innerHTML = '<li class="recent-empty">No rides saved yet.</li>';
+        return;
+      }
+
+      list.innerHTML = rides.slice(0, 5).map(function (r) {
+        return '<li class="recent-item">'
+          + '<div class="recent-info">'
+          +   '<span class="recent-location">' + escHtml(r.badge) + '</span>'
+          +   '<span class="recent-date">'     + escHtml(r.date)  + '</span>'
+          + '</div>'
+          + '<span class="recent-distance">'
+          +   (r.distanceKm > 0 ? r.distanceKm.toFixed(1) + ' km' : r.duration)
+          + '</span>'
+          + '<button class="btn-delete-recent" data-id="' + escHtml(r.id) + '" title="Delete">'
+          +   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
+          + '</button>'
+          + '</li>';
+      }).join('');
+    }
+
+    function escHtml(s) {
+      return String(s || '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    document.getElementById('recent-list').addEventListener('click', function (e) {
+      var btn = e.target.closest('.btn-delete-recent');
+      if (!btn) return;
+      if (!confirm('Are you sure you want to delete this ride?')) return;
+      ActivityStore.remove(btn.dataset.id);
+      refreshSidebar();
+    });
+
+    refreshSidebar();
+    setState('idle');
+  })();
+  </script>
+
+  <!-- Language Change Script -->
+  <script src="js/i18n.js"></script>
+</body>
+
+</html>
