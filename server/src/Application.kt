@@ -21,7 +21,6 @@ fun Application.module() {
             WaterworkTable,
             SportsTable,
             RecommendationsTable,
-            ActivityRecordTable,
         )
     }
 

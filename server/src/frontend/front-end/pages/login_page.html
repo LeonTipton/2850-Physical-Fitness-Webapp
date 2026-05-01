@@ -61,11 +61,7 @@
             .then(function(data) {
                 if (data.ok) {
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    localStorage.setItem('uid', data.user.id);
-                    localStorage.setItem('username', data.user.username);
-                    localStorage.setItem('email', data.user.email);
                     localStorage.setItem('isLoggedIn', 'true');
-
                     window.location.href = 'home_page.html';
                 } else {
                     alert(data.message || 'Login failed');

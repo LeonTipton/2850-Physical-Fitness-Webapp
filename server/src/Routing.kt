@@ -14,14 +14,10 @@ import io.ktor.http.HttpStatusCode
 import java.io.File
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import org.jetbrains.exposed.v1.core.eq
-import io.ktor.server.response.respond
-import org.jetbrains.exposed.v1.jdbc.insert
-import org.jetbrains.exposed.v1.jdbc.selectAll
 
 fun Application.configureRouting() {
     routing {
-        staticFiles("/pages", File("server/src/frontend/front-end/pages"))
-        staticFiles("/logo", File("server/src/frontend/front-end/logo"))
+        staticFiles("/", File("server/src/frontend/front-end"))
         staticFiles("/front-end", File("server/src/frontend/front-end"))
 
         get("/") {
@@ -230,135 +226,5 @@ fun Application.configureRouting() {
                 ContentType.Application.Json
             )
         }
-        get("/api/sports") {
-            val data = transaction {
-                Sports.all().map {
-                    mapOf(
-                        "id" to it.id.value,
-                        "name" to it.sportName
-                    )
-                }
-            }
-            call.respondText(data.toString())
-        }
-
-        get("/api/gym") {
-            val data = transaction {
-                Gymwork.all().map {
-                    mapOf(
-                        "id" to it.id.value,
-                        "name" to it.exName,
-                        "muscleGroups" to it.muscleGroups,
-                        "youtubeLink" to it.youtubeLink
-                    )
-                }
-            }
-            call.respondText(data.toString())
-        }
-
-        get("/api/swim") {
-            val data = transaction {
-                Waterwork.all().map {
-                    mapOf(
-                        "id" to it.id.value,
-                        "name" to it.exName,
-                        "intensity" to it.intensity,
-                        "strokes" to it.strokes,
-                        "equipment" to it.equipment
-                    )
-                }
-            }
-            call.respondText(data.toString())
-        }
-
-        get("/api/distances") {
-            val data = transaction {
-                Distances.all().map {
-                    mapOf(
-                        "id" to it.id.value,
-                        "name" to it.exName,
-                        "intensity" to it.intensity,
-                        "type" to it.type,
-                        "equipment" to it.equipment
-                    )
-                }
-            }
-            call.respondText(data.toString())
-        }
-
-        post("/api/records") {
-            val params = call.receiveParameters()
-
-            val uid = params["uid"]?.toIntOrNull()
-            val activityType = params["activityType"] ?: ""
-            val activityName = params["activityName"] ?: ""
-            val durationMinutes = params["durationMinutes"]?.toIntOrNull()
-            val distanceKm = params["distanceKm"]?.toDoubleOrNull()
-            val notes = params["notes"] ?: ""
-
-            if (uid == null || activityType.isBlank() || activityName.isBlank()) {
-                call.respondText(
-                    """{"ok":false,"message":"Missing required fields"}""",
-                    ContentType.Application.Json,
-                    HttpStatusCode.BadRequest
-                )
-                return@post
-            }
-
-        transaction {
-            ActivityRecordTable.insert {
-                it[ActivityRecordTable.userId] = uid
-                it[ActivityRecordTable.activityType] = activityType
-                it[ActivityRecordTable.activityName] = activityName
-                it[ActivityRecordTable.durationMinutes] = durationMinutes
-                it[ActivityRecordTable.distanceKm] = distanceKm
-                it[ActivityRecordTable.notes] = notes
-                it[ActivityRecordTable.createdAt] = System.currentTimeMillis().toString()
-            }
-        }
-            call.respondText(
-                """{"ok":true,"message":"Record added"}""",
-                ContentType.Application.Json
-            )
-        }
-
-        get("/api/test") {
-            call.respondText("test works")
-        }
-
-        get("/api/records") {
-            val uid = call.request.queryParameters["uid"]?.toIntOrNull()
-
-            if (uid == null) {
-                call.respondText(
-                    """{"ok":false,"message":"Missing uid"}""",
-                    ContentType.Application.Json,
-                    HttpStatusCode.BadRequest
-                )
-                return@get
-            }
-
-            val data = transaction {
-                ActivityRecordTable.selectAll()
-                    .where { ActivityRecordTable.userId eq uid }
-                    .map {
-                        mapOf(
-                            "id" to it[ActivityRecordTable.id].value,
-                            "activityType" to it[ActivityRecordTable.activityType],
-                            "activityName" to it[ActivityRecordTable.activityName],
-                            "durationMinutes" to it[ActivityRecordTable.durationMinutes],
-                            "distanceKm" to it[ActivityRecordTable.distanceKm],
-                            "notes" to it[ActivityRecordTable.notes],
-                            "createdAt" to it[ActivityRecordTable.createdAt]
-                        )
-                    }
-            }
-
-            val json = data.joinToString(prefix = "[", postfix = "]") { r ->
-                """{"id":${r["id"]},"activityType":"${r["activityType"]}","activityName":"${r["activityName"]}","durationMinutes":${r["durationMinutes"] ?: 0},"distanceKm":${r["distanceKm"] ?: 0},"notes":"${r["notes"] ?: ""}","createdAt":"${r["createdAt"]}"}"""
-            }
-
-            call.respondText(json, ContentType.Application.Json)
-        }
     }
-}   
+}

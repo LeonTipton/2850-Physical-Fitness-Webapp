@@ -59,6 +59,12 @@
             <div class="goal-bar"><div class="goal-fill" style="width: 60%"></div></div>
           </div>
         </div>
+        <!-- Live Timer (hidden in idle state) -->
+        <div id="timer-display" class="timer-display hidden">
+          <div id="timer-status" class="timer-status">Running</div>
+          <div id="timer-clock" class="timer-clock">00:00</div>
+        </div>
+
         <form class="run-form">
           <div class="form-row">
             <div class="form-group">
@@ -67,7 +73,7 @@
             </div>
             <div class="form-group">
               <label><span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span data-i18n="runp_duration">Duration (min)</span></label>
-              <input id="run-duration" type="number" min="0" placeholder="0">
+              <input id="run-duration" type="number" min="0" placeholder="0" readonly>
             </div>
             <div class="form-group">
               <label><span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span data-i18n="runp_c_b">Calories burned</span></label>
@@ -108,10 +114,10 @@
 
         <!-- Action Buttons -->
         <div class="run-actions">
-          <button class="btn-primary" data-i18n="runp_start_r">Start Run</button>
-          <button class="btn-secondary" data-i18n="runp_pause">Pause</button>
-          <button class="btn-secondary" data-i18n="runp_finish">Finish</button>
-          <button class="btn-outline" data-i18n="runp_save_r">Save Run</button>
+          <button id="btn-start"  class="btn-primary" data-i18n="runp_start_r">Start Run</button>
+          <button id="btn-pause"  class="btn-secondary" disabled data-i18n="runp_pause">Pause</button>
+          <button id="btn-finish" class="btn-secondary" disabled data-i18n="runp_finish">Finish</button>
+          <button id="btn-save"   class="btn-outline"   disabled data-i18n="runp_save_r">Save Run</button>
         </div>
       </section>
 
@@ -122,19 +128,19 @@
           <h3 class="summary-title" data-i18n="runp_y_s">Your Stats</h3>
           <div class="summary-grid">
             <div class="summary-item summary-item-1">
-              <span class="summary-value">42</span>
+              <span class="summary-value" id="stat-total-runs">—</span>
               <span class="summary-label" data-i18n="runp_total_r">Total Runs</span>
             </div>
             <div class="summary-item summary-item-2">
-              <span class="summary-value">320 km</span>
+              <span class="summary-value" id="stat-total-distance">—</span>
               <span class="summary-label" data-i18n="runp_total_dis">Total Distance</span>
             </div>
             <div class="summary-item summary-item-3">
-              <span class="summary-value">5:12</span>
+              <span class="summary-value" id="stat-avg-pace">—</span>
               <span class="summary-label" data-i18n="runp_aveg_pace">Avg Pace (min/km)</span>
             </div>
             <div class="summary-item summary-item-4">
-              <span class="summary-value">21.3 km</span>
+              <span class="summary-value" id="stat-longest">—</span>
               <span class="summary-label" data-i18n="runp_longest_r">Longest Run</span>
             </div>
           </div>
@@ -143,124 +149,322 @@
         <!-- Recent Runs -->
         <div class="recent-card card-animate card-animate-delay-2">
           <h3 class="recent-title" data-i18n="runp_recent_rs">Recent Runs</h3>
-          <ul class="recent-list">
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Riverside Loop</span>
-                <span class="recent-date">Mar 8, 2026</span>
-              </div>
-              <span class="recent-distance">7.4 km</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">City Park Route</span>
-                <span class="recent-date">Mar 6, 2026</span>
-              </div>
-              <span class="recent-distance">5.2 km</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Hill Repeats</span>
-                <span class="recent-date">Mar 3, 2026</span>
-              </div>
-              <span class="recent-distance">10.1 km</span>
-            </li>
-            <li class="recent-item">
-              <div class="recent-info">
-                <span class="recent-location">Waterfront Long Run</span>
-                <span class="recent-date">Mar 1, 2026</span>
-              </div>
-              <span class="recent-distance">18.0 km</span>
-            </li>
+          <ul class="recent-list" id="recent-list">
+            <li class="recent-empty">No runs saved yet.</li>
           </ul>
         </div>
       </aside>
     </div>
   </main>
+  <!-- Save success notification -->
+  <div id="save-notification" class="save-notif" role="status" aria-live="polite">
+    <span class="save-notif-icon">✓</span>
+    <div>
+      <div class="save-notif-title">Run Saved!</div>
+      <div class="save-notif-sub">
+        <span>Record stored.</span>
+        <a href="records_page.html">View Records →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/activity-store.js"></script>
   <script>
   (function () {
-    const distanceInput = document.getElementById('run-distance');
-    const durationInput = document.getElementById('run-duration');
-    const paceInput = document.getElementById('run-pace');
-    const saveButton = document.querySelector('.btn-outline');
-    const notesInput = document.querySelector('textarea');
+    var btnStart    = document.getElementById('btn-start');
+    var btnPause    = document.getElementById('btn-pause');
+    var btnFinish   = document.getElementById('btn-finish');
+    var btnSave     = document.getElementById('btn-save');
+    var timerDisplay = document.getElementById('timer-display');
+    var timerClock  = document.getElementById('timer-clock');
+    var timerStatus = document.getElementById('timer-status');
+    var saveNotif   = document.getElementById('save-notification');
 
-    if (!distanceInput || !durationInput || !paceInput) return;
+    var distanceInput = document.getElementById('run-distance');
+    var durationInput = document.getElementById('run-duration');
+    var paceInput     = document.getElementById('run-pace');
+    var notesArea     = document.querySelector('.run-form textarea');
+    var weatherSelect = document.querySelector('.run-form select');
+    var caloriesInput = document.querySelector('.run-form .form-row .form-group:nth-child(3) input');
+    var stepsInput    = document.querySelector('.run-form .form-row:nth-child(2) .form-group:first-child input');
+    var locationInput = document.querySelector('.run-form input[type="text"][placeholder="Park or route name"]');
+
+    var state          = 'idle';
+    var timerInterval  = null;
+    var elapsedSeconds = 0;
+    var startTimestamp = null;
+    var startDate      = null;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function formatClock(s) {
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      return h > 0
+        ? pad(h) + ':' + pad(m) + ':' + pad(sec)
+        : pad(m) + ':' + pad(sec);
+    }
+
+    function formatDuration(s) {
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      if (h > 0) return h + ' h ' + m + ' min';
+      return (m || 1) + ' min';
+    }
+
+    function updateTimerDisplay() {
+      timerClock.textContent = formatClock(elapsedSeconds);
+      var mins = Math.round(elapsedSeconds / 60);
+      if (mins >= 1) durationInput.value = mins;
+      updatePace();
+    }
+
+    function tickTimer() {
+      elapsedSeconds = Math.floor((Date.now() - startTimestamp) / 1000);
+      updateTimerDisplay();
+    }
+
+    function startTicking() {
+      startTimestamp = Date.now() - elapsedSeconds * 1000;
+      timerInterval  = setInterval(tickTimer, 1000);
+    }
+
+    function stopTicking() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
 
     function updatePace() {
-      const distance = parseFloat(distanceInput.value);
-      const duration = parseFloat(durationInput.value);
-
-      if (!distance || !duration || distance <= 0 || duration <= 0) {
+      var dist = parseFloat(distanceInput.value);
+      var mins = elapsedSeconds > 0
+        ? elapsedSeconds / 60
+        : parseFloat(durationInput.value);
+      if (!dist || !mins || dist <= 0 || mins <= 0) {
         paceInput.value = '';
         return;
       }
-
-      const paceMinutes = duration / distance;
-      const totalSeconds = Math.round(paceMinutes * 60);
-      const mm = Math.floor(totalSeconds / 60);
-      const ss = totalSeconds % 60;
-
-      paceInput.value = mm + ':' + String(ss).padStart(2, '0');
+      var paceMin = mins / dist;
+      var totalSec = Math.round(paceMin * 60);
+      paceInput.value = Math.floor(totalSec / 60) + ':' + pad(totalSec % 60);
     }
 
     distanceInput.addEventListener('input', updatePace);
-    durationInput.addEventListener('input', updatePace);
 
-    // Save Run
-    if (saveButton) {
-      saveButton.addEventListener('click', async function () {
-        const uid = localStorage.getItem("uid");
+    function setState(newState) {
+      state = newState;
 
-        if (!uid) {
-          alert("Please login first");
-          window.location.href = "login_page.html";
-          return;
-        }
+      timerDisplay.classList.toggle('hidden', state === 'idle');
+      timerDisplay.classList.toggle('timer-running',  state === 'running');
+      timerDisplay.classList.toggle('timer-paused',   state === 'paused');
+      timerDisplay.classList.toggle('timer-finished', state === 'finished');
 
-        const distance = distanceInput.value;
-        const duration = durationInput.value;
-        const notes = notesInput ? notesInput.value : "";
+      switch (state) {
+        case 'idle':
+          btnStart.textContent = 'Start Run';
+          btnStart.disabled  = false;
+          btnPause.disabled  = true;
+          btnFinish.disabled = true;
+          btnSave.disabled   = true;
+          timerStatus.textContent = '';
+          elapsedSeconds = 0;
+          durationInput.value = '';
+          timerClock.textContent = '00:00';
+          break;
 
-        if (!distance || !duration) {
-          alert("Please enter distance and duration");
-          return;
-        }
+        case 'running':
+          btnStart.textContent = 'Running…';
+          btnStart.disabled  = true;
+          btnPause.textContent = 'Pause';
+          btnPause.disabled  = false;
+          btnFinish.disabled = false;
+          btnSave.disabled   = true;
+          timerStatus.textContent = 'Running';
+          break;
 
-        const body = new URLSearchParams();
-        body.append("uid", uid);
-        body.append("activityType", "run");
-        body.append("activityName", "Run");
-        body.append("durationMinutes", duration);
-        body.append("distanceKm", distance);
-        body.append("notes", notes);
+        case 'paused':
+          btnStart.textContent = 'Resume';
+          btnStart.disabled  = false;
+          btnPause.disabled  = true;
+          btnFinish.disabled = false;
+          btnSave.disabled   = true;
+          timerStatus.textContent = 'Paused';
+          break;
 
-        try {
-          const res = await fetch("/api/records", {
-            method: "POST",
-            body: body
-          });
-
-          const data = await res.json();
-
-          if (data.ok) {
-            alert("Run saved successfully");
-            window.location.href = "records_page.html";
-          } else {
-            alert(data.message || "Save failed");
-          }
-
-        } catch (err) {
-          alert("Could not connect to server");
-          console.error(err);
-        }
-      });
+        case 'finished':
+          btnStart.textContent = 'Start Run';
+          btnStart.disabled  = true;
+          btnPause.disabled  = true;
+          btnFinish.disabled = true;
+          btnSave.disabled   = false;
+          btnSave.textContent = 'Save Run';
+          timerStatus.textContent = 'Finished';
+          break;
+      }
     }
 
+    btnStart.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state === 'idle') {
+        startDate = new Date();
+        startTicking();
+        setState('running');
+      } else if (state === 'paused') {
+        startTicking();
+        setState('running');
+      }
+    });
+
+    btnPause.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state === 'running') {
+        stopTicking();
+        setState('paused');
+      }
+    });
+
+    btnFinish.addEventListener('click', function (e) {
+      e.preventDefault();
+      stopTicking();
+      setState('finished');
+      updateTimerDisplay();
+    });
+
+    btnSave.addEventListener('click', function (e) {
+      e.preventDefault();
+      saveRun();
+    });
+
+    function saveRun() {
+      var distance = parseFloat(distanceInput.value) || 0;
+      var calories = parseInt(caloriesInput ? caloriesInput.value : '', 10) || 0;
+      var location = (locationInput ? locationInput.value : '').trim() || 'Run';
+
+      var dateObj       = startDate || new Date();
+      var dateFormatted = dateObj.toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+      var dateISO = dateObj.toISOString().slice(0, 10);
+
+      var details = [];
+      if (distance > 0) details.push({ icon: 'distance', text: distance.toFixed(1) + ' km' });
+      if (calories > 0) details.push({ icon: 'cal',      text: calories + ' kcal' });
+      if (details.length === 0) details.push({ icon: 'distance', text: '—' });
+
+      var record = {
+        id:              String(Date.now()),
+        type:            'run',
+        label:           'Run',
+        emoji:           '🏃',
+        date:            dateFormatted,
+        dateISO:         dateISO,
+        duration:        formatDuration(elapsedSeconds),
+        durationSeconds: elapsedSeconds,
+        badge:           location,
+        details:         details,
+        distanceKm:      distance,
+        calories:        calories,
+        location:        location,
+        weather:         weatherSelect ? weatherSelect.value : '',
+        notes:           notesArea ? notesArea.value.trim() : ''
+      };
+
+      ActivityStore.add(record);
+      refreshSidebar();
+      showNotification();
+    }
+
+    function showNotification() {
+      saveNotif.classList.add('save-notif--visible');
+      setTimeout(function () {
+        saveNotif.classList.remove('save-notif--visible');
+        resetForm();
+      }, 3000);
+    }
+
+    function resetForm() {
+      stopTicking();
+      setState('idle');
+      distanceInput.value = '';
+      paceInput.value     = '';
+      if (caloriesInput) caloriesInput.value = '';
+      if (stepsInput)    stepsInput.value    = '';
+      if (locationInput) locationInput.value = '';
+      if (notesArea)     notesArea.value     = '';
+      if (weatherSelect) weatherSelect.value = '';
+      startDate = null;
+    }
+
+    function refreshSidebar() {
+      var runs = ActivityStore.getAll().filter(function (r) {
+        return r.type === 'run';
+      });
+
+      var totalCount   = runs.length;
+      var totalDistKm  = runs.reduce(function (s, r) { return s + (r.distanceKm || 0); }, 0);
+      var longestDist  = runs.reduce(function (s, r) { return Math.max(s, r.distanceKm || 0); }, 0);
+
+      var totalSecs = runs.reduce(function (s, r) { return s + (r.durationSeconds || 0); }, 0);
+      var avgPace = '';
+      if (totalDistKm > 0 && totalSecs > 0) {
+        var paceMin  = (totalSecs / 60) / totalDistKm;
+        var paceSec  = Math.round(paceMin * 60);
+        avgPace = Math.floor(paceSec / 60) + ':' + pad(paceSec % 60);
+      }
+
+      document.getElementById('stat-total-runs').textContent =
+        totalCount > 0 ? totalCount : '—';
+      document.getElementById('stat-total-distance').textContent =
+        totalDistKm > 0 ? totalDistKm.toFixed(1) + ' km' : '—';
+      document.getElementById('stat-avg-pace').textContent =
+        avgPace || '—';
+      document.getElementById('stat-longest').textContent =
+        longestDist > 0 ? longestDist.toFixed(1) + ' km' : '—';
+
+      var list = document.getElementById('recent-list');
+      if (runs.length === 0) {
+        list.innerHTML = '<li class="recent-empty">No runs saved yet.</li>';
+        return;
+      }
+
+      list.innerHTML = runs.slice(0, 5).map(function (r) {
+        return '<li class="recent-item">'
+          + '<div class="recent-info">'
+          +   '<span class="recent-location">' + escHtml(r.badge) + '</span>'
+          +   '<span class="recent-date">'     + escHtml(r.date)  + '</span>'
+          + '</div>'
+          + '<span class="recent-distance">'
+          +   (r.distanceKm > 0 ? r.distanceKm.toFixed(1) + ' km' : r.duration)
+          + '</span>'
+          + '<button class="btn-delete-recent" data-id="' + escHtml(r.id) + '" title="Delete">'
+          +   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
+          + '</button>'
+          + '</li>';
+      }).join('');
+    }
+
+    function escHtml(s) {
+      return String(s || '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    document.getElementById('recent-list').addEventListener('click', function (e) {
+      var btn = e.target.closest('.btn-delete-recent');
+      if (!btn) return;
+      if (!confirm('Are you sure you want to delete this run?')) return;
+      ActivityStore.remove(btn.dataset.id);
+      refreshSidebar();
+    });
+
+    refreshSidebar();
+    setState('idle');
   })();
   </script>
 
   <!-- Language Change Script --> 
   <script src="js/i18n.js"></script>
-  </body>
-  </html>
+</body>
+
+</html>
+
