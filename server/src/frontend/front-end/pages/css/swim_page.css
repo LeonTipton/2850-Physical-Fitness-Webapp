@@ -587,3 +587,29 @@ body {
   padding: 12px 0;
   list-style: none;
 }
+
+.recent-item { position: relative; }
+
+.btn-delete-recent {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #ccc;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.recent-item:hover .btn-delete-recent { opacity: 1; }
+.btn-delete-recent:hover { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.2); color: #ef4444; }
+.btn-delete-recent:active { transform: translateY(-50%) scale(0.9); }

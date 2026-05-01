@@ -436,6 +436,38 @@ body {
 
 .detail-chip svg { opacity: 0.55; flex-shrink: 0; }
 
+/* Delete button */
+.btn-delete-activity {
+  flex-shrink: 0;
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #bbb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.activity-item:hover .btn-delete-activity {
+  opacity: 1;
+}
+
+.btn-delete-activity:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.btn-delete-activity:active {
+  transform: scale(0.9);
+}
+
 /* ─── Activity type colour tokens ──────────────────────────────────────────── */
 /* Run – blue */
 .color--run.activity-badge    { background: rgba(59, 130, 246, 0.12); }
