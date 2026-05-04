@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+  <html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -262,11 +262,62 @@
         show(stepEquipment);
       });
 
-      stepForm.addEventListener('submit', function (e) {
+      stepForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        alert(t('gym_workout_saved'));
-      });
 
+        const uid = localStorage.getItem("uid");
+
+        if (!uid) {
+          alert("Please login first");
+          window.location.href = "login_page.html";
+          return;
+        }
+
+        const exerciseName = document.getElementById("exercise-name").value.trim() || "Gym";
+        const sets = document.getElementById("exercise-sets").value;
+        const reps = document.getElementById("exercise-reps").value;
+        const weight = document.getElementById("exercise-weight").value;
+        const duration = document.getElementById("exercise-duration").value;
+        const notes = document.getElementById("exercise-notes").value;
+
+        if (!duration) {
+          alert("Please enter duration");
+          return;
+        }
+
+        const fullNotes =
+          "Sets: " + (sets || "-") +
+          ", Reps: " + (reps || "-") +
+          ", Weight: " + (weight || "-") + "kg" +
+          (notes ? ", Notes: " + notes : "");
+
+        const body = new URLSearchParams();
+        body.append("uid", uid);
+        body.append("activityType", "gym");
+        body.append("activityName", exerciseName);
+        body.append("durationMinutes", duration);
+        body.append("distanceKm", "0");
+        body.append("notes", fullNotes);
+
+        try {
+          const res = await fetch("/api/records", {
+            method: "POST",
+            body: body
+          });
+
+          const data = await res.json();
+
+          if (data.ok) {
+            alert("Gym workout saved successfully");
+            window.location.href = "records_page.html";
+          } else {
+            alert(data.message || "Save failed");
+          }
+        } catch (err) {
+          alert("Could not connect to server");
+          console.error(err);
+        }
+      });
       document.addEventListener('DOMContentLoaded', function () {
         const originalApplyLanguage = window.applyLanguage;
 

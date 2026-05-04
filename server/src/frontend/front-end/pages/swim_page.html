@@ -190,29 +190,82 @@
       const distanceInput = document.getElementById('swim-distance');
       const durationInput = document.getElementById('swim-duration');
       const paceInput = document.getElementById('swim-pace');
+      const saveButton = document.querySelector('.btn-outline');
+      const notesInput = document.querySelector('textarea');
+
       if (!distanceInput || !durationInput || !paceInput) return;
 
       function updatePace() {
         const distance = parseFloat(distanceInput.value);
         const duration = parseFloat(durationInput.value);
+
         if (!distance || !duration || distance <= 0 || duration <= 0) {
           paceInput.value = '';
           return;
         }
-        const pacePer100m = (duration / (distance / 100));
+
+        const pacePer100m = duration / (distance / 100);
         const totalSeconds = Math.round(pacePer100m * 60);
         const mm = Math.floor(totalSeconds / 60);
         const ss = totalSeconds % 60;
+
         paceInput.value = mm + ':' + String(ss).padStart(2, '0');
       }
 
       distanceInput.addEventListener('input', updatePace);
       durationInput.addEventListener('input', updatePace);
+
+      if (saveButton) {
+        saveButton.addEventListener('click', async function () {
+          const uid = localStorage.getItem("uid");
+
+          if (!uid) {
+            alert("Please login first");
+            window.location.href = "login_page.html";
+            return;
+          }
+
+          const distanceMeters = distanceInput.value;
+          const duration = durationInput.value;
+          const notes = notesInput ? notesInput.value : "";
+
+          if (!distanceMeters || !duration) {
+            alert("Please enter distance and duration");
+            return;
+          }
+
+          const distanceKm = parseFloat(distanceMeters) / 1000;
+
+          const body = new URLSearchParams();
+          body.append("uid", uid);
+          body.append("activityType", "swim");
+          body.append("activityName", "Swim");
+          body.append("durationMinutes", duration);
+          body.append("distanceKm", distanceKm);
+          body.append("notes", notes);
+
+          try {
+            const res = await fetch("/api/records", {
+              method: "POST",
+              body: body
+            });
+
+            const data = await res.json();
+
+            if (data.ok) {
+              alert("Swim saved successfully");
+              window.location.href = "records_page.html";
+            } else {
+              alert(data.message || "Save failed");
+            }
+          } catch (err) {
+            alert("Could not connect to server");
+            console.error(err);
+          }
+        });
+      }
     })();
   </script>
-
-  <!-- Language Change Script --> 
-  <script src="js/i18n.js"></script>
 </body>
 
 </html>

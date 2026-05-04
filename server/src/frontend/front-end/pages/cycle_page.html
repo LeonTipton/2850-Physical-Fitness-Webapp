@@ -229,9 +229,53 @@
       durationInput.addEventListener('input', updatePace);
 
       if (cycleForm) {
-        cycleForm.addEventListener('submit', function (e) {
+        cycleForm.addEventListener('submit', async function (e) {
           e.preventDefault();
-          alert(t('cycle_ride_saved'));
+
+          const uid = localStorage.getItem("uid");
+
+          if (!uid) {
+            alert("Please login first");
+            window.location.href = "login_page.html";
+            return;
+          }
+
+          const distance = document.getElementById("cycle-distance").value;
+          const duration = document.getElementById("cycle-duration").value;
+          const notes = document.getElementById("cycle-notes").value;
+
+          if (!distance || !duration) {
+            alert("Please enter distance and duration");
+            return;
+          }
+
+          const body = new URLSearchParams();
+          body.append("uid", uid);
+          body.append("activityType", "cycle");
+          body.append("activityName", "Cycle");
+          body.append("durationMinutes", duration);
+          body.append("distanceKm", distance);
+          body.append("notes", notes);
+
+          try {
+            const res = await fetch("/api/records", {
+              method: "POST",
+              body: body
+            });
+
+            const data = await res.json();
+
+            if (data.ok) {
+              alert("Cycle saved successfully");
+              window.location.href = "records_page.html";
+            } else {
+              alert(data.message || "Save failed");
+            }
+
+          } catch (err) {
+            alert("Could not connect to server");
+            console.error(err);
+          }
         });
       }
     })();
