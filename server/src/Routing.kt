@@ -18,23 +18,35 @@ import io.ktor.server.response.respond
 import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.selectAll
 
+private fun frontendRoot(): File {
+    val possibleRoots = listOf(
+        File("server/src/frontend/front-end"),
+        File("src/frontend/front-end")
+    )
+
+    return possibleRoots.firstOrNull { it.exists() }
+        ?: File("server/src/frontend/front-end")
+}
+
 fun Application.configureRouting() {
+    val frontendDir = frontendRoot()
+
     routing {
-        staticFiles("/pages", File("server/src/frontend/front-end/pages"))
-        staticFiles("/logo", File("server/src/frontend/front-end/logo"))
-        staticFiles("/front-end", File("server/src/frontend/front-end"))
+        staticFiles("/", frontendDir)
+        staticFiles("/front-end", frontendDir)
 
         get("/") {
-            call.respondFile(File("server/src/frontend/front-end/index.html"))
+            call.respondFile(File(frontendDir, "index.html"))
         }
 
         get("/login") {
-            call.respondFile(File("server/src/frontend/front-end/pages/login_page.html"))
+            call.respondFile(File(frontendDir, "pages/login_page.html"))
         }
 
         get("/register") {
-            call.respondFile(File("server/src/frontend/front-end/pages/register_page.html"))
+            call.respondFile(File(frontendDir, "pages/register_page.html"))
         }
+
 
         post("/api/login") {
             val params = call.receiveParameters()
