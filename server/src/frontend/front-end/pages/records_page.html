@@ -209,6 +209,45 @@
     { id:24, type:'strength', labelKey:'recordsp_strength', label:'Strength', emoji:'💪', date:'Jan 8, 2026',  daysAgo:66, minutes:55,  distanceKm:0,    badge:'Powerlifting',
       duration:'55 min',    details:[{icon:'exercise',text:'Deadlift · 5 × 3 · 100 kg'},{icon:'exercise',text:'Bench · 5 × 3 · 60 kg'},{icon:'exercise',text:'Squat · 5 × 3 · 80 kg'}] }
   ];
+  async function loadBackendRecords() {
+  const uid = localStorage.getItem("uid");
+
+  if (!uid) {
+    window.location.href = "login_page.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/records?uid=" + uid);
+    const records = await res.json();
+
+    records.forEach(function (r) {
+      ALL_ACTIVITIES.unshift({
+        id: 'db-' + r.id,
+        type: r.activityType,
+        labelKey: 'recordsp_' + r.activityType,
+        label: r.activityType,
+        emoji: r.activityType === 'swim' ? '🏊' :
+              r.activityType === 'gym' ? '🏋️' :
+              r.activityType === 'cycle' ? '🚴' :
+              r.activityType === 'hike' ? '🥾' :
+              r.activityType === 'strength' ? '💪' : '🏃',
+        date: 'Today',
+        daysAgo: 0,
+        minutes: r.durationMinutes || 0,
+        distanceKm: r.distanceKm || 0,
+        badge: r.activityName || r.activityType,
+        duration: (r.durationMinutes || 0) + ' min',
+        details: [
+          { icon: 'distance', text: (r.distanceKm || 0) + ' km' },
+          { icon: 'exercise', text: r.notes || 'Saved record' }
+        ]
+      });
+    });
+  } catch (err) {
+    console.error("Failed to load backend records", err);
+  }
+}
 
   // ─── Merge real saved records from localStorage ──────────────────────────────
   // Saved records from activity pages are loaded and prepended (newest first).
@@ -533,9 +572,10 @@
   });
 
   // ─── Init ────────────────────────────────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', function() {
-    applyRecordPageTranslations();
-  });
+document.addEventListener('DOMContentLoaded', async function() {
+  await loadBackendRecords();
+  applyRecordPageTranslations();
+});
 
   // Optional: if language is changed on this page directly, re-render dynamic text too
   if (typeof window.changeLanguage === 'function') {

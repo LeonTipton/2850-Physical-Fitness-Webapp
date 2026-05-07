@@ -333,46 +333,80 @@
         refreshSidebar();
       });
 
-      stepForm.addEventListener('submit', function (e) {
+      stepForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        var exerciseName = document.getElementById('exercise-name').value.trim();
-        var sets = document.getElementById('exercise-sets').value;
-        var reps = document.getElementById('exercise-reps').value;
-        var weight = document.getElementById('exercise-weight').value;
-        var duration = document.getElementById('exercise-duration').value;
-        var notes = document.getElementById('exercise-notes').value.trim();
+        const uid = localStorage.getItem("uid");
 
-        var bodyLabel = t(bodyPartLabels[selectedBodyPart]) || selectedBodyPart;
-        var badge = exerciseName ? bodyLabel + ' - ' + exerciseName : bodyLabel;
+        if (!uid) {
+          alert("Please login first");
+          window.location.href = "login_page.html";
+          return;
+        }
 
-        var details = [];
-        if (sets) details.push(sets + ' sets');
-        if (reps) details.push(reps + ' reps');
-        if (weight) details.push(weight + ' kg');
-        if (duration) details.push(formatDuration(duration));
+        const inputName = document.getElementById("exercise-name").value.trim();
+        const bodyLabel = selectedBodyPart ? t(bodyPartLabels[selectedBodyPart]) : "Gym";
+        const equipmentLabel = selectedEquipment ? t(selectedEquipment) : "";
+        const exerciseName = inputName || (equipmentLabel ? bodyLabel + " - " + equipmentLabel : bodyLabel);
+        const sets = document.getElementById("exercise-sets").value;
+        const reps = document.getElementById("exercise-reps").value;
+        const weight = document.getElementById("exercise-weight").value;
+        const duration = document.getElementById("exercise-duration").value;
+        const notes = document.getElementById("exercise-notes").value.trim();
 
-        var record = {
-          type: 'gym',
-          emoji: '🏋️',
-          label: 'Gym Workout',
-          badge: badge,
-          duration: formatDuration(duration),
-          details: details,
-          bodyPart: selectedBodyPart,
-          equipment: selectedEquipment,
-          exerciseName: exerciseName,
-          sets: sets,
-          reps: reps,
-          weight: weight,
-          durationRaw: duration,
-          notes: notes
-        };
+        if (!duration) {
+          alert("Please enter duration");
+          return;
+        }
 
-        ActivityStore.save(record);
-        refreshSidebar();
-        showNotification();
-        resetForm();
+        const fullNotes =
+          "Body Part: " + (bodyLabel || "-") +
+          ", Equipment: " + (equipmentLabel || "-") +
+          ", Sets: " + (sets || "-") +
+          ", Reps: " + (reps || "-") +
+          ", Weight: " + (weight || "-") + "kg" +
+          (notes ? ", Notes: " + notes : "");
+
+        const body = new URLSearchParams();
+        body.append("uid", uid);
+        body.append("activityType", "gym");
+        body.append("activityName", exerciseName);
+        body.append("durationMinutes", duration);
+        body.append("distanceKm", "0");
+        body.append("notes", fullNotes);
+
+        try {
+          const now = new Date();
+
+          ActivityStore.add({
+            id: String(Date.now()),
+            type: "gym",
+            label: "Gym",
+            emoji: "🏋️",
+            date: now.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            }),
+            dateISO: now.toISOString().slice(0, 10),
+            duration: duration + " min",
+            durationSeconds: Number(duration) * 60,
+            badge: exerciseName,
+            distanceKm: 0,
+            details: [
+              { icon: "target", text: bodyLabel },
+              { icon: "exercise", text: "Equipment: " + (equipmentLabel || "-") },
+              { icon: "exercise", text: "Sets: " + (sets || "-") + ", Reps: " + (reps || "-") + ", Weight: " + (weight || "-") + "kg" }
+            ],
+            notes: notes
+          });
+
+          alert("Gym workout saved successfully");
+          window.location.href = "records_page.html";
+        } catch (err) {
+          alert("Save failed");
+          console.error(err);
+        }
       });
 
       document.addEventListener('DOMContentLoaded', function () {
