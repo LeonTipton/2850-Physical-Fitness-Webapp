@@ -120,10 +120,10 @@
 
         <!-- Action Buttons -->
         <div class="swim-actions">
-          <button id="btn-start" class="btn-primary" data-i18n="start_swim">Start Swim</button>
-          <button id="btn-pause" class="btn-secondary" data-i18n="pause">Pause</button>
-          <button id="btn-finish" class="btn-secondary" data-i18n="finish">Finish</button>
-          <button id="btn-save" class="btn-outline" data-i18n="save_swim">Save Swim</button>
+          <button id="btn-start" class="btn-primary" type="button" data-i18n="start_swim">Start Swim</button>
+          <button id="btn-pause" class="btn-secondary" type="button" disabled data-i18n="pause">Pause</button>
+          <button id="btn-finish" class="btn-secondary" type="button" disabled data-i18n="finish">Finish</button>
+          <button id="btn-save" class="btn-outline" type="button" disabled data-i18n="save_swim">Save Swim</button>
         </div>
       </section>
 
@@ -189,52 +189,54 @@
       var notification = document.getElementById('save-notification');
 
       var state = 'idle';
-      var startTime = 0;
-      var elapsed = 0;
-      var tickInterval = null;
+      var timerInterval = null;
+      var elapsedSeconds = 0;
+      var startTimestamp = null;
+      var startDate = null;
 
       function pad(n) {
         return n < 10 ? '0' + n : '' + n;
       }
 
-      function formatClock(ms) {
-        var totalSec = Math.floor(ms / 1000);
-        var m = Math.floor(totalSec / 60);
-        var s = totalSec % 60;
-        return pad(m) + ':' + pad(s);
+      function formatClock(s) {
+        var h = Math.floor(s / 3600);
+        var m = Math.floor((s % 3600) / 60);
+        var sec = s % 60;
+        return h > 0 ? pad(h) + ':' + pad(m) + ':' + pad(sec) : pad(m) + ':' + pad(sec);
       }
 
-      function formatDuration(ms) {
-        var totalSec = Math.floor(ms / 1000);
-        var h = Math.floor(totalSec / 3600);
-        var m = Math.floor((totalSec % 3600) / 60);
-        var s = totalSec % 60;
-        if (h > 0) return h + 'h ' + pad(m) + 'm ' + pad(s) + 's';
-        if (m > 0) return m + 'm ' + pad(s) + 's';
-        return s + 's';
+      function formatDuration(s) {
+        var h = Math.floor(s / 3600);
+        var m = Math.floor((s % 3600) / 60);
+        if (h > 0) return h + ' h ' + m + ' min';
+        return (m || 1) + ' min';
+      }
+
+      function updateTimerDisplay() {
+        timerClock.textContent = formatClock(elapsedSeconds);
+        var mins = Math.round(elapsedSeconds / 60);
+        if (mins >= 1) durationInput.value = mins;
+        updatePace();
+      }
+
+      function tickTimer() {
+        elapsedSeconds = Math.floor((Date.now() - startTimestamp) / 1000);
+        updateTimerDisplay();
       }
 
       function startTicking() {
-        stopTicking();
-        tickInterval = setInterval(function () {
-          var now = Date.now();
-          var total = elapsed + (now - startTime);
-          timerClock.textContent = formatClock(total);
-          durationInput.value = (total / 60000).toFixed(2);
-          updatePace();
-        }, 250);
+        startTimestamp = Date.now() - elapsedSeconds * 1000;
+        timerInterval = setInterval(tickTimer, 1000);
       }
 
       function stopTicking() {
-        if (tickInterval) {
-          clearInterval(tickInterval);
-          tickInterval = null;
-        }
+        clearInterval(timerInterval);
+        timerInterval = null;
       }
 
       function updatePace() {
         var distance = parseFloat(distanceInput.value);
-        var duration = parseFloat(durationInput.value);
+        var duration = elapsedSeconds > 0 ? elapsedSeconds / 60 : parseFloat(durationInput.value);
         if (!distance || !duration || distance <= 0 || duration <= 0) {
           paceInput.value = '';
           return;
@@ -248,44 +250,61 @@
 
       function setState(s) {
         state = s;
-        btnStart.disabled = true;
-        btnPause.disabled = true;
-        btnFinish.disabled = true;
-        btnSave.disabled = true;
+        timerDisplay.classList.toggle('hidden', state === 'idle');
+        timerDisplay.classList.toggle('timer-running', state === 'running');
+        timerDisplay.classList.toggle('timer-paused', state === 'paused');
+        timerDisplay.classList.toggle('timer-finished', state === 'finished');
 
         if (s === 'idle') {
+          btnStart.textContent = 'Start Swim';
           btnStart.disabled = false;
-          timerDisplay.classList.add('hidden');
+          btnPause.disabled = true;
+          btnFinish.disabled = true;
+          btnSave.disabled = true;
+          timerStatus.textContent = '';
+          elapsedSeconds = 0;
+          durationInput.value = '';
+          timerClock.textContent = '00:00';
         } else if (s === 'running') {
+          btnStart.textContent = 'Swimming...';
+          btnStart.disabled = true;
           btnPause.disabled = false;
           btnFinish.disabled = false;
-          timerDisplay.classList.remove('hidden');
+          btnSave.disabled = true;
           timerStatus.textContent = 'Running';
         } else if (s === 'paused') {
+          btnStart.textContent = 'Resume';
           btnStart.disabled = false;
+          btnPause.disabled = true;
           btnFinish.disabled = false;
-          timerDisplay.classList.remove('hidden');
+          btnSave.disabled = true;
           timerStatus.textContent = 'Paused';
         } else if (s === 'finished') {
+          btnStart.textContent = 'Start Swim';
+          btnStart.disabled = true;
+          btnPause.disabled = true;
+          btnFinish.disabled = true;
           btnSave.disabled = false;
-          timerDisplay.classList.remove('hidden');
+          btnSave.textContent = 'Save Swim';
           timerStatus.textContent = 'Finished';
         }
       }
 
       btnStart.addEventListener('click', function (e) {
         e.preventDefault();
-        if (state === 'idle' || state === 'paused') {
-          startTime = Date.now();
-          setState('running');
+        if (state === 'idle') {
+          startDate = new Date();
           startTicking();
+          setState('running');
+        } else if (state === 'paused') {
+          startTicking();
+          setState('running');
         }
       });
 
       btnPause.addEventListener('click', function (e) {
         e.preventDefault();
         if (state === 'running') {
-          elapsed += Date.now() - startTime;
           stopTicking();
           setState('paused');
         }
@@ -293,20 +312,16 @@
 
       btnFinish.addEventListener('click', function (e) {
         e.preventDefault();
-        if (state === 'running') {
-          elapsed += Date.now() - startTime;
-          stopTicking();
-        }
         if (state === 'running' || state === 'paused') {
+          stopTicking();
           setState('finished');
+          updateTimerDisplay();
         }
       });
 
       btnSave.addEventListener('click', function (e) {
         e.preventDefault();
-        if (state === 'finished') {
-          saveSwim();
-        }
+        if (state === 'finished') saveSwim();
       });
 
       distanceInput.addEventListener('input', updatePace);
@@ -314,8 +329,7 @@
       function saveSwim() {
         var distanceM = parseFloat(distanceInput.value) || 0;
         var distanceKm = distanceM / 1000;
-        var durationMs = elapsed;
-        var elapsedSec = Math.round(durationMs / 1000);
+        var elapsedSec = elapsedSeconds;
         var lapsInput = document.querySelectorAll('.form-group input[type="number"]')[3];
         var laps = lapsInput ? (parseInt(lapsInput.value) || 0) : 0;
         var strokeSelect = document.querySelectorAll('select')[1];
@@ -326,7 +340,7 @@
         var notes = notesEl ? notesEl.value.trim() : '';
         var pace = paceInput.value || '';
 
-        var dateObj = new Date();
+        var dateObj = startDate || new Date();
         var dateFormatted = dateObj.toLocaleDateString('en-US', {
           month: 'short', day: 'numeric', year: 'numeric'
         });
@@ -345,7 +359,7 @@
           emoji:           '🏊',
           date:            dateFormatted,
           dateISO:         dateISO,
-          duration:        formatDuration(durationMs),
+          duration:        formatDuration(elapsedSec),
           durationSeconds: elapsedSec,
           badge:           location || 'Pool Session',
           details:         details,
@@ -373,8 +387,10 @@
       }
 
       function resetForm() {
-        elapsed = 0;
-        startTime = 0;
+        stopTicking();
+        elapsedSeconds = 0;
+        startTimestamp = null;
+        startDate = null;
         distanceInput.value = '';
         durationInput.value = '';
         paceInput.value = '';
@@ -414,7 +430,7 @@
         for (var i = 0; i < swims.length; i++) {
           var d = swims[i].distanceM || 0;
           totalDist += d;
-          totalDurMin += swims[i].durationMin || 0;
+          totalDurMin += (swims[i].durationSeconds || 0) / 60;
           if (d > longest) longest = d;
         }
 

@@ -333,7 +333,7 @@
         refreshSidebar();
       });
 
-      stepForm.addEventListener('submit', async function (e) {
+      stepForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         const uid = localStorage.getItem("uid");
@@ -358,22 +358,6 @@
           alert("Please enter duration");
           return;
         }
-
-        const fullNotes =
-          "Body Part: " + (bodyLabel || "-") +
-          ", Equipment: " + (equipmentLabel || "-") +
-          ", Sets: " + (sets || "-") +
-          ", Reps: " + (reps || "-") +
-          ", Weight: " + (weight || "-") + "kg" +
-          (notes ? ", Notes: " + notes : "");
-
-        const body = new URLSearchParams();
-        body.append("uid", uid);
-        body.append("activityType", "gym");
-        body.append("activityName", exerciseName);
-        body.append("durationMinutes", duration);
-        body.append("distanceKm", "0");
-        body.append("notes", fullNotes);
 
         try {
           const now = new Date();
@@ -401,8 +385,9 @@
             notes: notes
           });
 
-          alert("Gym workout saved successfully");
-          window.location.href = "records_page.html";
+          refreshSidebar();
+          showNotification();
+          resetForm();
         } catch (err) {
           alert("Save failed");
           console.error(err);
