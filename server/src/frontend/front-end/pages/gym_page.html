@@ -181,7 +181,7 @@
       var selectedSummary = document.getElementById('selected-summary');
       var backToBody = document.getElementById('back-to-body');
       var backToEquipment = document.getElementById('back-to-equipment');
-      var notifEl = document.getElementById('save-notification');
+      var saveNotif = document.getElementById('save-notification');
 
       var selectedBodyPart = null;
       var selectedEquipment = null;
@@ -254,9 +254,19 @@
       }
 
       function showNotification() {
-        notifEl.classList.add('show');
+        const saveNotif = document.getElementById('save-notification');
+
+        if (!saveNotif) {
+          alert("Gym workout saved successfully");
+          resetForm();
+          return;
+        }
+
+        saveNotif.classList.add('save-notif--visible');
+
         setTimeout(function () {
-          notifEl.classList.remove('show');
+          saveNotif.classList.remove('save-notif--visible');
+          resetForm();
         }, 3000);
       }
 
@@ -389,7 +399,7 @@
           showNotification();
           resetForm();
         } catch (err) {
-          alert("Save failed");
+          alert("Save failed: " + err.message);
           console.error(err);
         }
       });
