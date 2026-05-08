@@ -1,0 +1,7 @@
+JetBrains Amper version 0.9.2 (80094bb, 2025-12-11)
+running on Linux 6.8.0-1044-azure jvm arch amd64
+
+00:05.578 WARN  :database:testJvm         JvmTestTask               No test classes, skipping test execution for module 'database'
+00:05.623 WARN  :query:testJvm            JvmTestTask               No test classes, skipping test execution for module 'query'
+00:05.615 WARN  :create:testJvm           JvmTestTask               No test classes, skipping test execution for module 'create'
+00:05.816 INFO  :server:testJvm           JvmTestTask               Testing module 'server' for platform 'jvm'...

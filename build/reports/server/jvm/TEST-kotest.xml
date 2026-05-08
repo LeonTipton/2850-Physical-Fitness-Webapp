@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Kotest" tests="12" skipped="0" failures="0" errors="0" time="6.188" hostname="codespaces-ebaade" timestamp="2026-05-04T11:52:06">
+<testsuite name="Kotest" tests="12" skipped="0" failures="0" errors="0" time="7.333" hostname="codespaces-ff3c78" timestamp="2026-05-08T10:42:55">
 <properties>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
@@ -30,7 +30,7 @@
 <property name="jdk.debug" value="release"/>
 <property name="jna.loaded" value="true"/>
 <property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib:/lib32"/>
-<property name="jnidispatch.path" value="/home/codespace/.cache/JNA/temp/jna18044541977498832923.tmp"/>
+<property name="jnidispatch.path" value="/home/codespace/.cache/JNA/temp/jna14040723953288436810.tmp"/>
 <property name="junit.docs.version" value="6.0.1"/>
 <property name="junit.vintage.discovery.issue.reporting.enabled" value="false"/>
 <property name="line.separator" value="&#10;"/>
@@ -58,73 +58,73 @@
 <property name="user.name" value="codespace"/>
 <property name="user.timezone" value="Etc/UTC"/>
 </properties>
-<testcase name="home page returns OK and contains HTML" classname="com.physicalfitness.ApplicationRouteTest" time="1.525">
+<testcase name="home page returns OK and contains HTML" classname="com.physicalfitness.ApplicationRouteTest" time="1.723">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:home page returns OK and contains HTML]
 display-name: home page returns OK and contains HTML
 ]]></system-out>
 </testcase>
-<testcase name="register login get user change password and delete account journey works" classname="com.physicalfitness.ApplicationRouteTest" time="2.221">
+<testcase name="register login get user change password and delete account journey works" classname="com.physicalfitness.ApplicationRouteTest" time="2.606">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:register login get user change password and delete account journey works]
 display-name: register login get user change password and delete account journey works
 ]]></system-out>
 </testcase>
-<testcase name="login rejects missing fields" classname="com.physicalfitness.ApplicationRouteTest" time="0.214">
+<testcase name="login rejects missing fields" classname="com.physicalfitness.ApplicationRouteTest" time="0.228">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:login rejects missing fields]
 display-name: login rejects missing fields
 ]]></system-out>
 </testcase>
-<testcase name="register page returns OK" classname="com.physicalfitness.ApplicationRouteTest" time="0.15">
+<testcase name="register page returns OK" classname="com.physicalfitness.ApplicationRouteTest" time="0.124">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:register page returns OK]
 display-name: register page returns OK
 ]]></system-out>
 </testcase>
-<testcase name="login page returns OK" classname="com.physicalfitness.ApplicationRouteTest" time="0.134">
+<testcase name="login page returns OK" classname="com.physicalfitness.ApplicationRouteTest" time="0.161">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:login page returns OK]
 display-name: login page returns OK
 ]]></system-out>
 </testcase>
-<testcase name="delete user rejects missing uid" classname="com.physicalfitness.ApplicationRouteTest" time="0.113">
+<testcase name="delete user rejects missing uid" classname="com.physicalfitness.ApplicationRouteTest" time="0.226">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:delete user rejects missing uid]
 display-name: delete user rejects missing uid
 ]]></system-out>
 </testcase>
-<testcase name="get user rejects missing uid" classname="com.physicalfitness.ApplicationRouteTest" time="0.096">
+<testcase name="get user rejects missing uid" classname="com.physicalfitness.ApplicationRouteTest" time="0.063">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:get user rejects missing uid]
 display-name: get user rejects missing uid
 ]]></system-out>
 </testcase>
-<testcase name="login rejects an unknown account" classname="com.physicalfitness.ApplicationRouteTest" time="0.252">
+<testcase name="login rejects an unknown account" classname="com.physicalfitness.ApplicationRouteTest" time="0.571">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:login rejects an unknown account]
 display-name: login rejects an unknown account
 ]]></system-out>
 </testcase>
-<testcase name="register rejects missing fields" classname="com.physicalfitness.ApplicationRouteTest" time="0.186">
+<testcase name="register rejects missing fields" classname="com.physicalfitness.ApplicationRouteTest" time="0.184">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.ApplicationRouteTest]/[test:register rejects missing fields]
 display-name: register rejects missing fields
 ]]></system-out>
 </testcase>
-<testcase name="verifyPassword rejects the wrong password" classname="com.physicalfitness.PasswordHashTest" time="0.347">
+<testcase name="verifyPassword rejects the wrong password" classname="com.physicalfitness.PasswordHashTest" time="0.371">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.PasswordHashTest]/[test:verifyPassword rejects the wrong password]
 display-name: verifyPassword rejects the wrong password
 ]]></system-out>
 </testcase>
-<testcase name="verifyPassword accepts the correct password" classname="com.physicalfitness.PasswordHashTest" time="0.353">
+<testcase name="verifyPassword accepts the correct password" classname="com.physicalfitness.PasswordHashTest" time="0.395">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.PasswordHashTest]/[test:verifyPassword accepts the correct password]
 display-name: verifyPassword accepts the correct password
 ]]></system-out>
 </testcase>
-<testcase name="hashPassword does not store the raw password" classname="com.physicalfitness.PasswordHashTest" time="0.221">
+<testcase name="hashPassword does not store the raw password" classname="com.physicalfitness.PasswordHashTest" time="0.162">
 <system-out><![CDATA[
 unique-id: [engine:kotest]/[spec:com.physicalfitness.PasswordHashTest]/[test:hashPassword does not store the raw password]
 display-name: hashPassword does not store the raw password
