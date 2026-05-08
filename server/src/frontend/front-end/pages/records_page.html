@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Records - Fitness App</title>
+  <link rel="stylesheet" href="css/records_page.css">
+  <link rel="icon" type="image/png" size="32x32" href="../logo/favicon-32.png">
+</head>
+
+<body>
+  <!-- Nav -->
+  <nav class="top-nav">
+    <a href="home_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span data-i18n="back">Back</span>
+    </a>
+
+    <a href="home_page.html" class="nav-logo">
+      <img src="../logo/white.png" alt="Fitness App Logo">
+    </a>
+
+    <div class="nav-right">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="records-main">
+
+    <!-- Page Header + Time Filter -->
+    <header class="records-header card-animate">
+      <div class="records-header-top">
+        <div>
+          <h1 class="records-title" data-i18n="recp_title">Workout Records</h1>
+          <p class="records-subtitle" data-i18n="recp_subtitle">Your personal training history</p>
+        </div>
+      </div>
+      <!-- Time filter: segmented control -->
+      <div class="time-filter" id="time-filter" role="tablist" aria-label="Time period">
+        <button class="time-btn active" data-period="weekly" role="tab" data-i18n="recp_wkly">Weekly</button>
+        <button class="time-btn" data-period="monthly" role="tab" data-i18n="recp_mthly">Monthly</button>
+        <button class="time-btn" data-period="alltime" role="tab" data-i18n="recp_a_t">All Time</button>
+        <span class="time-slider" id="time-slider"></span>
+      </div>
+    </header>
+
+    <!-- Summary Cards -->
+    <section class="summary-row card-animate card-animate-delay-1">
+      <div class="summary-card summary-card--blue">
+        <div class="summary-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="summary-body">
+          <span class="summary-value" id="stat-total-activities">—</span>
+          <span class="summary-label" data-i18n="recp_total_acti">Total Activities</span>
+        </div>
+      </div>
+      <div class="summary-card summary-card--green">
+        <div class="summary-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="summary-body">
+          <span class="summary-value" id="stat-total-distance">—</span>
+          <span class="summary-label" data-i18n="recp_total_dist">Total Distance</span>
+        </div>
+      </div>
+      <div class="summary-card summary-card--orange">
+        <div class="summary-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="summary-body">
+          <span class="summary-value" id="stat-total-duration">—</span>
+          <span class="summary-label" data-i18n="recp_total_dura">Total Duration</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donut Chart -->
+    <section class="donut-section card-animate card-animate-delay-2">
+      <div class="donut-card">
+        <div class="donut-card-header">
+          <h2 class="donut-card-title" id="donut-title" data-i18n="recp_acti_brkd">Activity Breakdown</h2>
+          <span class="donut-card-sub" id="donut-sub">—</span>
+        </div>
+        <div class="donut-body">
+          <div class="donut-chart-wrap">
+            <svg id="donut-svg" class="donut-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+              <circle class="donut-track" cx="130" cy="130" r="100"/>
+              <g id="donut-segments"></g>
+              <text class="donut-center-label" id="donut-center-label" x="130" y="118" text-anchor="middle">This Week</text>
+              <text class="donut-center-value" id="donut-center-value" x="130" y="145" text-anchor="middle">—</text>
+              <text class="donut-center-sub" id="donut-center-sub" x="130" y="163" text-anchor="middle">—</text>
+            </svg>
+          </div>
+          <ul class="donut-legend" id="donut-legend"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activity Type Filter -->
+    <section class="filter-section card-animate card-animate-delay-3">
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-tab active" data-filter="all" data-i18n="recp_filter_all">All</button>
+        <button class="filter-tab" data-filter="hike"><span class="tab-emoji">🥾</span> <span data-i18n="recp_hike_btn">Hike</span></button>
+        <button class="filter-tab" data-filter="run"><span class="tab-emoji">🏃</span> <span data-i18n="recp_run_btn">Run</span></button>
+        <button class="filter-tab" data-filter="swim"><span class="tab-emoji">🏊</span> <span data-i18n="recp_swim_btn">Swim</span></button>
+        <button class="filter-tab" data-filter="cycle"><span class="tab-emoji">🚴</span> <span data-i18n="recp_cycle_btn">Cycle</span></button>
+        <button class="filter-tab" data-filter="gym"><span class="tab-emoji">🏋️</span> <span data-i18n="recp_gym_btn">Gym</span></button>
+        <button class="filter-tab" data-filter="strength"><span class="tab-emoji">💪</span> <span data-i18n="recp_strength_btn">Strength</span></button>
+      </div>
+    </section>
+
+    <!-- Activity List -->
+    <section class="records-section card-animate card-animate-delay-4">
+      <div class="records-card">
+        <div class="records-card-header">
+          <h2 class="records-card-title" data-i18n="recp_recent_acti">Recent Activities</h2>
+          <span class="records-count" id="records-count">—</span>
+        </div>
+        <ul class="activity-list" id="activity-list"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Language Change Script -->
+  <script src="js/i18n.js"></script>
+  <script src="js/activity-store.js"></script>
+
+  <script>
+  // ─── Master activity dataset ────────────────────────────────────────────────
+  // daysAgo: days before Mar 15 2026 (today in mock)
+  // distanceKm: 0 for gym / strength
+  // minutes: session duration
+  const ALL_ACTIVITIES = [
+    // ── This week (daysAgo 0-6) ───────────────────────────────────────────────
+    { id:1,  type:'run',      labelKey:'recordsp_run',      label:'Run',      emoji:'🏃', date:'Mar 13, 2026', daysAgo:2,  minutes:32,  distanceKm:5.0,  badge:'Morning Run',
+      duration:'32 min',    details:[{icon:'distance',text:'5.0 km'},{icon:'pace',text:'6:24 / km'},{icon:'cal',text:'320 kcal'}] },
+    { id:2,  type:'cycle',    labelKey:'recordsp_cycle',    label:'Cycle',    emoji:'🚴', date:'Mar 12, 2026', daysAgo:3,  minutes:58,  distanceKm:32,   badge:'Country Road Loop',
+      duration:'58 min',    details:[{icon:'distance',text:'32 km'},{icon:'speed',text:'33.1 km/h avg'},{icon:'cal',text:'480 kcal'}] },
+    { id:3,  type:'hike',     labelKey:'recordsp_hike',     label:'Hike',     emoji:'🥾', date:'Mar 11, 2026', daysAgo:4,  minutes:135, distanceKm:9.2,  badge:'Mountain Trail',
+      duration:'2 h 15 min',details:[{icon:'distance',text:'9.2 km'},{icon:'elevation',text:'↑ 410 m'},{icon:'cal',text:'620 kcal'}] },
+    { id:4,  type:'swim',     labelKey:'recordsp_swim',     label:'Swim',     emoji:'🏊', date:'Mar 10, 2026', daysAgo:5,  minutes:25,  distanceKm:1.0,  badge:'Pool Session',
+      duration:'25 min',    details:[{icon:'laps',text:'20 laps'},{icon:'distance',text:'1000 m'},{icon:'cal',text:'270 kcal'}] },
+    { id:5,  type:'gym',      labelKey:'recordsp_gym',      label:'Gym',      emoji:'🏋️', date:'Mar 9, 2026',  daysAgo:6,  minutes:50,  distanceKm:0,    badge:'Leg Day',
+      duration:'50 min',    details:[{icon:'target',text:'Legs'},{icon:'exercise',text:'Leg Press · 3 × 12'},{icon:'exercise',text:'Squat · 4 × 10'}] },
+
+    // ── This month extras (daysAgo 7-29) ─────────────────────────────────────
+    { id:6,  type:'strength', labelKey:'recordsp_strength', label:'Strength', emoji:'💪', date:'Mar 8, 2026',  daysAgo:7,  minutes:45,  distanceKm:0,    badge:'Upper Body',
+      duration:'45 min',    details:[{icon:'exercise',text:'Bench Press · 4 × 8 · 40 kg'},{icon:'exercise',text:'Pull-up · 3 × 8'},{icon:'exercise',text:'Overhead Press · 3 × 10 · 30 kg'}] },
+    { id:7,  type:'run',      labelKey:'recordsp_run',      label:'Run',      emoji:'🏃', date:'Mar 7, 2026',  daysAgo:8,  minutes:48,  distanceKm:7.5,  badge:'Evening Run',
+      duration:'48 min',    details:[{icon:'distance',text:'7.5 km'},{icon:'pace',text:'6:24 / km'},{icon:'cal',text:'455 kcal'}] },
+    { id:8,  type:'hike',     labelKey:'recordsp_hike',     label:'Hike',     emoji:'🥾', date:'Mar 6, 2026',  daysAgo:9,  minutes:100, distanceKm:7.0,  badge:'Forest Walk',
+      duration:'1 h 40 min',details:[{icon:'distance',text:'7.0 km'},{icon:'elevation',text:'↑ 280 m'},{icon:'cal',text:'510 kcal'}] },
+    { id:9,  type:'swim',     labelKey:'recordsp_swim',     label:'Swim',     emoji:'🏊', date:'Mar 5, 2026',  daysAgo:10, minutes:35,  distanceKm:1.5,  badge:'Endurance Set',
+      duration:'35 min',    details:[{icon:'laps',text:'30 laps'},{icon:'distance',text:'1500 m'},{icon:'cal',text:'380 kcal'}] },
+    { id:10, type:'cycle',    labelKey:'recordsp_cycle',    label:'Cycle',    emoji:'🚴', date:'Mar 4, 2026',  daysAgo:11, minutes:40,  distanceKm:18,   badge:'City Commute',
+      duration:'40 min',    details:[{icon:'distance',text:'18 km'},{icon:'speed',text:'27.0 km/h avg'},{icon:'cal',text:'310 kcal'}] },
+    { id:11, type:'gym',      labelKey:'recordsp_gym',      label:'Gym',      emoji:'🏋️', date:'Mar 3, 2026',  daysAgo:12, minutes:55,  distanceKm:0,    badge:'Pull Day',
+      duration:'55 min',    details:[{icon:'target',text:'Back & Biceps'},{icon:'exercise',text:'Lat Pulldown · 3 × 12'},{icon:'exercise',text:'Barbell Row · 4 × 8'}] },
+    { id:12, type:'strength', labelKey:'recordsp_strength', label:'Strength', emoji:'💪', date:'Mar 2, 2026',  daysAgo:13, minutes:40,  distanceKm:0,    badge:'Posterior Chain',
+      duration:'40 min',    details:[{icon:'exercise',text:'Deadlift · 4 × 5 · 80 kg'},{icon:'exercise',text:'Romanian DL · 3 × 10 · 50 kg'},{icon:'exercise',text:'Hip Thrust · 3 × 12 · 60 kg'}] },
+    { id:13, type:'run',      labelKey:'recordsp_run',      label:'Run',      emoji:'🏃', date:'Mar 1, 2026',  daysAgo:14, minutes:55,  distanceKm:8.2,  badge:'Sunday Long Run',
+      duration:'55 min',    details:[{icon:'distance',text:'8.2 km'},{icon:'pace',text:'6:42 / km'},{icon:'cal',text:'520 kcal'}] },
+    { id:14, type:'cycle',    labelKey:'recordsp_cycle',    label:'Cycle',    emoji:'🚴', date:'Feb 26, 2026', daysAgo:17, minutes:72,  distanceKm:40,   badge:'Hill Climb',
+      duration:'1 h 12 min',details:[{icon:'distance',text:'40 km'},{icon:'speed',text:'33.3 km/h avg'},{icon:'cal',text:'590 kcal'}] },
+    { id:15, type:'swim',     labelKey:'recordsp_swim',     label:'Swim',     emoji:'🏊', date:'Feb 23, 2026', daysAgo:20, minutes:30,  distanceKm:1.25, badge:'Technique Session',
+      duration:'30 min',    details:[{icon:'laps',text:'25 laps'},{icon:'distance',text:'1250 m'},{icon:'cal',text:'320 kcal'}] },
+    { id:16, type:'hike',     labelKey:'recordsp_hike',     label:'Hike',     emoji:'🥾', date:'Feb 20, 2026', daysAgo:23, minutes:150, distanceKm:12,   badge:'Coastal Trail',
+      duration:'2 h 30 min',details:[{icon:'distance',text:'12.0 km'},{icon:'elevation',text:'↑ 530 m'},{icon:'cal',text:'780 kcal'}] },
+    { id:17, type:'gym',      labelKey:'recordsp_gym',      label:'Gym',      emoji:'🏋️', date:'Feb 18, 2026', daysAgo:25, minutes:60,  distanceKm:0,    badge:'Push Day',
+      duration:'60 min',    details:[{icon:'target',text:'Chest & Triceps'},{icon:'exercise',text:'Bench Press · 4 × 10'},{icon:'exercise',text:'Cable Fly · 3 × 15'}] },
+    { id:18, type:'strength', labelKey:'recordsp_strength', label:'Strength', emoji:'💪', date:'Feb 16, 2026', daysAgo:27, minutes:50,  distanceKm:0,    badge:'Full Body',
+      duration:'50 min',    details:[{icon:'exercise',text:'Squat · 5 × 5 · 70 kg'},{icon:'exercise',text:'Deadlift · 3 × 5 · 80 kg'},{icon:'exercise',text:'Press · 4 × 8 · 30 kg'}] },
+
+    // ── All-time extras (daysAgo 30+) ─────────────────────────────────────────
+    { id:19, type:'run',      labelKey:'recordsp_run',      label:'Run',      emoji:'🏃', date:'Feb 10, 2026', daysAgo:33, minutes:60,  distanceKm:9.5,  badge:'Tempo Run',
+      duration:'1 h',       details:[{icon:'distance',text:'9.5 km'},{icon:'pace',text:'6:18 / km'},{icon:'cal',text:'570 kcal'}] },
+    { id:20, type:'cycle',    labelKey:'recordsp_cycle',    label:'Cycle',    emoji:'🚴', date:'Feb 5, 2026',  daysAgo:38, minutes:90,  distanceKm:50,   badge:'Lakeside Loop',
+      duration:'1 h 30 min',details:[{icon:'distance',text:'50 km'},{icon:'speed',text:'33.3 km/h avg'},{icon:'cal',text:'720 kcal'}] },
+    { id:21, type:'hike',     labelKey:'recordsp_hike',     label:'Hike',     emoji:'🥾', date:'Jan 28, 2026', daysAgo:46, minutes:120, distanceKm:10,   badge:'Ridge Walk',
+      duration:'2 h',       details:[{icon:'distance',text:'10.0 km'},{icon:'elevation',text:'↑ 460 m'},{icon:'cal',text:'640 kcal'}] },
+    { id:22, type:'swim',     labelKey:'recordsp_swim',     label:'Swim',     emoji:'🏊', date:'Jan 22, 2026', daysAgo:52, minutes:40,  distanceKm:1.75, badge:'Open Water',
+      duration:'40 min',    details:[{icon:'laps',text:'35 laps'},{icon:'distance',text:'1750 m'},{icon:'cal',text:'420 kcal'}] },
+    { id:23, type:'gym',      labelKey:'recordsp_gym',      label:'Gym',      emoji:'🏋️', date:'Jan 15, 2026', daysAgo:59, minutes:65,  distanceKm:0,    badge:'Leg Hypertrophy',
+      duration:'1 h 5 min', details:[{icon:'target',text:'Legs'},{icon:'exercise',text:'Hack Squat · 4 × 12'},{icon:'exercise',text:'Leg Curl · 3 × 15'}] },
+    { id:24, type:'strength', labelKey:'recordsp_strength', label:'Strength', emoji:'💪', date:'Jan 8, 2026',  daysAgo:66, minutes:55,  distanceKm:0,    badge:'Powerlifting',
+      duration:'55 min',    details:[{icon:'exercise',text:'Deadlift · 5 × 3 · 100 kg'},{icon:'exercise',text:'Bench · 5 × 3 · 60 kg'},{icon:'exercise',text:'Squat · 5 × 3 · 80 kg'}] }
+  ];
+  async function loadBackendRecords() {
+  const uid = localStorage.getItem("uid");
+
+  if (!uid) {
+    window.location.href = "login_page.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/records?uid=" + uid);
+    const records = await res.json();
+
+    records.forEach(function (r) {
+      ALL_ACTIVITIES.unshift({
+        id: 'db-' + r.id,
+        type: r.activityType,
+        labelKey: 'recordsp_' + r.activityType,
+        label: r.activityType,
+        emoji: r.activityType === 'swim' ? '🏊' :
+              r.activityType === 'gym' ? '🏋️' :
+              r.activityType === 'cycle' ? '🚴' :
+              r.activityType === 'hike' ? '🥾' :
+              r.activityType === 'strength' ? '💪' : '🏃',
+        date: 'Today',
+        daysAgo: 0,
+        minutes: r.durationMinutes || 0,
+        distanceKm: r.distanceKm || 0,
+        badge: r.activityName || r.activityType,
+        duration: (r.durationMinutes || 0) + ' min',
+        details: [
+          { icon: 'distance', text: (r.distanceKm || 0) + ' km' },
+          { icon: 'exercise', text: r.notes || 'Saved record' }
+        ]
+      });
+    });
+  } catch (err) {
+    console.error("Failed to load backend records", err);
+  }
+}
+
+  // ─── Merge real saved records from localStorage ──────────────────────────────
+  // Saved records from activity pages are loaded and prepended (newest first).
+  // daysAgo is calculated from the real current date so time-filter tabs work.
+  (function () {
+    var stored = ActivityStore.getAll();
+    if (!stored.length) return;
+    var now = new Date();
+    stored.slice().reverse().forEach(function (r) {
+      var recDate = new Date(r.dateISO);
+      var daysAgo = Math.max(0, Math.floor((now - recDate) / 86400000));
+      ALL_ACTIVITIES.unshift({
+        id:          'ls-' + r.id,
+        type:        r.type,
+        labelKey:    r.labelKey || ('recordsp_' + r.type),
+        label:       r.label,
+        emoji:       r.emoji,
+        date:        r.date,
+        dateISO:     r.dateISO,
+        daysAgo:     daysAgo,
+        minutes:     Math.max(1, Math.round((r.durationSeconds || 0) / 60)),
+        distanceKm:  r.distanceKm || 0,
+        badge:       r.badge,
+        duration:    r.duration,
+        details:     r.details || []
+      });
+    });
+  })();
+
+  // ─── Colours ────────────────────────────────────────────────────────────────
+  const TYPE_COLOR = {
+    run:'color--run', cycle:'color--cycle', hike:'color--hike',
+    swim:'color--swim', gym:'color--gym', strength:'color--strength'
+  };
+  const TYPE_HEX = {
+    hike:'#22c55e', run:'#3b82f6', cycle:'#f59e0b',
+    swim:'#06b6d4', gym:'#8b5cf6', strength:'#f43f5e'
+  };
+  const TYPE_ORDER = ['hike','run','cycle','swim','gym','strength'];
+
+  // ─── Icon SVGs ───────────────────────────────────────────────────────────────
+  const ICONS = {
+    distance: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    pace:     `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+    speed:    `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`,
+    cal:      `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M11 8h2v5h-2zm0 7h2v2h-2z"/></svg>`,
+    elevation:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    laps:     `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/><path d="M12 8v4l3 3"/></svg>`,
+    target:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+    exercise: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M6 12h12M3 8h3M18 8h3M3 16h3M18 16h3"/></svg>`
+  };
+
+  // ─── State ───────────────────────────────────────────────────────────────────
+  let currentPeriod = 'weekly';
+  let currentType   = 'all';
+
+  // ─── Helpers ─────────────────────────────────────────────────────────────────
+  function fmtMin(m) {
+    const h = Math.floor(m / 60), r = m % 60;
+    return h > 0 ? h + ' h ' + r + ' m' : r + ' min';
+  }
+
+  function getPeriods() {
+    return {
+      weekly:  { label: t('recordsp_period_weekly'),  sub: t('recordsp_period_weekly_sub'),  maxDays: 7 },
+      monthly: { label: t('recordsp_period_monthly'), sub: t('recordsp_period_monthly_sub'), maxDays: 30 },
+      alltime: { label: t('recordsp_period_alltime'), sub: t('recordsp_period_alltime_sub'), maxDays: Infinity }
+    };
+  }
+
+  function getActivityTypeLabel(activity) {
+    if (activity.labelKey) return t(activity.labelKey);
+    if (activity.type) return t('recordsp_' + activity.type);
+    return activity.label || '';
+  }
+
+  function activitiesForPeriod(period) {
+    const periods = getPeriods();
+    const max = periods[period].maxDays;
+    return ALL_ACTIVITIES.filter(a => a.daysAgo < max);
+  }
+
+  // ─── Update summary cards ────────────────────────────────────────────────────
+  function updateSummary(period) {
+    const data = activitiesForPeriod(period);
+    const totalMin  = data.reduce((s, a) => s + a.minutes, 0);
+    const totalDist = data.reduce((s, a) => s + a.distanceKm, 0);
+    document.getElementById('stat-total-activities').textContent = data.length;
+    document.getElementById('stat-total-distance').textContent   = totalDist.toFixed(1) + ' km';
+    document.getElementById('stat-total-duration').textContent   = fmtMin(totalMin);
+  }
+
+  // ─── Build / rebuild donut ───────────────────────────────────────────────────
+  const R = 100, CX = 130, CY = 130;
+  const CIRCUMFERENCE = 2 * Math.PI * R;
+  const GAP = 5;
+
+  function buildDonut(period) {
+    const periods = getPeriods();
+    const data = activitiesForPeriod(period);
+    const cfg  = periods[period];
+
+    // Aggregate minutes per type (keep TYPE_ORDER order)
+    const minByType = {};
+    TYPE_ORDER.forEach(type => { minByType[type] = 0; });
+    data.forEach(a => { minByType[a.type] += a.minutes; });
+
+    const segments = TYPE_ORDER
+      .filter(type => minByType[type] > 0)
+      .map(type => ({
+        type: type,
+        label: t('recordsp_' + type),
+        emoji: ALL_ACTIVITIES.find(a => a.type === type).emoji,
+        minutes: minByType[type],
+        color: TYPE_HEX[type]
+      }));
+
+    const totalMin = segments.reduce((s, d) => s + d.minutes, 0);
+    const usable   = CIRCUMFERENCE - GAP * segments.length;
+
+    // Update header
+    document.getElementById('donut-title').textContent        = t('recp_acti_brkd');
+    document.getElementById('donut-sub').textContent          = cfg.sub;
+    document.getElementById('donut-center-label').textContent = cfg.label;
+    document.getElementById('donut-center-value').textContent = fmtMin(totalMin);
+    document.getElementById('donut-center-sub').textContent   = segments.length + ' ' + t('recordsp_activities');
+
+    const defaultVal = fmtMin(totalMin);
+    const defaultSub = segments.length + ' ' + t('recordsp_activities');
+
+    // Clear old segments + legend
+    const segGroup = document.getElementById('donut-segments');
+    const legend   = document.getElementById('donut-legend');
+    segGroup.innerHTML = '';
+    legend.innerHTML   = '';
+
+    const centerVal = document.getElementById('donut-center-value');
+    const centerSub = document.getElementById('donut-center-sub');
+
+    let offset = -90;
+
+    segments.forEach(function(d, i) {
+      const pct    = d.minutes / totalMin;
+      const arcLen = pct * usable;
+      const rotateDeg = (offset / 360) * CIRCUMFERENCE;
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', CX);
+      circle.setAttribute('cy', CY);
+      circle.setAttribute('r', R);
+      circle.setAttribute('fill', 'none');
+      circle.setAttribute('stroke', d.color);
+      circle.setAttribute('stroke-width', '28');
+      circle.setAttribute('stroke-dasharray', arcLen + ' ' + (CIRCUMFERENCE - arcLen));
+      circle.setAttribute('stroke-dashoffset', -rotateDeg);
+      circle.setAttribute('stroke-linecap', 'butt');
+      circle.setAttribute('class', 'donut-seg');
+      circle.setAttribute('data-idx', i);
+      circle.style.transition = 'stroke-width 0.2s ease, opacity 0.2s ease';
+
+      circle.addEventListener('mouseenter', function() {
+        segGroup.querySelectorAll('.donut-seg').forEach(s => { s.style.opacity='0.3'; s.setAttribute('stroke-width','28'); });
+        circle.style.opacity='1';
+        circle.setAttribute('stroke-width','34');
+        centerVal.textContent = fmtMin(d.minutes);
+        centerSub.textContent = d.emoji + ' ' + d.label;
+      });
+
+      circle.addEventListener('mouseleave', function() {
+        segGroup.querySelectorAll('.donut-seg').forEach(s => { s.style.opacity='1'; s.setAttribute('stroke-width','28'); });
+        centerVal.textContent = defaultVal;
+        centerSub.textContent = defaultSub;
+      });
+
+      segGroup.appendChild(circle);
+
+      offset += pct * 360 + (GAP / CIRCUMFERENCE) * 360;
+
+      // Legend row
+      const li = document.createElement('li');
+      li.className = 'donut-legend-item';
+      li.innerHTML =
+        '<span class="legend-dot" style="background:' + d.color + '"></span>' +
+        '<span class="legend-emoji">' + d.emoji + '</span>' +
+        '<span class="legend-name">' + d.label + '</span>' +
+        '<span class="legend-dur">' + fmtMin(d.minutes) + '</span>' +
+        '<span class="legend-pct" style="color:' + d.color + '">' + Math.round(pct * 100) + '%</span>';
+
+      li.addEventListener('mouseenter', () => circle.dispatchEvent(new MouseEvent('mouseenter')));
+      li.addEventListener('mouseleave', () => circle.dispatchEvent(new MouseEvent('mouseleave')));
+      legend.appendChild(li);
+    });
+
+    // Draw-in animation
+    segGroup.querySelectorAll('.donut-seg').forEach(function(seg) {
+      const arcLen = parseFloat(seg.getAttribute('stroke-dasharray').split(' ')[0]);
+      const savedOffset = parseFloat(seg.getAttribute('stroke-dashoffset'));
+      seg.style.strokeDasharray  = '0 ' + CIRCUMFERENCE;
+      seg.style.strokeDashoffset = -savedOffset;
+      seg.style.transition = 'stroke-dasharray 0.6s ease, stroke-width 0.2s ease, opacity 0.2s ease';
+      const idx = parseInt(seg.getAttribute('data-idx'));
+      setTimeout(function() {
+        seg.style.strokeDasharray  = arcLen + ' ' + (CIRCUMFERENCE - arcLen);
+        seg.style.strokeDashoffset = savedOffset;
+      }, 60 + idx * 70);
+    });
+  }
+
+  // ─── Render activity list ────────────────────────────────────────────────────
+  function renderList(period, typeFilter) {
+    let data = activitiesForPeriod(period);
+    if (typeFilter !== 'all') data = data.filter(a => a.type === typeFilter);
+
+    document.getElementById('records-count').textContent =
+      data.length === 1
+        ? data.length + ' ' + t('recordsp_record')
+        : data.length + ' ' + t('recordsp_records');
+
+    document.getElementById('activity-list').innerHTML = data.length === 0
+      ? '<li class="no-records">' + t('recordsp_no_activities') + '</li>'
+      : data.map(a => `
+        <li class="activity-item" data-type="${a.type}" data-id="${a.id}">
+          <div class="activity-badge ${TYPE_COLOR[a.type]}">
+            <span class="activity-emoji-badge">${a.emoji}</span>
+          </div>
+          <div class="activity-body">
+            <div class="activity-top">
+              <div class="activity-meta">
+                <span class="activity-type-tag ${TYPE_COLOR[a.type]}">${getActivityTypeLabel(a)}</span>
+                <span class="activity-name">${a.badge}</span>
+              </div>
+              <div class="activity-date-dur">
+                <span class="activity-date">${a.date}</span>
+                <span class="activity-dur">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  ${a.duration}
+                </span>
+              </div>
+            </div>
+            <div class="activity-details">
+              ${a.details.map(d => `<span class="detail-chip">${ICONS[d.icon] || ''}${d.text}</span>`).join('')}
+            </div>
+          </div>
+          <button class="btn-delete-activity" onclick="deleteActivity('${a.id}')" title="Delete">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </button>
+        </li>`).join('');
+  }
+
+  // ─── Delete an activity ──────────────────────────────────────────────────────
+  function deleteActivity(id) {
+    if (!confirm('Are you sure you want to delete this record?')) return;
+
+    var strId = String(id);
+
+    if (strId.indexOf('ls-') === 0) {
+      var realId = strId.slice(3);
+      ActivityStore.remove(realId);
+    }
+
+    for (var i = ALL_ACTIVITIES.length - 1; i >= 0; i--) {
+      if (String(ALL_ACTIVITIES[i].id) === strId) {
+        ALL_ACTIVITIES.splice(i, 1);
+        break;
+      }
+    }
+
+    refresh(currentPeriod, currentType);
+  }
+
+  // ─── Master refresh ──────────────────────────────────────────────────────────
+  function refresh(period, typeFilter) {
+    updateSummary(period);
+    buildDonut(period);
+    renderList(period, typeFilter);
+  }
+
+  function applyRecordPageTranslations() {
+    if (typeof applyLanguage === 'function') {
+      applyLanguage(getCurrentLanguage());
+    }
+    refresh(currentPeriod, currentType);
+    requestAnimationFrame(function() {
+      const activeBtn = document.querySelector('.time-btn.active');
+      if (activeBtn) positionSlider(activeBtn);
+    });
+  }
+
+  // ─── Time filter tabs ────────────────────────────────────────────────────────
+  const timeFilter = document.getElementById('time-filter');
+  const slider     = document.getElementById('time-slider');
+
+  function positionSlider(btn) {
+    slider.style.width = btn.offsetWidth + 'px';
+    slider.style.left  = btn.offsetLeft + 'px';
+  }
+
+  timeFilter.addEventListener('click', function(e) {
+    const btn = e.target.closest('.time-btn');
+    if (!btn) return;
+    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    positionSlider(btn);
+    currentPeriod = btn.dataset.period;
+
+    // Reset type filter to All when changing period
+    currentType = 'all';
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    document.querySelector('.filter-tab[data-filter="all"]').classList.add('active');
+
+    refresh(currentPeriod, currentType);
+  });
+
+  // ─── Activity type filter tabs ───────────────────────────────────────────────
+  document.getElementById('filter-tabs').addEventListener('click', function(e) {
+    const btn = e.target.closest('.filter-tab');
+    if (!btn) return;
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.filter;
+    renderList(currentPeriod, currentType);
+  });
+
+  // ─── Init ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async function() {
+  await loadBackendRecords();
+  applyRecordPageTranslations();
+});
+
+  // Optional: if language is changed on this page directly, re-render dynamic text too
+  if (typeof window.changeLanguage === 'function') {
+    const originalChangeLanguage = window.changeLanguage;
+    window.changeLanguage = function(lang) {
+      originalChangeLanguage(lang);
+      applyRecordPageTranslations();
+    };
+  }
+
+  window.addEventListener('pageshow', function() {
+    applyRecordPageTranslations();
+  });
+  </script>
+</body>
+
+</html>

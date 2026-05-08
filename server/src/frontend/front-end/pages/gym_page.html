@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Activity - Fitness App</title>
+  <link rel="stylesheet" href="css/gym_page.css">
+  <link rel="icon" type="image/png" size="32x32" href="../logo/favicon-32.png">
+</head>
+
+<body>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <nav class="top-nav">
+    <a href="start_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span data-i18n="back">Back</span>
+    </a>
+    
+    <a href="home_page.html" class="nav-logo">
+      <img src="../logo/white.png" alt="Fitness App Logo">
+    </a>
+
+    <div class="nav-right">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="gym-main">
+    <header class="gym-header card-animate">
+      <h1 class="gym-title" data-i18n="gym_title">Gym Activity</h1>
+      <p class="gym-subtitle" data-i18n="gym_subtitle">Track your workouts</p>
+    </header>
+
+    <div class="gym-layout">
+      <section class="gym-form-card card-animate">
+        <div class="form-header">
+          <h2 class="form-title" data-i18n="gym_new_workout">New Workout</h2>
+          <div class="gym-goal">
+            <span class="goal-label" data-i18n="gym_this_week">This week</span>
+            <span class="goal-value" data-i18n="gym_goal_value">5 / 5 sessions</span>
+            <div class="goal-bar"><div class="goal-fill" style="width: 100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Step 1: Body Part -->
+        <div class="step-section" id="step-body-part">
+          <h3 class="step-title" data-i18n="gym_step_1">Step 1: Select Body Part</h3>
+          <div class="option-grid" id="body-part-options">
+            <button type="button" class="option-btn" data-body-part="upper" data-i18n="gym_upper_body">Upper Body</button>
+            <button type="button" class="option-btn" data-body-part="lower" data-i18n="gym_lower_body">Lower Body</button>
+            <button type="button" class="option-btn" data-body-part="core" data-i18n="gym_core">Core</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Equipment -->
+        <div class="step-section hidden" id="step-equipment">
+          <h3 class="step-title" data-i18n="gym_step_2">Step 2: Select Equipment</h3>
+          <div class="option-grid" id="equipment-options"></div>
+          <button type="button" class="back-btn" id="back-to-body" data-i18n="gym_back">← Back</button>
+        </div>
+
+        <!-- Step 3: Exercise Details -->
+        <form class="gym-form hidden" id="step-form">
+          <p class="selected-summary" id="selected-summary" aria-live="polite"></p>
+
+          <div class="form-row form-row-full">
+            <div class="form-group">
+              <label data-i18n="gym_exercise_name">Exercise Name (optional)</label>
+              <input
+                id="exercise-name"
+                type="text"
+                data-i18n-placeholder="gym_exercise_name_placeholder"
+                placeholder="e.g. Bench Press, Plank, Squat">
+            </div>
+          </div>
+
+          <div class="form-row form-row-4">
+            <div class="form-group">
+              <label data-i18n="gym_sets">Sets</label>
+              <input id="exercise-sets" type="number" min="0" placeholder="3">
+            </div>
+            <div class="form-group">
+              <label data-i18n="gym_reps">Reps</label>
+              <input id="exercise-reps" type="number" min="0" placeholder="10">
+            </div>
+            <div class="form-group">
+              <label data-i18n="gym_weight">Weight (kg)</label>
+              <input id="exercise-weight" type="number" step="0.5" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label data-i18n="gym_duration">Duration (min)</label>
+              <input id="exercise-duration" type="number" min="0" placeholder="0">
+            </div>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label data-i18n="gym_notes">Notes</label>
+            <textarea
+              id="exercise-notes"
+              rows="3"
+              data-i18n-placeholder="gym_notes_placeholder"
+              placeholder="Add notes about your workout..."></textarea>
+          </div>
+
+          <div class="gym-actions">
+            <button type="button" class="btn-back" id="back-to-equipment" data-i18n="gym_back_plain">Back</button>
+            <button type="submit" class="btn-primary" data-i18n="gym_save_workout">Save Workout</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="gym-sidebar">
+        <div class="summary-card card-animate card-animate-delay-1">
+          <h3 class="summary-title" data-i18n="gym_your_stats">Your Stats</h3>
+          <div class="summary-grid">
+            <div class="summary-item summary-item-1">
+              <span class="summary-value" id="stat-this-month">—</span>
+              <span class="summary-label" data-i18n="gym_this_month">This Month</span>
+            </div>
+            <div class="summary-item summary-item-2">
+              <span class="summary-value" id="stat-total-exercises">—</span>
+              <span class="summary-label" data-i18n="gym_total_exercises">Total Exercises</span>
+            </div>
+            <div class="summary-item summary-item-3">
+              <span class="summary-value" id="stat-max-weight">—</span>
+              <span class="summary-label" data-i18n="gym_max_bench">Max Bench</span>
+            </div>
+            <div class="summary-item summary-item-4">
+              <span class="summary-value" id="stat-total-sessions">—</span>
+              <span class="summary-label" data-i18n="gym_max_squat">Max Squat</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-card card-animate card-animate-delay-2">
+          <h3 class="recent-title" data-i18n="gym_recent_workouts">Recent Workouts</h3>
+          <ul class="recent-list" id="recent-list">
+            <li class="recent-empty">No workouts saved yet.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="js/activity-store.js"></script>
+  <script>
+    (function () {
+      var equipmentByBodyPart = {
+        upper: ['gym_eq_dumbbells', 'gym_eq_barbell', 'gym_eq_bench_press', 'gym_eq_pullup_bar', 'gym_eq_cable_machine'],
+        lower: ['gym_eq_barbell', 'gym_eq_leg_press_machine', 'gym_eq_dumbbells', 'gym_eq_smith_machine'],
+        core: ['gym_eq_bodyweight', 'gym_eq_ab_machine', 'gym_eq_medicine_ball']
+      };
+
+      var bodyPartLabels = {
+        upper: 'gym_upper_body',
+        lower: 'gym_lower_body',
+        core: 'gym_core'
+      };
+
+      var stepBodyPart = document.getElementById('step-body-part');
+      var stepEquipment = document.getElementById('step-equipment');
+      var stepForm = document.getElementById('step-form');
+      var bodyPartOptions = document.getElementById('body-part-options');
+      var equipmentOptions = document.getElementById('equipment-options');
+      var selectedSummary = document.getElementById('selected-summary');
+      var backToBody = document.getElementById('back-to-body');
+      var backToEquipment = document.getElementById('back-to-equipment');
+      var saveNotif = document.getElementById('save-notification');
+
+      var selectedBodyPart = null;
+      var selectedEquipment = null;
+
+      function show(el) {
+        el.classList.remove('hidden');
+      }
+
+      function hide(el) {
+        el.classList.add('hidden');
+      }
+
+      function renderSelectedSummary() {
+        if (!selectedBodyPart || !selectedEquipment) return;
+        selectedSummary.textContent = t(bodyPartLabels[selectedBodyPart]) + ' → ' + t(selectedEquipment);
+      }
+
+      function onBodyPartClick() {
+        selectedBodyPart = this.dataset.bodyPart;
+        var equipment = equipmentByBodyPart[selectedBodyPart];
+        equipmentOptions.innerHTML = '';
+
+        equipment.forEach(function (item) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.textContent = t(item);
+          btn.dataset.equipment = item;
+          btn.addEventListener('click', onEquipmentClick);
+          equipmentOptions.appendChild(btn);
+        });
+
+        selectedEquipment = null;
+        selectedSummary.textContent = '';
+        hide(stepBodyPart);
+        show(stepEquipment);
+      }
+
+      function onEquipmentClick() {
+        selectedEquipment = this.dataset.equipment;
+        renderSelectedSummary();
+        hide(stepEquipment);
+        show(stepForm);
+      }
+
+      bodyPartOptions.querySelectorAll('.option-btn').forEach(function (btn) {
+        btn.addEventListener('click', onBodyPartClick);
+      });
+
+      backToBody.addEventListener('click', function () {
+        selectedBodyPart = null;
+        selectedEquipment = null;
+        selectedSummary.textContent = '';
+        hide(stepEquipment);
+        show(stepBodyPart);
+      });
+
+      backToEquipment.addEventListener('click', function () {
+        hide(stepForm);
+        show(stepEquipment);
+      });
+
+      function formatDuration(mins) {
+        var m = parseInt(mins, 10);
+        if (!m || m <= 0) return '0 min';
+        if (m < 60) return m + ' min';
+        var h = Math.floor(m / 60);
+        var rem = m % 60;
+        return rem ? h + 'h ' + rem + 'm' : h + 'h';
+      }
+
+      function showNotification() {
+        const saveNotif = document.getElementById('save-notification');
+
+        if (!saveNotif) {
+          alert("Gym workout saved successfully");
+          resetForm();
+          return;
+        }
+
+        saveNotif.classList.add('save-notif--visible');
+
+        setTimeout(function () {
+          saveNotif.classList.remove('save-notif--visible');
+          resetForm();
+        }, 3000);
+      }
+
+      function resetForm() {
+        document.getElementById('exercise-name').value = '';
+        document.getElementById('exercise-sets').value = '';
+        document.getElementById('exercise-reps').value = '';
+        document.getElementById('exercise-weight').value = '';
+        document.getElementById('exercise-duration').value = '';
+        document.getElementById('exercise-notes').value = '';
+        selectedBodyPart = null;
+        selectedEquipment = null;
+        selectedSummary.textContent = '';
+        hide(stepForm);
+        hide(stepEquipment);
+        show(stepBodyPart);
+      }
+
+      function refreshSidebar() {
+        var all = ActivityStore.getAll().filter(function (r) { return r.type === 'gym'; });
+        var now = new Date();
+        var thisMonth = all.filter(function (r) {
+          var d = new Date(r.date);
+          return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        });
+
+        document.getElementById('stat-this-month').textContent = thisMonth.length || '—';
+        document.getElementById('stat-total-sessions').textContent = all.length || '—';
+
+        var totalExercises = 0;
+        var maxWeight = 0;
+        all.forEach(function (r) {
+          totalExercises++;
+          var w = parseFloat(r.weight) || 0;
+          if (w > maxWeight) maxWeight = w;
+        });
+        document.getElementById('stat-total-exercises').textContent = totalExercises || '—';
+        document.getElementById('stat-max-weight').textContent = maxWeight > 0 ? maxWeight + ' kg' : '—';
+
+        var recentList = document.getElementById('recent-list');
+        var recent = all.slice(-5).reverse();
+        if (recent.length === 0) {
+          recentList.innerHTML = '<li class="recent-empty">No workouts saved yet.</li>';
+          return;
+        }
+        recentList.innerHTML = '';
+        recent.forEach(function (r) {
+          var li = document.createElement('li');
+          li.className = 'recent-item';
+          var sets = r.sets || '—';
+          var reps = r.reps || '—';
+          var weight = r.weight ? r.weight + 'kg' : '';
+          var detail = sets + '×' + reps;
+          if (weight) detail += ' @ ' + weight;
+          var dateStr = new Date(r.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+          li.innerHTML =
+            '<div class="recent-info">' +
+              '<span class="recent-location">' + (r.badge || 'Gym Workout') + '</span>' +
+              '<span class="recent-date">' + dateStr + '</span>' +
+            '</div>' +
+            '<span class="recent-distance">' + detail + '</span>' +
+            '<button class="btn-delete-recent" data-id="' + (r.id || '') + '" title="Delete">' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>' +
+            '</button>';
+          recentList.appendChild(li);
+        });
+      }
+
+      document.getElementById('recent-list').addEventListener('click', function (e) {
+        var btn = e.target.closest('.btn-delete-recent');
+        if (!btn) return;
+        if (!confirm('Are you sure you want to delete this workout?')) return;
+        ActivityStore.remove(btn.dataset.id);
+        refreshSidebar();
+      });
+
+      stepForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const uid = localStorage.getItem("uid");
+
+        if (!uid) {
+          alert("Please login first");
+          window.location.href = "login_page.html";
+          return;
+        }
+
+        const inputName = document.getElementById("exercise-name").value.trim();
+        const bodyLabel = selectedBodyPart ? t(bodyPartLabels[selectedBodyPart]) : "Gym";
+        const equipmentLabel = selectedEquipment ? t(selectedEquipment) : "";
+        const exerciseName = inputName || (equipmentLabel ? bodyLabel + " - " + equipmentLabel : bodyLabel);
+        const sets = document.getElementById("exercise-sets").value;
+        const reps = document.getElementById("exercise-reps").value;
+        const weight = document.getElementById("exercise-weight").value;
+        const duration = document.getElementById("exercise-duration").value;
+        const notes = document.getElementById("exercise-notes").value.trim();
+
+        if (!duration) {
+          alert("Please enter duration");
+          return;
+        }
+
+        try {
+          const now = new Date();
+
+          ActivityStore.add({
+            id: String(Date.now()),
+            type: "gym",
+            label: "Gym",
+            emoji: "🏋️",
+            date: now.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            }),
+            dateISO: now.toISOString().slice(0, 10),
+            duration: duration + " min",
+            durationSeconds: Number(duration) * 60,
+            badge: exerciseName,
+            distanceKm: 0,
+            details: [
+              { icon: "target", text: bodyLabel },
+              { icon: "exercise", text: "Equipment: " + (equipmentLabel || "-") },
+              { icon: "exercise", text: "Sets: " + (sets || "-") + ", Reps: " + (reps || "-") + ", Weight: " + (weight || "-") + "kg" }
+            ],
+            notes: notes
+          });
+
+          refreshSidebar();
+          showNotification();
+          resetForm();
+        } catch (err) {
+          alert("Save failed: " + err.message);
+          console.error(err);
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        refreshSidebar();
+
+        var originalApplyLanguage = window.applyLanguage;
+
+        if (typeof originalApplyLanguage === 'function') {
+          window.applyLanguage = function (lang) {
+            originalApplyLanguage(lang);
+
+            if (!stepEquipment.classList.contains('hidden') && selectedBodyPart) {
+              var equipment = equipmentByBodyPart[selectedBodyPart];
+              equipmentOptions.innerHTML = '';
+
+              equipment.forEach(function (item) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'option-btn';
+                btn.textContent = t(item);
+                btn.dataset.equipment = item;
+                btn.addEventListener('click', onEquipmentClick);
+                equipmentOptions.appendChild(btn);
+              });
+            }
+
+            if (!stepForm.classList.contains('hidden')) {
+              renderSelectedSummary();
+            }
+          };
+        }
+      });
+    })();
+  </script>
+
+  <!-- Language Change Script -->
+  <script src="js/i18n.js"></script>
+
+  <div id="save-notification" class="save-notif" role="status" aria-live="polite">
+    <span class="save-notif-icon">✓</span>
+    <div>
+      <div class="save-notif-title">Workout Saved!</div>
+      <div class="save-notif-sub">
+        <span>Record stored.</span>
+        <a href="records_page.html">View Records →</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

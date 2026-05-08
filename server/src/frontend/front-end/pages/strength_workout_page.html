@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Workout - Strength - Fitness App</title>
+  <link rel="stylesheet" href="css/strength_page.css">
+  <link rel="stylesheet" href="css/gym_page.css">
+  <link rel="icon" type="image/png" size="32x32" href="../logo/favicon-32.png">
+</head>
+
+<body>
+  <div class="page-bg strength-workout-bg"></div>
+  <div class="page-overlay"></div>
+
+  <nav class="top-nav">
+    <a href="strength_page.html" class="nav-back">
+      <svg class="nav-back-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span data-i18n="back">Back</span>
+    </a>
+    
+    <a href="home_page.html" class="nav-logo">
+      <img src="../logo/white.png" alt="Fitness App Logo">
+    </a>
+
+    <div class="nav-right">
+      <a href="setting_page.html" class="nav-icon" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+      </a>
+      <a href="profile_page.html" class="nav-icon" aria-label="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="gym-main strength-workout-main">
+    <header class="gym-header card-animate">
+      <h1 class="gym-title" data-i18n="swp_title">Strength Workout</h1>
+      <p class="gym-subtitle" data-i18n="swp_subtitle">Record your exercise</p>
+    </header>
+
+    <div class="gym-layout">
+      <section class="gym-form-card card-animate">
+        <div class="form-header">
+          <h2 class="form-title" data-i18n="swp_card_title">New Workout</h2>
+          <div class="gym-goal">
+            <span class="goal-label" data-i18n="swp_t_w">This week</span>
+            <span class="goal-value"><span>4 / 5</span> <span data-i18n="swp_sessions">sessions</span></span>
+            <div class="goal-bar"><div class="goal-fill" style="width: 80%"></div></div>
+          </div>
+        </div>
+
+        <form class="gym-form" id="strength-form">
+          <p class="selected-summary" id="selected-summary" aria-live="polite"></p>
+          <div class="form-row form-row-full">
+            <div class="form-group">
+              <label data-i18n="swp_exer_name">Exercise Name (optional)</label>
+              <input id="exercise-name" type="text" data-i18n-placeholder="swp_placeholder_e_g" placeholder="e.g. Bench Press, Plank, Squat">
+            </div>
+          </div>
+          <div class="form-row form-row-4">
+            <div class="form-group">
+              <label data-i18n="swp_sets">Sets</label>
+              <input id="exercise-sets" type="number" min="0" placeholder="3">
+            </div>
+            <div class="form-group">
+              <label data-i18n="swp_reps">Reps</label>
+              <input id="exercise-reps" type="number" min="0" placeholder="10">
+            </div>
+            <div class="form-group">
+              <label data-i18n="swp_weight">Weight (kg)</label>
+              <input id="exercise-weight" type="number" step="0.5" min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label data-i18n="swp_duration">Duration (min)</label>
+              <input id="exercise-duration" type="number" min="0" placeholder="0">
+            </div>
+          </div>
+          <div class="form-group form-group-full">
+            <label data-i18n="swp_notes">Notes</label>
+            <textarea id="exercise-notes" rows="3" data-i18n="swp_placeholder_note" placeholder="Add notes about your workout..."></textarea>
+          </div>
+          <div class="gym-actions">
+            <button type="button" class="btn-back" onclick="window.location.href='strength_page.html'" data-i18n="swp_back_btn">Back</button>
+            <button type="submit" class="btn-primary" data-i18n="swp_save_workout_btn">Save Workout</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="gym-sidebar">
+        <div class="summary-card card-animate card-animate-delay-1">
+          <h3 class="summary-title" data-i18n="swp_your_stats">Your Stats</h3>
+          <div class="summary-grid">
+            <div class="summary-item summary-item-1">
+              <span class="summary-value" id="stat-this-month">—</span>
+              <span class="summary-label" data-i18n="swp_t_m">This Month</span>
+            </div>
+            <div class="summary-item summary-item-2">
+              <span class="summary-value" id="stat-total-exercises">—</span>
+              <span class="summary-label" data-i18n="swp_total_exer">Total Exercises</span>
+            </div>
+            <div class="summary-item summary-item-3">
+              <span class="summary-value" id="stat-max-weight">—</span>
+              <span class="summary-label" data-i18n="swp_max_bench">Max Bench</span>
+            </div>
+            <div class="summary-item summary-item-4">
+              <span class="summary-value" id="stat-total-sessions">—</span>
+              <span class="summary-label" data-i18n="swp_max_squat">Max Squat</span>
+            </div>
+          </div>
+        </div>
+        <div class="recent-card card-animate card-animate-delay-2">
+          <h3 class="recent-title" data-i18n="swp_recent_workout">Recent Workouts</h3>
+          <ul class="recent-list" id="recent-list">
+            <li class="recent-empty">No workouts saved yet.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="js/activity-store.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var exercise = params.get('exercise') || '';
+      var category = params.get('category') || '';
+
+      var selectedSummary = document.getElementById('selected-summary');
+      var exerciseNameInput = document.getElementById('exercise-name');
+
+      if (category && exercise) {
+        selectedSummary.textContent = category + ' → ' + exercise;
+        exerciseNameInput.value = exercise;
+      }
+
+      function refreshSidebar() {
+        var all = ActivityStore.getAll().filter(function (r) { return r.type === 'strength'; });
+        var now = new Date();
+        var thisMonth = all.filter(function (r) {
+          var d = new Date(r.dateISO);
+          return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        });
+
+        var maxWeight = 0;
+        all.forEach(function (r) {
+          var w = parseFloat(r.weight) || 0;
+          if (w > maxWeight) maxWeight = w;
+        });
+
+        document.getElementById('stat-this-month').textContent = thisMonth.length;
+        document.getElementById('stat-total-exercises').textContent = all.length;
+        document.getElementById('stat-max-weight').textContent = maxWeight ? maxWeight + ' kg' : '—';
+        document.getElementById('stat-total-sessions').textContent = all.length;
+
+        var list = document.getElementById('recent-list');
+        if (all.length === 0) {
+          list.innerHTML = '<li class="recent-empty">No workouts saved yet.</li>';
+          return;
+        }
+        var recent = all.slice(-4).reverse();
+        var html = '';
+        recent.forEach(function (r) {
+          var detail = (r.details && r.details[0]) ? r.details[0].text : '';
+          html += '<li class="recent-item">'
+            + '<div class="recent-info">'
+            + '<span class="recent-location">' + (r.badge || '') + '</span>'
+            + '<span class="recent-date">' + (r.date || '') + '</span>'
+            + '</div>'
+            + '<span class="recent-distance">' + detail + '</span>'
+            + '<button class="btn-delete-recent" data-id="' + (r.id || '') + '" title="Delete">'
+            + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
+            + '</button>'
+            + '</li>';
+        });
+        list.innerHTML = html;
+      }
+
+      function showNotification() {
+        var notif = document.getElementById('save-notification');
+        notif.classList.add('show');
+        setTimeout(function () {
+          notif.classList.remove('show');
+        }, 2200);
+        document.getElementById('strength-form').reset();
+        if (category && exercise) {
+          selectedSummary.textContent = category + ' → ' + exercise;
+          exerciseNameInput.value = exercise;
+        }
+      }
+
+      document.getElementById('recent-list').addEventListener('click', function (e) {
+        var btn = e.target.closest('.btn-delete-recent');
+        if (!btn) return;
+        if (!confirm('Are you sure you want to delete this workout?')) return;
+        ActivityStore.remove(btn.dataset.id);
+        refreshSidebar();
+      });
+
+      document.getElementById('strength-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var exerciseName = document.getElementById('exercise-name').value || exercise;
+        var sets = document.getElementById('exercise-sets').value || '0';
+        var reps = document.getElementById('exercise-reps').value || '0';
+        var weight = document.getElementById('exercise-weight').value || '0';
+        var duration = document.getElementById('exercise-duration').value || '0';
+        var notes = document.getElementById('exercise-notes').value || '';
+
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        var dateISO = now.toISOString().slice(0, 10);
+
+        var record = {
+          id: String(Date.now()),
+          type: 'strength',
+          emoji: '💪',
+          label: 'Strength',
+          badge: (category || 'General') + ' - ' + exerciseName,
+          date: dateStr,
+          dateISO: dateISO,
+          duration: duration + ' min',
+          durationSeconds: parseInt(duration, 10) * 60,
+          details: [{ icon: 'weight', text: sets + '×' + reps + ' @ ' + weight + 'kg' }],
+          distanceKm: 0,
+          category: category || 'General',
+          exerciseName: exerciseName,
+          sets: sets,
+          reps: reps,
+          weight: weight,
+          notes: notes
+        };
+
+        ActivityStore.add(record);
+        refreshSidebar();
+        showNotification();
+      });
+
+      refreshSidebar();
+    })();
+  </script>
+  
+  <div id="save-notification" class="save-notif" role="status" aria-live="polite">
+    <span class="save-notif-icon">✓</span>
+    <div>
+      <div class="save-notif-title">Workout Saved!</div>
+      <div class="save-notif-sub">
+        <span>Record stored.</span>
+        <a href="records_page.html">View Records →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Change Script --> 
+  <script src="js/i18n.js"></script>
+</body>
+
+</html>
