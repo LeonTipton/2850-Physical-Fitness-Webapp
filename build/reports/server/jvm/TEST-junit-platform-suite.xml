@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Platform Suite" tests="0" skipped="0" failures="0" errors="0" time="0.024" hostname="codespaces-ebaade" timestamp="2026-05-04T11:52:00">
+<testsuite name="JUnit Platform Suite" tests="0" skipped="0" failures="0" errors="0" time="0.006" hostname="codespaces-ff3c78" timestamp="2026-05-08T10:42:48">
 <properties>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
@@ -30,7 +30,7 @@
 <property name="jdk.debug" value="release"/>
 <property name="jna.loaded" value="true"/>
 <property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib:/lib32"/>
-<property name="jnidispatch.path" value="/home/codespace/.cache/JNA/temp/jna18044541977498832923.tmp"/>
+<property name="jnidispatch.path" value="/home/codespace/.cache/JNA/temp/jna14040723953288436810.tmp"/>
 <property name="junit.docs.version" value="6.0.1"/>
 <property name="junit.vintage.discovery.issue.reporting.enabled" value="false"/>
 <property name="line.separator" value="&#10;"/>
